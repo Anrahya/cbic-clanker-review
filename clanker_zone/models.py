@@ -137,6 +137,7 @@ class ExecutedTaskResult(BaseModel):
     dossier_id: str
     provider_response: ProviderResponse
     parsed_judgment: Optional[Judgment] = None
+    invoke_error: Optional[str] = None
     parse_error: Optional[str] = None
 
 
@@ -164,6 +165,7 @@ class RuleSynthesisReport(BaseModel):
     manual_review_issues: List[CandidateIssue] = Field(default_factory=list)
     rejected_issues: List[CandidateIssue] = Field(default_factory=list)
     summary: str
+    diagnostics: Dict[str, Any] = Field(default_factory=dict)
 
 
 class CouncilDeliberationRun(BaseModel):

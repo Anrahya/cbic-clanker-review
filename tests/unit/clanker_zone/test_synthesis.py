@@ -46,6 +46,7 @@ def test_synthesize_rule_report_uses_arbiter_outcome():
     report = synthesize_rule_report(
         rule_id="CGST-R26",
         issues=[issue],
+        specialist_results=[],
         challenge_results=[challenge_result],
         arbiter_results=[arbiter_result],
     )
@@ -53,3 +54,25 @@ def test_synthesize_rule_report_uses_arbiter_outcome():
     assert report.status == "issues_found"
     assert [item.issue_id for item in report.confirmed_issues] == ["ISSUE-0001"]
     assert not report.manual_review_issues
+
+
+def test_synthesize_rule_report_flags_failed_tasks_as_manual_review():
+    report = synthesize_rule_report(
+        rule_id="CGST-R26",
+        issues=[],
+        specialist_results=[
+            ExecutedTaskResult(
+                task_id="specialist-source-gst-cluster-CGST-R26(1)",
+                counsel_name="source_fidelity_counsel",
+                dossier_id="gst-cluster-CGST-R26(1)",
+                provider_response=ProviderResponse(model="fake"),
+                invoke_error="MiniMax HTTP error 429: rate limited",
+            )
+        ],
+        challenge_results=[],
+        arbiter_results=[],
+    )
+
+    assert report.status == "needs_manual_review"
+    assert report.diagnostics["failed_task_count"] == 1
+    assert report.diagnostics["stage_stats"]["specialist"]["invoke_failures"] == 1

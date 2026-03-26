@@ -76,3 +76,46 @@ def test_execute_compiled_requests_parses_judgments():
     assert results
     assert results[0].parsed_judgment is not None
     assert results[0].parsed_judgment.label == "no_issue"
+
+
+class ErrorProvider(FakeProvider):
+    def invoke(self, request: ProviderRequest) -> ProviderResponse:
+        raise RuntimeError("boom")
+
+
+def test_execute_compiled_requests_captures_invoke_errors():
+    roster = [CounselSpec(name="demo", stage="specialist", categories=["text_fidelity"], prompt_key="demo")]
+    dossier = Dossier(
+        dossier_id="d1",
+        kind="node",
+        domain="gst",
+        target_id="n1",
+        title="Demo dossier",
+        category_focus=["text_fidelity"],
+        evidence=[
+            EvidenceSnippet(
+                kind="candidate",
+                label="candidate",
+                locator=EvidenceLocator(source_name="demo", pointer="x"),
+                text="hello",
+            )
+        ],
+    )
+    builder = CouncilBuilder(CouncilConfig(), "gst", roster)
+    plan = builder.build_plan(
+        dossiers=[dossier],
+        constitution="constitution",
+        domain_overview="overview",
+        output_contract="contract",
+    )
+    provider = ErrorProvider()
+    compiled = compile_plan_requests(
+        plan=plan,
+        provider=provider,
+        prompt_builder=lambda prompt_key, dossier, categories: '{"demo":true}',
+    )
+    results = execute_compiled_requests(compiled_requests=compiled, provider=provider)
+
+    assert results
+    assert results[0].parsed_judgment is None
+    assert results[0].invoke_error == "boom"

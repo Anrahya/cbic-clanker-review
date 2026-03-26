@@ -4,6 +4,7 @@ import json
 import os
 import socket
 import time
+from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from typing import Optional
@@ -28,8 +29,8 @@ class MiniMaxProviderConfig(BaseModel):
     temperature: float = Field(default=0.1, gt=0.0, le=1.0)
     max_tokens: int = 4096
     anthropic_version: str = "2023-06-01"
-    timeout_seconds: float = 60.0
-    max_retries: int = 2
+    timeout_seconds: float = 180.0
+    max_retries: int = 3
     retry_backoff_seconds: float = 2.0
 
 
@@ -39,6 +40,8 @@ class MiniMaxProvider(LLMProvider):
 
     def resolve_api_key(self) -> str:
         api_key = self.config.explicit_api_key or os.getenv(self.config.api_key_env)
+        if not api_key:
+            api_key = _load_env_api_key(self.config.api_key_env)
         if not api_key:
             raise RuntimeError(
                 f"MiniMax API key is required. Set {self.config.api_key_env} or pass explicit_api_key when live execution is needed."
@@ -120,11 +123,58 @@ class MiniMaxProvider(LLMProvider):
                     raw = json.loads(response.read().decode("utf-8"))
                 return self.normalize_response(raw)
             except HTTPError as exc:
-                body = exc.read().decode("utf-8", errors="replace")
-                raise RuntimeError(f"MiniMax HTTP error {exc.code}: {body}") from exc
+                body = _read_http_error_body(exc)
+                last_error = RuntimeError(f"MiniMax HTTP error {exc.code}: {body}")
+                if not _is_retryable_http_error(exc) or attempt >= self.config.max_retries:
+                    raise last_error from exc
+                time.sleep(_retry_delay_for_http_error(exc, self.config.retry_backoff_seconds, attempt))
             except (URLError, socket.timeout, TimeoutError) as exc:
                 last_error = exc
                 if attempt >= self.config.max_retries:
                     break
                 time.sleep(self.config.retry_backoff_seconds * (attempt + 1))
         raise RuntimeError(f"MiniMax network error after {attempts} attempt(s): {last_error}") from last_error
+
+
+def _load_env_api_key(env_name: str) -> Optional[str]:
+    env_path = Path.cwd() / ".env"
+    if not env_path.exists():
+        return None
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        key, value = stripped.split("=", 1)
+        if key.strip() != env_name:
+            continue
+        resolved = value.strip().strip("'").strip('"')
+        if resolved:
+            os.environ.setdefault(env_name, resolved)
+            return resolved
+    return None
+
+
+def _is_retryable_http_error(error: HTTPError) -> bool:
+    return error.code in {408, 409, 425, 429, 500, 502, 503, 504}
+
+
+def _retry_delay_for_http_error(error: HTTPError, backoff_seconds: float, attempt: int) -> float:
+    retry_after = error.headers.get("Retry-After") if error.headers else None
+    if retry_after:
+        try:
+            return max(float(retry_after), 0.0)
+        except ValueError:
+            pass
+    return backoff_seconds * (attempt + 1)
+
+
+def _read_http_error_body(error: HTTPError) -> str:
+    try:
+        body = error.read()
+    except Exception:
+        body = b""
+    if isinstance(body, bytes):
+        decoded = body.decode("utf-8", errors="replace").strip()
+        if decoded:
+            return decoded
+    return error.reason if getattr(error, "reason", None) else ""

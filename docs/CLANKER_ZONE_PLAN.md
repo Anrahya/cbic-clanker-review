@@ -24,7 +24,7 @@ Decisions already fixed:
 Deliverables:
 
 - rule dossiers
-- node dossiers
+- parent-cluster dossiers
 - amendment dossiers
 - table dossiers
 
@@ -38,6 +38,12 @@ Inputs for GST:
 Outputs:
 
 - compact evidence packs that specialist counsel can review without reading the whole corpus
+
+Current GST decision:
+
+- the default reasoning unit is a parent structural cluster, usually one sub-rule with attached clauses, provisos, and explanations
+- leaf nodes remain the reporting unit through target cards inside the cluster dossier
+- this replaces isolated-node-first review because CBIC amendment and bracket scope often crosses sibling nodes
 
 ## Stage 3. Core Council Runtime
 
@@ -154,3 +160,24 @@ Deliverables:
 - leaf node ids remain the reporting unit even when the reasoning unit is the cluster
 
 This stage exists because CBIC source structure often spans sibling provisos or clauses, so isolated node review over-flags bracket carryover and amendment-scope artifacts.
+
+## Current Runtime Shape
+
+Defined council roles:
+
+1. `docket_clerk`
+2. `source_fidelity_counsel`
+3. `structure_scope_counsel`
+4. `amendment_counsel`
+5. `reference_counsel`
+6. `table_counsel`
+7. `artifact_defender`
+8. `chief_arbiter`
+
+Current GST live review path uses:
+
+- `5` specialist roles
+- `1` skeptic role
+- `1` arbiter role
+
+`docket_clerk` is currently architectural only and not a separate live provider call.

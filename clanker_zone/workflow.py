@@ -72,6 +72,7 @@ def run_issue_council(
     rule_report = synthesize_rule_report(
         rule_id=rule_number if rule_number.startswith("CGST-") else f"CGST-R{rule_number}",
         issues=candidate_issues,
+        specialist_results=specialist_results,
         challenge_results=challenge_results,
         arbiter_results=arbiter_results,
     )

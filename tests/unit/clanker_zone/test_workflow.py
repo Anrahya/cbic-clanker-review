@@ -120,3 +120,57 @@ def test_run_issue_council_executes_specialist_challenge_and_arbiter_stages():
     assert len(run.arbiter_results) == 1
     assert run.rule_report.status == "issues_found"
     assert run.rule_report.confirmed_issues[0].issue_id == "ISSUE-0001"
+
+
+class FailingProvider(QueueProvider):
+    def invoke(self, request: ProviderRequest) -> ProviderResponse:
+        raise RuntimeError("provider unavailable")
+
+
+def test_run_issue_council_degrades_to_manual_review_when_specialist_call_fails():
+    dossier = Dossier(
+        dossier_id="gst-cluster-CGST-R26(1)",
+        kind="cluster",
+        domain="gst",
+        target_id="CGST-R26(1)",
+        title="Cluster dossier",
+        category_focus=["text_fidelity"],
+        evidence=[
+            EvidenceSnippet(
+                kind="candidate_node",
+                label="Candidate node",
+                locator=EvidenceLocator(source_name="rule_json", pointer="$.node.children[0]"),
+                text="demo",
+            )
+        ],
+    )
+    plan = CouncilRunPlan(
+        council_name="clanker zone",
+        domain="gst",
+        shared_prefix="constitution",
+        dossiers=[dossier],
+        tasks=[
+            CouncilTask(
+                task_id="specialist-source_fidelity-gst-cluster-CGST-R26(1)",
+                stage="specialist",
+                counsel_name="source_fidelity_counsel",
+                dossier_id=dossier.dossier_id,
+                prompt_key="gst.source_fidelity",
+                categories=["text_fidelity"],
+                payload={"target_id": dossier.target_id},
+            )
+        ],
+        metadata={"rule_number": "26"},
+    )
+    run = run_issue_council(
+        plan=plan,
+        roster=[],
+        provider=FailingProvider([]),
+        specialist_prompt_builder=_specialist_prompt,
+        issue_prompt_builder=_issue_prompt,
+    )
+
+    assert len(run.specialist_results) == 1
+    assert run.specialist_results[0].invoke_error == "provider unavailable"
+    assert run.rule_report.status == "needs_manual_review"
+    assert run.rule_report.diagnostics["failed_task_count"] == 1

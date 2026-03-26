@@ -49,6 +49,27 @@ Each provider contributes:
 5. `chief_arbiter`
 6. rule synthesis
 
+## Agent Roster
+
+Defined council roles:
+
+1. `docket_clerk`
+2. `source_fidelity_counsel`
+3. `structure_scope_counsel`
+4. `amendment_counsel`
+5. `reference_counsel`
+6. `table_counsel`
+7. `artifact_defender`
+8. `chief_arbiter`
+
+Current GST live review path uses:
+
+- `5` specialist roles
+- `1` skeptic role
+- `1` arbiter role
+
+`docket_clerk` is part of the architecture and planning model, but it is not currently executed as a separate live model call in `gst-review`.
+
 ## Deliberation Flow
 
 1. build dossiers from extracted JSON, schema, raw HTML, and hint JSON

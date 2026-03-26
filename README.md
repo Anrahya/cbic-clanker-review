@@ -27,8 +27,71 @@ gst-rule-review review --rule rule_026.json --schema rule_document.json
 gst-rule-review fetch-raw --source-url https://cbic-gst.gov.in/... --out raw.html
 clanker-zone gst-plan --rule-number 26 --out-dir clanker_runs/plan
 clanker-zone gst-run --rule-number 26 --target-id CGST-R26(1)-P4 --counsel-name amendment_counsel
-clanker-zone gst-review --rule-number 26 --out-dir clanker_runs/review
+clanker-zone gst-review --rule-number 26
 ```
+
+If `MINIMAX_API_KEY` is present in a local `.env`, `clanker-zone` now auto-loads it.
+
+MiniMax integration references are documented in [docs/MINIMAX_PROVIDER_REFERENCE.md](/Users/renoa/Documents/cbic-verify/docs/MINIMAX_PROVIDER_REFERENCE.md).
+
+## Clanker Zone
+
+`clanker_zone` is a staged review council, not a single freeform prompt.
+
+Current council roles:
+
+1. `docket_clerk`
+2. `source_fidelity_counsel`
+3. `structure_scope_counsel`
+4. `amendment_counsel`
+5. `reference_counsel`
+6. `table_counsel`
+7. `artifact_defender`
+8. `chief_arbiter`
+
+Current GST live review uses:
+
+- `5` specialist roles
+- `1` skeptic role
+- `1` arbiter role
+
+`docket_clerk` exists in the architecture and planning model, but `gst-review` does not currently execute it as a separate live model call.
+
+## GST Review Unit
+
+GST review is now cluster-first.
+
+The model does not review isolated leaf nodes by default. It reviews parent structural clusters, usually one sub-rule at a time, with attached clauses, provisos, and explanations. This matches CBIC source structure more closely and reduces false positives caused by:
+
+- bracket carryover across sibling provisos
+- amendment spans crossing multiple child nodes
+- repeated cross-references across neighboring blocks
+- clause labels whose scope is only clear when siblings are visible together
+
+Each cluster dossier contains:
+
+- cluster root fragment
+- target cards for each child node
+- full source block span
+- overlapping hint segments
+- overlapping amendment spans and notes
+
+Issues are still reported against the exact `node_id` inside the cluster.
+
+## GST Review Flow
+
+`clanker-zone gst-review` runs this path:
+
+1. load extracted rule JSON, schema, raw HTML, and hint JSON
+2. build GST cluster dossiers and amendment dossiers
+3. run specialist counsel over those dossiers
+4. aggregate specialist outputs into candidate issues
+5. challenge each candidate issue with `artifact_defender`
+6. arbitrate each surviving issue with `chief_arbiter`
+7. apply GST false-positive suppression rules
+8. write the final rule report plus intermediate artifacts
+
+Artifacts are persisted under `clanker_runs/` when you run the MiniMax-backed review commands.
 
 ## Library API
 
@@ -51,4 +114,3 @@ print(report.overall_verdict.status)
 - Amendment and chronology findings rely on visible source footnotes and mapped block spans.
 - The pipeline is modular so checks can be extended for sections, chapters, or batch review later.
 - `clanker_zone` runs a staged council: specialist dossier review, candidate issue aggregation, skeptic challenge, arbiter review, and rule-level synthesis.
-# cbic-clanker-review

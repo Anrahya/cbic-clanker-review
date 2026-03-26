@@ -79,8 +79,8 @@ def gst_run(
     target_id: Optional[str] = typer.Option(None, help="Optional node id or dossier id to isolate"),
     counsel_name: Optional[str] = typer.Option(None, help="Optional counsel name to isolate"),
     max_tokens: int = typer.Option(4096, help="Max output tokens per MiniMax request"),
-    timeout_seconds: float = typer.Option(60.0, help="HTTP timeout per MiniMax request"),
-    max_retries: int = typer.Option(2, help="Retry count for transient MiniMax network timeouts"),
+    timeout_seconds: float = typer.Option(180.0, help="HTTP timeout per MiniMax request"),
+    max_retries: int = typer.Option(3, help="Retry count for transient MiniMax network timeouts"),
 ) -> None:
     bundles = discover_rule_bundles(corpus)
     bundle = next(bundle for bundle in bundles if bundle.rule_json["metadata"]["rule_number"] == rule_number)
@@ -125,8 +125,8 @@ def gst_review(
         help="Optional comma-separated specialist counsel names to isolate, e.g. amendment_counsel,reference_counsel",
     ),
     max_tokens: int = typer.Option(4096, help="Max output tokens per MiniMax request"),
-    timeout_seconds: float = typer.Option(60.0, help="HTTP timeout per MiniMax request"),
-    max_retries: int = typer.Option(2, help="Retry count for transient MiniMax network timeouts"),
+    timeout_seconds: float = typer.Option(180.0, help="HTTP timeout per MiniMax request"),
+    max_retries: int = typer.Option(3, help="Retry count for transient MiniMax network timeouts"),
     max_concurrency: int = typer.Option(6, help="Maximum parallel MiniMax requests per stage"),
 ) -> None:
     bundles = discover_rule_bundles(corpus)

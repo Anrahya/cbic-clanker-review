@@ -3,7 +3,7 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Callable, Dict, List, Optional, Tuple
 
-from .models import CompiledTaskRequest, CouncilRunPlan, Dossier, ExecutedTaskResult, Judgment
+from .models import CompiledTaskRequest, CouncilRunPlan, Dossier, ExecutedTaskResult, Judgment, ProviderResponse
 from .parser import parse_judgment_response
 from .provider.base import LLMProvider
 
@@ -70,33 +70,43 @@ def execute_compiled_requests(
 
 
 def _execute_one(compiled: CompiledTaskRequest, provider: LLMProvider) -> ExecutedTaskResult:
-    response = provider.invoke(compiled.provider_request)
-    response.metadata = {
-        **compiled.provider_request.metadata,
-        **response.metadata,
-    }
+    invoke_error: Optional[str] = None
+    try:
+        response = provider.invoke(compiled.provider_request)
+        response.metadata = {
+            **compiled.provider_request.metadata,
+            **response.metadata,
+        }
+    except Exception as exc:
+        invoke_error = str(exc)
+        response = ProviderResponse(
+            model=compiled.provider_request.model,
+            metadata=dict(compiled.provider_request.metadata),
+        )
     judgment: Optional[Judgment] = None
     parse_error: Optional[str] = None
-    try:
-        judgment = parse_judgment_response(
-            response,
-            counsel_name=compiled.counsel_name,
-            dossier_id=compiled.dossier_id,
-        )
-        judgment.metadata.setdefault("task_id", compiled.task_id)
-        judgment.metadata.setdefault("stage", compiled.stage)
-        judgment.metadata.setdefault("categories", compiled.categories)
-        judgment.metadata.setdefault("task_payload", compiled.payload)
-        issue_id = compiled.payload.get("issue_id")
-        if issue_id is not None:
-            judgment.metadata.setdefault("issue_id", issue_id)
-    except Exception as exc:  # parser failure should not drop raw response
-        parse_error = str(exc)
+    if invoke_error is None:
+        try:
+            judgment = parse_judgment_response(
+                response,
+                counsel_name=compiled.counsel_name,
+                dossier_id=compiled.dossier_id,
+            )
+            judgment.metadata.setdefault("task_id", compiled.task_id)
+            judgment.metadata.setdefault("stage", compiled.stage)
+            judgment.metadata.setdefault("categories", compiled.categories)
+            judgment.metadata.setdefault("task_payload", compiled.payload)
+            issue_id = compiled.payload.get("issue_id")
+            if issue_id is not None:
+                judgment.metadata.setdefault("issue_id", issue_id)
+        except Exception as exc:  # parser failure should not drop raw response
+            parse_error = str(exc)
     return ExecutedTaskResult(
         task_id=compiled.task_id,
         counsel_name=compiled.counsel_name,
         dossier_id=compiled.dossier_id,
         provider_response=response,
         parsed_judgment=judgment,
+        invoke_error=invoke_error,
         parse_error=parse_error,
     )
