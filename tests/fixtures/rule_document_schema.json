@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["metadata", "rule"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "rule_id": {"type": "string"},
+        "source_url": {"type": "string"}
+      },
+      "required": ["rule_id"]
+    },
+    "amendments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "marker": {"type": ["string", "integer"]},
+          "action": {"type": "string"},
+          "notification_ref": {"type": ["string", "null"]},
+          "notification_date": {"type": ["string", "null"]},
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": {"type": ["string", "null"]},
+                "event_text": {"type": ["string", "null"]},
+                "historical_text": {"type": ["string", "null"]}
+              }
+            }
+          }
+        },
+        "required": ["marker", "action"]
+      }
+    },
+    "rule": {
+      "$ref": "#/$defs/node"
+    }
+  },
+  "$defs": {
+    "sourceRef": {
+      "type": "object",
+      "properties": {
+        "block_ids": {
+          "type": "array",
+          "items": {"type": "integer"}
+        },
+        "exact": {"type": ["boolean", "null"]},
+        "line_hint": {"type": ["string", "null"]},
+        "dom_path": {"type": ["string", "null"]}
+      },
+      "required": ["block_ids"]
+    },
+    "crossRef": {
+      "type": "object",
+      "properties": {
+        "target_text": {"type": "string"},
+        "target_id": {"type": ["string", "null"]},
+        "relationship": {"type": ["string", "null"]},
+        "mention_text": {"type": ["string", "null"]}
+      },
+      "required": ["target_text"]
+    },
+    "node": {
+      "type": "object",
+      "required": ["node_id", "type"],
+      "properties": {
+        "node_id": {"type": "string"},
+        "type": {"type": "string"},
+        "label": {"type": ["string", "null"]},
+        "display_label": {"type": ["string", "null"]},
+        "text": {"type": ["string", "null"]},
+        "operative_text": {"type": ["string", "null"]},
+        "raw_text": {"type": ["string", "null"]},
+        "status": {"type": ["string", "null"]},
+        "effective_from": {"type": ["string", "null"]},
+        "effective_until": {"type": ["string", "null"]},
+        "amendment_markers": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "source_ref": {"$ref": "#/$defs/sourceRef"},
+        "cross_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/crossRef"}
+        },
+        "caption": {"type": ["string", "null"]},
+        "headers": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/node"}
+        }
+      }
+    }
+  }
+}
+

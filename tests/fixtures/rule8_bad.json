@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "rule_id": "RULE-8",
+    "source_url": "https://example.invalid/rule8"
+  },
+  "amendments": [
+    {
+      "marker": "2",
+      "action": "INSERTED",
+      "notification_ref": "Notification No. 31/2020-Central Tax",
+      "notification_date": null,
+      "events": [
+        {
+          "action": "INSERTED",
+          "event_text": "03.04.2020",
+          "historical_text": "Provided that the officer sh"
+        }
+      ]
+    },
+    {
+      "marker": "3",
+      "action": "SUBSTITUTED",
+      "notification_ref": "Notification No. 40/2021-Central Tax",
+      "notification_date": "29.12.2021"
+    }
+  ],
+  "rule": {
+    "node_id": "CGST-R8",
+    "type": "rule",
+    "label": "Rule 8",
+    "text": null,
+    "source_ref": {
+      "block_ids": [1],
+      "exact": false
+    },
+    "children": [
+      {
+        "node_id": "CGST-R8(2)",
+        "type": "sub_rule",
+        "label": "(2)",
+        "text": null,
+        "source_ref": {
+          "block_ids": [2],
+          "exact": false
+        },
+        "children": [
+          {
+            "node_id": "CGST-R8(2)(a)",
+            "type": "clause",
+            "label": "(a)",
+            "text": "the proper officer shall verify the application.",
+            "source_ref": {
+              "block_ids": [3],
+              "exact": true
+            }
+          },
+          {
+            "node_id": "CGST-R8(2)(b)",
+            "type": "clause",
+            "label": "(b)",
+            "text": "(b)",
+            "status": "omitted",
+            "source_ref": {
+              "block_ids": [4],
+              "exact": true
+            }
+          },
+          {
+            "node_id": "CGST-R8(2)(c)",
+            "type": "clause",
+            "label": "(c)",
+            "text": "(c)",
+            "status": "omitted",
+            "source_ref": {
+              "block_ids": [5],
+              "exact": true
+            }
+          }
+        ]
+      },
+      {
+        "node_id": "CGST-R8(4A)",
+        "type": "sub_rule",
+        "label": "(4A)",
+        "text": "The proper officer may act on the application [3].",
+        "raw_text": "(4A) The proper officer may act on the application [3].",
+        "amendment_markers": ["2", "3"],
+        "source_ref": {
+          "block_ids": [6],
+          "exact": true
+        },
+        "children": [
+          {
+            "node_id": "CGST-R8(4A)-P1",
+            "type": "proviso",
+            "label": "Provided that",
+            "text": "Provided that the officer shall record reasons.",
+            "raw_text": "Provided that the officer shall record reasons.",
+            "source_ref": {
+              "block_ids": [7],
+              "exact": true
+            }
+          },
+          {
+            "node_id": "CGST-R8(4A)-CROSS",
+            "type": "clause",
+            "label": null,
+            "text": "The reference in this sub-rule shall include the proviso to sub-rule (4A).",
+            "source_ref": {
+              "block_ids": [8],
+              "exact": true
+            },
+            "cross_refs": [
+              {
+                "target_text": "sub-rule (4A)",
+                "mention_text": "proviso to sub-rule (4A)",
+                "relationship": "refers_to"
+              },
+              {
+                "target_text": "sub-rule (4A)",
+                "mention_text": "proviso to sub-rule (4A)",
+                "relationship": "refers_to"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+

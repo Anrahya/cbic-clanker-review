@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "rule_id": "RULE-10B",
+    "source_url": "https://example.invalid/rule10b"
+  },
+  "amendments": [
+    {
+      "marker": "1",
+      "action": "INSERTED",
+      "notification_ref": "Notification No. 25/2020-Central Tax",
+      "notification_date": "01.04.2020"
+    }
+  ],
+  "rule": {
+    "node_id": "CGST-R10B",
+    "type": "rule",
+    "label": "Rule 10B",
+    "source_ref": {
+      "block_ids": [1],
+      "exact": false
+    },
+    "children": [
+      {
+        "node_id": "CGST-R10B(1)(b)",
+        "type": "clause",
+        "label": "(b)",
+        "text": "bank account details.",
+        "amendment_markers": ["1"],
+        "source_ref": {
+          "block_ids": [4],
+          "exact": true
+        },
+        "children": [
+          {
+            "node_id": "CGST-R10B(1)(b)(i)",
+            "type": "sub_clause",
+            "label": "(i)",
+            "text": "bank account details.",
+            "source_ref": {
+              "block_ids": [4],
+              "exact": true
+            }
+          },
+          {
+            "node_id": "CGST-R10B(1)(b)(ii)",
+            "type": "sub_clause",
+            "label": "(ii)",
+            "text": "sub-section (6D) of section 25 compliance reference.",
+            "source_ref": {
+              "block_ids": [5],
+              "exact": true
+            },
+            "cross_refs": [
+              {
+                "target_text": "section 25",
+                "mention_text": "sub-section (6D) of section 25",
+                "relationship": "refers_to"
+              }
+            ]
+          },
+          {
+            "node_id": "CGST-R10B(1)(b)(iii)",
+            "type": "sub_clause",
+            "label": "(iii)",
+            "text": "address proof.",
+            "source_ref": {
+              "block_ids": [6],
+              "exact": true
+            }
+          },
+          {
+            "node_id": "CGST-R10B(1)(b)(iv)",
+            "type": "sub_clause",
+            "label": "(iv)",
+            "text": "any other document.",
+            "source_ref": {
+              "block_ids": [7],
+              "exact": true
+            }
+          }
+        ]
+      },
+      {
+        "node_id": "CGST-R10B-T1",
+        "type": "table",
+        "caption": "Table 1 - Documents",
+        "headers": [
+          ["Document", "Reference"]
+        ],
+        "rows": [
+          ["(1)", "(2)"],
+          ["Passport", "Identity proof"],
+          ["Utility bill", "Address proof"]
+        ],
+        "source_ref": {
+          "block_ids": [8],
+          "exact": true
+        }
+      }
+    ]
+  }
+}
+

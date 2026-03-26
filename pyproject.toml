@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gst-rule-review"
+version = "0.1.0"
+description = "Deterministic review pipeline for extracted GST rule JSON against CBIC source pages"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "jsonschema>=4.22",
+  "lxml>=5.2",
+  "pydantic>=2.7",
+  "rapidfuzz>=3.9",
+  "rich>=13.7",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2",
+]
+
+[project.scripts]
+gst-rule-review = "gst_rule_review.cli:app"
+clanker-zone = "clanker_zone.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["gst_rule_review*", "clanker_zone*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

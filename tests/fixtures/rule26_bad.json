@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "rule_id": "RULE-26",
+    "source_url": "https://example.invalid/rule26"
+  },
+  "amendments": [
+    {
+      "marker": "4",
+      "action": "NOTIFIED",
+      "notification_ref": "Notification No. 14/2022-Central Tax",
+      "notification_date": null,
+      "events": [
+        {
+          "action": "NOTIFIED",
+          "event_text": "Notification No."
+        }
+      ]
+    }
+  ],
+  "rule": {
+    "node_id": "CGST-R26",
+    "type": "rule",
+    "label": "Rule 26",
+    "source_ref": {
+      "block_ids": [1],
+      "exact": false
+    },
+    "children": [
+      {
+        "node_id": "CGST-R26(1)",
+        "type": "sub_rule",
+        "label": "(1)",
+        "text": "Every return shall be authenticated electronically.",
+        "source_ref": {
+          "block_ids": [2],
+          "exact": true
+        },
+        "children": [
+          {
+            "node_id": "CGST-R26(1)-P1",
+            "type": "proviso",
+            "label": "Provided that",
+            "text": "Provided that the Commissioner may exempt a person from electronic filing.",
+            "status": "omitted",
+            "effective_from": "05.07.2022",
+            "amendment_markers": ["4"],
+            "source_ref": {
+              "block_ids": [3],
+              "exact": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
