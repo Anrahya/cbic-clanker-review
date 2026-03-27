@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { CouncilRoster } from './components/CouncilRoster'
 import { DeliberationStream } from './components/DeliberationStream'
 import { IssueTracker } from './components/IssueTracker'
+import { HistoryView } from './components/HistoryView'
 import { StatsBar } from './components/StatsBar'
 import { useSessionStore } from './stores/session'
 import { useWebSocket } from './hooks/useWebSocket'
@@ -12,10 +13,13 @@ function App() {
   const startSession = useSessionStore((s) => s.startSession)
   const sessionId = useSessionStore((s) => s.sessionId)
   const status = useSessionStore((s) => s.status)
+  const activeView = useSessionStore((s) => s.activeView)
+  const setActiveView = useSessionStore((s) => s.setActiveView)
   const report = useSessionStore((s) => s.report)
   const ruleId = useSessionStore((s) => s.ruleId)
   const errorMsg = useSessionStore((s) => s.error)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  
   const [ruleInput, setRuleInput] = useState('19')
   const [corpusInput, setCorpusInput] = useState('D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017')
   
@@ -43,9 +47,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rule_number: ruleNum, corpus_path: corpusInput.trim() })
       })
-      if (!res.ok) {
-        throw new Error(await res.text())
-      }
+      if (!res.ok) throw new Error(await res.text())
       const data = await res.json()
       startSession(data.session_id, `CGST-R${data.rule_number}`)
     } catch (err) {
@@ -55,166 +57,163 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-surface text-text-primary font-body selection:bg-orange-200 selection:text-orange-900">
+    <div className="app-shell">
+      <div className="app-background" />
+
       {/* ═══ TOP NAV ═══ */}
-      <header className="bg-surface flex justify-between items-center w-full px-8 h-14 border-b border-border-subtle z-50 shrink-0 shadow-sm">
-        <div className="flex items-center gap-8">
-          <span className="font-headline font-bold text-lg tracking-wider text-text-primary flex items-center gap-2">
-            <span className="material-symbols-outlined text-text-secondary text-lg">public</span>
-            CLANKER_ZONE
-          </span>
-          <nav className="hidden md:flex gap-6 border-l border-border-subtle pl-6 h-6 items-center">
+      <header className="top-nav">
+        <div className="brand-title">
+          <span className="material-symbols-outlined">public</span>
+          CLANKER_ZONE
+          
+          <div style={{ marginLeft: '16px', display: 'flex', gap: '20px' }}>
             {status === 'running' && (
-              <span className="font-headline uppercase tracking-wide text-xs text-primary-accent font-bold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-accent pulse-glow" />
+              <div className="status-indicator running">
+                <span className="status-dot running animate-pulse-orange" />
                 SYSTEM_ACTIVE
-              </span>
+              </div>
             )}
             {status === 'complete' && (
-              <span className="font-headline uppercase tracking-wide text-xs text-emerald-700 font-bold flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+              <div className="status-indicator complete">
+                <span className="status-dot complete" />
                 SYSTEM_STABLE
-              </span>
+              </div>
             )}
             {status === 'idle' && (
-              <span className="font-headline uppercase tracking-wide text-xs text-text-secondary font-bold">STANDBY</span>
+              <div className="status-indicator idle">STANDBY</div>
             )}
-          </nav>
+          </div>
         </div>
-        <div className="flex items-center gap-5">
-          <button className="text-text-secondary hover:text-text-primary transition-colors flex items-center">
-            <span className="material-symbols-outlined text-[20px]">notifications</span>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <button className="btn-ghost">
+            <span className="material-symbols-outlined">notifications</span>
           </button>
-          <button className="text-text-secondary hover:text-text-primary transition-colors flex items-center">
-            <span className="material-symbols-outlined text-[20px]">settings</span>
+          <button className="btn-ghost">
+            <span className="material-symbols-outlined">settings</span>
           </button>
-          <div className="w-[1px] h-4 bg-border-subtle" />
-          <input ref={fileInputRef} type="file" accept=".json" onChange={handleLoadReport} className="hidden" />
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="text-text-secondary font-headline uppercase tracking-wide text-[11px] hover:text-text-primary transition-all cursor-pointer font-bold"
-          >
+          <div style={{ width: '1px', height: '16px', background: 'var(--border-subtle)' }} />
+          
+          <input ref={fileInputRef} type="file" accept=".json" onChange={handleLoadReport} style={{ display: 'none' }} />
+          <button onClick={() => fileInputRef.current?.click()} className="btn-ghost">
             LOAD JSON
           </button>
           
-          <div className="flex items-center bg-surface-panel border border-border-subtle rounded shadow-sm focus-within:border-primary-accent focus-within:ring-1 focus-within:ring-primary-accent transition-all overflow-hidden ml-4">
-            <div className="bg-border-subtle/40 px-3 flex items-center border-r border-border-subtle h-full">
-              <span className="font-mono text-[10px] font-bold tracking-widest text-text-secondary uppercase">CORPUS</span>
-            </div>
+          <div className="command-bar">
+            <div className="command-label">CORPUS</div>
             <input 
               type="text" 
               value={corpusInput} 
               onChange={e => setCorpusInput(e.target.value)}
               disabled={status === 'running'}
-              className="w-64 bg-transparent border-none text-xs font-mono text-text-primary px-3 py-1.5 focus:ring-0 disabled:opacity-50"
+              className="command-input mono"
               placeholder="Absolute path to corpus"
             />
-            <div className="bg-border-subtle flex items-center w-[1px] h-4 mx-1" />
-            <div className="bg-border-subtle/40 px-3 flex items-center border-x border-border-subtle h-full">
-              <span className="font-mono text-[10px] font-bold tracking-widest text-text-secondary uppercase">RULE</span>
-            </div>
+            <div className="command-label">RULE</div>
             <input 
               type="text" 
               value={ruleInput} 
               onChange={e => setRuleInput(e.target.value)}
               disabled={status === 'running'}
-              className="w-16 bg-transparent border-none text-sm font-headline font-bold text-text-primary px-3 py-1.5 focus:ring-0 disabled:opacity-50"
+              className="command-input bold"
               placeholder="e.g. 19"
             />
             <button
               onClick={handleStartReview}
               disabled={status === 'running' || !ruleInput.trim() || !corpusInput.trim()}
-              className="bg-primary-accent text-white font-headline uppercase tracking-wide text-[11px] px-4 py-1.5 hover:bg-orange-600 disabled:opacity-50 transition-all font-bold flex items-center gap-1.5 h-full"
+              className="btn-primary"
             >
-              <span className="material-symbols-outlined text-[14px]">bolt</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>bolt</span>
               LIVE
             </button>
           </div>
         </div>
       </header>
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="layout-body">
         {/* ═══ SIDE NAV ═══ */}
-        <aside className="bg-surface flex flex-col h-full w-[260px] border-r border-border-subtle shrink-0">
-          <div className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-surface-card border border-border-subtle rounded-full flex items-center justify-center shadow-card text-primary-accent">
-                <span className="material-symbols-outlined text-[20px]">engineering</span>
-              </div>
-              <div className="flex flex-col justify-center">
-                <span className="text-text-primary font-bold text-sm leading-tight">OPERATOR_01</span>
-                <span className="text-[10px] text-text-secondary font-mono tracking-wider mt-0.5">SOVEREIGN</span>
-              </div>
+        <aside className="side-nav">
+          <div className="operator-card">
+            <div className="operator-avatar">
+              <span className="material-symbols-outlined">engineering</span>
+            </div>
+            <div className="operator-details">
+              <span className="operator-name">OPERATOR_01</span>
+              <span className="operator-role">SOVEREIGN</span>
             </div>
           </div>
           
-          <nav className="flex-1 px-3 space-y-1 mt-2">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-3 px-3 font-semibold">Terminal Views</div>
-            <NavItem icon="dashboard" label="MISSION_CONTROL" active />
-            <NavItem icon="vital_signs" label="AGENT_STATUS" />
-            <NavItem icon="memory" label="REASONING_FEED" />
-            <NavItem icon="receipt_long" label="REPORT_VIEW" />
+          <nav className="nav-menu">
+            <div className="nav-label">TERMINAL VIEWS</div>
+            <div className={`nav-item ${activeView === 'mission_control' ? 'active' : ''}`} onClick={() => setActiveView('mission_control')}>
+              <span className="material-symbols-outlined">dashboard</span>
+              <span>MISSION_CONTROL</span>
+            </div>
+            <div className={`nav-item ${activeView === 'history' ? 'active' : ''}`} onClick={() => setActiveView('history')}>
+              <span className="material-symbols-outlined">history</span>
+              <span>HISTORY_LOGS</span>
+            </div>
           </nav>
         </aside>
 
         {/* ═══ MAIN CONTENT ═══ */}
-        <main className="flex-1 flex flex-col overflow-hidden bg-surface-panel/50 grid-bg">
-          <StatsBar ruleId={ruleId} />
+        <main className="workspace">
+          {activeView === 'mission_control' ? (
+            <>
+              <StatsBar ruleId={ruleId} />
 
-          <div className="flex-1 flex overflow-hidden p-6 gap-6">
-            {/* Intelligence Pipeline */}
-            <section className="w-80 flex flex-col shrink-0">
-              <div className="bg-surface-card border border-border-subtle rounded-xl flex flex-col h-full shadow-card overflow-hidden">
-                <div className="p-4 border-b border-border-subtle bg-surface/50">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-text-secondary text-sm">hub</span>
-                    <h3 className="font-mono text-[10px] font-bold uppercase tracking-widest text-text-secondary">
+              <div className="panels-container">
+                {/* Intelligence Pipeline */}
+                <section className="glass-panel roster-panel">
+                  <div className="panel-header">
+                    <div className="panel-title">
+                      <span className="material-symbols-outlined">hub</span>
                       INTELLIGENCE_PIPELINE
-                    </h3>
+                    </div>
                   </div>
-                </div>
-                <CouncilRoster />
-              </div>
-            </section>
+                  <div className="roster-content">
+                    <CouncilRoster />
+                  </div>
+                </section>
 
-            {/* Center panel */}
-            <section className="flex-1 flex flex-col min-w-0">
-              <div className="bg-surface-card border border-border-subtle rounded-xl flex flex-col h-full shadow-card overflow-hidden">
-                {report ? (
-                  <>
-                    <div className="p-4 border-b border-border-subtle flex justify-between items-center bg-surface/50">
-                      <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-text-secondary text-sm">analytics</span>
-                        <h3 className="font-mono text-[10px] font-bold uppercase tracking-widest text-text-secondary">REPORT_VIEW</h3>
+                {/* Center panel */}
+                <section className="glass-panel feed-panel">
+                  {report ? (
+                    <>
+                      <div className="panel-header">
+                        <div className="panel-title">
+                          <span className="material-symbols-outlined">analytics</span>
+                          REPORT_VIEW
+                        </div>
+                        <StatusBadge status={report.status} />
                       </div>
-                      <StatusBadge status={report.status} />
-                    </div>
-                    <div className="p-8 border-b border-border-subtle bg-surface-panel/30">
-                      <h2 className="font-headline text-3xl font-bold tracking-tight text-text-primary">{report.rule_id}</h2>
-                      <p className="text-sm text-text-secondary mt-3 leading-relaxed max-w-2xl">{report.summary}</p>
-                    </div>
-                    <div className="flex-1 overflow-auto p-8 bg-surface/30">
-                      <IssueTracker />
-                    </div>
-                  </>
-                ) : (
-                  <DeliberationStream />
-                )}
+                      <div className="report-header">
+                        <h2 className="report-rule">{report.rule_id}</h2>
+                        <p className="report-summary">{report.summary}</p>
+                      </div>
+                      <div style={{ flex: 1, padding: '32px', overflowY: 'hidden', height: '100%' }}>
+                        <IssueTracker />
+                      </div>
+                    </>
+                  ) : (
+                    <DeliberationStream />
+                  )}
+                </section>
               </div>
-            </section>
-          </div>
+            </>
+          ) : (
+            <HistoryView />
+          )}
         </main>
       </div>
 
       {/* ═══ ERROR BANNER ═══ */}
       {status === 'error' && errorMsg && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 max-w-lg w-full z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="bg-red-50 border border-red-200 text-red-900 px-6 py-4 shadow-xl flex items-center gap-4">
-            <span className="material-symbols-outlined text-red-600">error</span>
-            <div className="flex-1">
-              <h3 className="font-headline font-bold text-sm tracking-wide mb-1">SESSION ERROR</h3>
-              <p className="font-mono text-xs">{errorMsg}</p>
-            </div>
+        <div className="error-banner">
+          <span className="material-symbols-outlined">error</span>
+          <div>
+            <h3>SESSION ERROR</h3>
+            <p>{errorMsg}</p>
           </div>
         </div>
       )}
@@ -222,28 +221,26 @@ function App() {
   )
 }
 
-function NavItem({ icon, label, active }: { icon: string; label: string; active?: boolean }) {
-  return (
-    <div className={`px-3 py-2.5 rounded-md flex items-center gap-3 cursor-pointer transition-colors font-medium ${
-      active
-        ? 'text-primary-accent bg-orange-50 border-l-[3px] border-primary-accent pl-2.5 shadow-sm'
-        : 'text-text-secondary hover:text-text-primary hover:bg-surface-panel border-l-[3px] border-transparent pl-2.5'
-    }`}>
-      <span className="material-symbols-outlined text-[18px]">{icon}</span>
-      <span className="font-mono uppercase text-[11px] tracking-widest">{label}</span>
-    </div>
-  )
-}
-
 function StatusBadge({ status }: { status: string }) {
-  const styles: Record<string, string> = {
-    clean: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-    issues_found: 'text-red-700 bg-red-50 border-red-200',
-    accepted_with_artifacts: 'text-sky-700 bg-sky-50 border-sky-200',
-    needs_manual_review: 'text-amber-700 bg-amber-50 border-amber-200',
-  }
+  const isErr = status === 'issues_found'
+  const isOk = status === 'clean'
+  const isWarn = status === 'needs_manual_review'
+  const color = isErr ? 'var(--status-error)' : isOk ? 'var(--status-success)' : isWarn ? 'var(--status-warning)' : 'var(--accent-secondary)'
+  const bg = isErr ? 'var(--status-error-bg)' : isOk ? 'var(--status-success-bg)' : isWarn ? 'var(--status-warning-bg)' : 'var(--accent-secondary-dim)'
+  
   return (
-    <span className={`text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full border ${styles[status] || 'text-text-secondary border-border-subtle'}`}>
+    <span style={{
+      fontSize: '0.65rem',
+      fontFamily: 'var(--font-mono)',
+      fontWeight: 800,
+      letterSpacing: '0.1em',
+      textTransform: 'uppercase',
+      padding: '4px 12px',
+      borderRadius: 'var(--border-radius-pill)',
+      color: color,
+      backgroundColor: bg,
+      border: `1px solid ${color}`
+    }}>
       {status.replace(/_/g, ' ')}
     </span>
   )

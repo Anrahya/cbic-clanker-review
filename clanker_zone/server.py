@@ -220,6 +220,46 @@ async def start_review(req: ReviewRequest):
     return ReviewResponse(session_id=session.id, rule_number=req.rule_number, status=session.state.value)
 
 
+@app.get("/api/history")
+async def list_history():
+    import json
+    from datetime import datetime
+    reports = []
+    base_dir = Path("reports")
+    if base_dir.exists():
+        for report_file in base_dir.rglob("rule_report.json"):
+            try:
+                parent = report_file.parent
+                folder_name = parent.name
+                parts = folder_name.split("_")
+                
+                # Default parsing if structure YYYYMMDD_HHMMSS_sess... holds
+                if len(parts) >= 3 and "sess" in folder_name:
+                    ts_str = f"{parts[0]}_{parts[1]}"
+                    dt = datetime.strptime(ts_str, "%Y%m%d_%H%M%S")
+                    timestamp_ms = int(dt.timestamp() * 1000)
+                    session_id = "sess_" + folder_name.split("_sess_")[-1]
+                else:
+                    # Fallback to file creation time
+                    timestamp_ms = int(report_file.stat().st_mtime * 1000)
+                    session_id = folder_name
+
+                with open(report_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    
+                reports.append({
+                    "id": folder_name,
+                    "session_id": session_id,
+                    "timestamp": timestamp_ms,
+                    "report": data
+                })
+            except Exception as e:
+                logger.warning(f"Skipping unparseable history {report_file}: {e}")
+                
+    reports.sort(key=lambda x: x["timestamp"], reverse=True)
+    return {"history": reports}
+
+
 @app.get("/api/sessions")
 async def list_sessions():
     return {

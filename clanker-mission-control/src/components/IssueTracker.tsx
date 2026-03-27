@@ -2,34 +2,23 @@ import { useSessionStore } from '../stores/session'
 import type { CandidateIssue, FinalDisposition, Severity } from '../lib/types'
 import { useState } from 'react'
 
-const dispStyles: Record<FinalDisposition, { label: string; icon: string; color: string; bg: string; border: string }> = {
-  confirmed_issue:     { label: 'CONFIRMED',     icon: 'error',           color: 'text-red-700',       bg: 'bg-red-50',       border: 'border-red-200' },
-  acceptable_artifact: { label: 'ACCEPTED',      icon: 'check_circle',    color: 'text-emerald-700',   bg: 'bg-emerald-50',   border: 'border-emerald-200' },
-  manual_review:       { label: 'MANUAL_REVIEW', icon: 'visibility',      color: 'text-amber-700',     bg: 'bg-amber-50',     border: 'border-amber-200' },
-  rejected:            { label: 'REJECTED',      icon: 'cancel',          color: 'text-text-secondary',bg: 'bg-surface-panel',border: 'border-border-subtle' },
-}
-
-const sevDots: Record<Severity, string> = {
-  critical: 'bg-red-500',
-  major:    'bg-orange-500',
-  moderate: 'bg-amber-500',
-  minor:    'bg-stone-400',
+const dispStyles: Record<FinalDisposition, { label: string; icon: string; className: string }> = {
+  confirmed_issue:     { label: 'CONFIRMED',     icon: 'error',           className: 'status-error' },
+  acceptable_artifact: { label: 'ACCEPTED',      icon: 'check_circle',    className: 'status-success' },
+  manual_review:       { label: 'MANUAL_REVIEW', icon: 'visibility',      className: 'status-warning' },
+  rejected:            { label: 'REJECTED',      icon: 'cancel',          className: 'status-inactive' },
 }
 
 function IssueCard({ issue, onClick }: { issue: CandidateIssue; onClick: () => void }) {
   return (
-    <button
-      onClick={onClick}
-      className="w-full text-left p-4 border border-border-subtle bg-surface-card hover:border-primary-accent/50 hover:shadow-soft 
-        transition-all cursor-pointer group rounded-xl flex flex-col gap-3 shadow-sm"
-    >
-      <div className="flex items-center gap-2">
-        {issue.severity && <span className={`w-2.5 h-2.5 rounded-full ${sevDots[issue.severity]} shadow-sm`} />}
-        <span className="text-[10px] font-mono text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100 font-bold tracking-tight">
+    <button onClick={onClick} className="issue-card">
+      <div className="card-header">
+        {issue.severity && <span className={`sev-dot sev-${issue.severity}`} />}
+        <span className="node-ref">
           {issue.node_id || issue.issue_id}
         </span>
       </div>
-      <div className="text-sm font-semibold text-text-primary leading-snug line-clamp-3 group-hover:text-primary-accent transition-colors font-body">
+      <div className="card-title">
         {issue.title || 'Untitled Issue'}
       </div>
     </button>
@@ -40,110 +29,107 @@ function IssueDetail({ issue, onClose }: { issue: CandidateIssue; onClose: () =>
   const disp = issue.final_disposition ? dispStyles[issue.final_disposition] : null
 
   return (
-    <div className="fixed inset-0 z-[100] flex justify-end">
-      <div className="absolute inset-0 bg-stone-900/20 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-2xl bg-surface border-l border-border-subtle overflow-y-auto shadow-2xl flex flex-col animate-slide-in">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
         {/* Header */}
-        <div className="p-8 border-b border-border-subtle bg-surface-card flex justify-between items-start sticky top-0 z-10 shadow-sm">
-          <div className="pr-6">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-[10px] font-mono bg-surface-panel text-text-secondary px-2.5 py-1 rounded border border-border-subtle font-bold">
+        <div className="modal-header">
+          <div>
+            <div className="modal-meta">
+              <span className="node-ref" style={{ fontSize: '0.75rem', padding: '4px 10px' }}>
                 {issue.issue_id}
               </span>
               {disp && (
-                <span className={`flex items-center gap-1.5 text-[10px] font-mono font-bold px-3 py-1 rounded-full border shadow-sm ${disp.color} ${disp.bg} ${disp.border}`}>
-                  <span className="material-symbols-outlined text-[14px]">{disp.icon}</span>
+                <span className={`disp-badge ${disp.className}`} style={{ 
+                  color: `var(--${disp.className})`, 
+                  backgroundColor: `var(--${disp.className}-bg)`, 
+                  borderColor: `rgba(var(--${disp.className}), 0.2)` 
+                }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>{disp.icon}</span>
                   {disp.label}
                 </span>
               )}
             </div>
-            <h3 className="text-2xl font-headline font-bold tracking-tight text-text-primary leading-snug">{issue.title}</h3>
+            <h3 className="modal-title">{issue.title}</h3>
           </div>
-          <button onClick={onClose} className="text-text-secondary hover:text-text-primary transition-colors bg-surface-panel hover:bg-border-subtle p-2.5 rounded-full">
-            <span className="material-symbols-outlined text-[20px]">close</span>
+          <button onClick={onClose} className="modal-close">
+            <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>close</span>
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-8 space-y-10 flex-1 bg-surface">
-          <div className="grid grid-cols-2 gap-8">
-            <Field label="NODE REFERENCE">
-              <div className="text-sm font-mono font-bold text-indigo-800 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-md inline-block shadow-sm">
+        <div className="modal-body">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+            <div className="field-group">
+              <span className="field-label">NODE REFERENCE</span>
+              <div className="node-ref" style={{ display: 'inline-flex', padding: '6px 12px', fontSize: '0.8rem', width: 'fit-content' }}>
                 {issue.node_id || 'N/A'}
               </div>
-            </Field>
+            </div>
             {issue.severity && (
-              <Field label="SEVERITY">
-                <div className="flex items-center gap-2 mt-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${sevDots[issue.severity]} shadow-sm`} />
-                  <span className="text-sm font-mono uppercase text-text-primary font-bold tracking-wide">{issue.severity}</span>
+              <div className="field-group">
+                <span className="field-label">SEVERITY</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '4px' }}>
+                  <span className={`sev-dot sev-${issue.severity}`} style={{ width: '12px', height: '12px' }} />
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase' }}>
+                    {issue.severity}
+                  </span>
                 </div>
-              </Field>
+              </div>
             )}
           </div>
 
           {issue.problem && (
-            <Field label="PROBLEM DESCRIPTION">
-              <div className="text-[15px] font-body text-text-primary leading-relaxed bg-surface-card p-5 rounded-lg border border-border-subtle shadow-sm selection:bg-orange-200">
-                {issue.problem}
-              </div>
-            </Field>
+            <div className="field-group">
+              <span className="field-label">PROBLEM DESCRIPTION</span>
+              <div className="field-content problem">{issue.problem}</div>
+            </div>
           )}
 
           {issue.evidence_refs.length > 0 && (
-            <Field label="EVIDENCE">
-              <div className="space-y-3">
+            <div className="field-group">
+              <span className="field-label">EVIDENCE LOGS</span>
+              <div>
                 {issue.evidence_refs.map((ref, i) => (
-                  <div key={i} className="text-[13px] font-mono font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 p-4 rounded-lg shadow-sm leading-relaxed">
+                  <div key={i} className="evidence-box">
                     {ref}
                   </div>
                 ))}
               </div>
-            </Field>
+            </div>
           )}
 
           {issue.recommended_fix && (
-            <Field label="RECOMMENDED FIX">
-              <div className="text-[15px] font-body text-amber-900 leading-relaxed bg-[#fffbeb] p-5 rounded-lg border border-amber-200 shadow-sm">
-                {issue.recommended_fix}
-              </div>
-            </Field>
+            <div className="field-group">
+              <span className="field-label">RECOMMENDED FIX</span>
+              <div className="field-content fix">{issue.recommended_fix}</div>
+            </div>
           )}
 
-          <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border-subtle">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', borderTop: '1px solid var(--border-subtle)', paddingTop: '32px' }}>
             {issue.supporting_counsel.length > 0 && (
-              <Field label="SUPPORTING COUNSEL">
-                <div className="flex gap-2 flex-wrap mt-2">
+              <div className="field-group">
+                <span className="field-label">SUPPORTING COUNSEL</span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {issue.supporting_counsel.map(c => (
-                    <span key={c} className="text-[10px] font-mono font-bold tracking-widest px-2.5 py-1 rounded-md text-primary-accent bg-orange-50 border border-orange-200 shadow-sm">
+                    <span key={c} className="node-ref" style={{ color: 'var(--accent-secondary)', background: 'var(--accent-secondary-dim)', borderColor: 'var(--accent-secondary)' }}>
                       {c.replace(/_/g, ' ').toUpperCase()}
                     </span>
                   ))}
                 </div>
-              </Field>
+              </div>
             )}
             {issue.metadata?.max_confidence != null && (
-              <Field label="CONFIDENCE">
-                <div className="text-3xl font-headline font-black text-text-primary mt-1 tracking-tighter">
-                  {((issue.metadata.max_confidence as number) * 100).toFixed(0)}<span className="text-xl text-text-secondary ml-0.5">%</span>
+              <div className="field-group">
+                <span className="field-label">SYSTEM CONFIDENCE</span>
+                <div style={{ fontFamily: 'var(--font-headline)', fontSize: '2.5rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>
+                  {((issue.metadata.max_confidence as number) * 100).toFixed(0)}
+                  <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>%</span>
                 </div>
-              </Field>
+              </div>
             )}
           </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <div className="flex items-center gap-2 mb-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-border-subtle" />
-        <span className="text-[10px] font-mono tracking-widest uppercase text-text-secondary font-bold">{label}</span>
-      </div>
-      {children}
     </div>
   )
 }
@@ -164,23 +150,23 @@ export function IssueTracker() {
 
   return (
     <>
-      <div className="flex gap-8 h-full overflow-x-auto pb-4 px-2">
+      <div className="issue-tracker-container">
         {nonEmpty.map(({ key, issues }) => {
           const cfg = dispStyles[key]
+          const colorVar = cfg.className === 'status-inactive' ? 'var(--text-secondary)' : `var(--${cfg.className})`
+          
           return (
-            <div key={key} className="flex flex-col flex-1 min-w-[300px] max-w-[420px]">
-              <div className="flex items-center justify-between mb-5 border-b-2 border-border-subtle pb-3">
-                <div className="flex items-center gap-2.5">
-                  <span className={`material-symbols-outlined text-[18px] ${cfg.color}`}>{cfg.icon}</span>
-                  <span className={`text-xs font-mono font-bold tracking-widest ${cfg.color}`}>
-                    {cfg.label}
-                  </span>
+            <div key={key} className="issue-column">
+              <div className="col-header">
+                <div className="col-title" style={{ color: colorVar }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>{cfg.icon}</span>
+                  {cfg.label}
                 </div>
-                <span className="text-[11px] font-mono font-bold text-text-primary bg-surface-card border border-border-subtle px-2.5 py-0.5 rounded-lg shadow-sm">
+                <div className="col-count" style={{ color: colorVar, borderColor: colorVar }}>
                   {issues.length}
-                </span>
+                </div>
               </div>
-              <div className="space-y-4 overflow-y-auto flex-1 pr-2">
+              <div className="col-cards">
                 {issues.map(issue => (
                   <IssueCard key={issue.issue_id} issue={issue} onClick={() => setSelectedIssue(issue)} />
                 ))}

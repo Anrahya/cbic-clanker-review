@@ -11,6 +11,7 @@ interface StreamMessage {
 }
 
 interface SessionState {
+  activeView: 'mission_control' | 'history'
   sessionId: string | null
   ruleId: string | null
   status: 'idle' | 'connecting' | 'running' | 'complete' | 'error'
@@ -25,6 +26,7 @@ interface SessionState {
   error: string | null
 
   // Actions
+  setActiveView: (view: 'mission_control' | 'history') => void
   startSession: (sessionId: string, ruleId: string) => void
   handleEvent: (event: StreamEvent) => void
   loadReport: (report: RuleReport) => void
@@ -43,6 +45,7 @@ const DEFAULT_COUNSEL: CounselStatus[] = [
 let msgCounter = 0
 
 export const useSessionStore = create<SessionState>((set) => ({
+  activeView: 'mission_control',
   sessionId: null,
   ruleId: null,
   status: 'idle',
@@ -52,7 +55,10 @@ export const useSessionStore = create<SessionState>((set) => ({
   stats: { totalTokens: 0, startedAt: null, completedAt: null },
   error: null,
 
+  setActiveView: (view) => set({ activeView: view }),
+
   startSession: (sessionId, ruleId) => set({
+    activeView: 'mission_control',
     sessionId,
     ruleId,
     status: 'running',
@@ -132,6 +138,7 @@ export const useSessionStore = create<SessionState>((set) => ({
   }),
 
   loadReport: (report) => set({
+    activeView: 'mission_control',
     report,
     status: 'complete',
     ruleId: report.rule_id,
@@ -139,6 +146,7 @@ export const useSessionStore = create<SessionState>((set) => ({
   }),
 
   reset: () => set({
+    activeView: 'mission_control',
     sessionId: null,
     ruleId: null,
     status: 'idle',
