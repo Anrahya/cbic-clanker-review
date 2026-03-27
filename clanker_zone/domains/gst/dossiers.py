@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from ...models import Dossier, EvidenceLocator, EvidenceSnippet
@@ -52,18 +53,39 @@ def _schema_excerpt(schema_json: Dict[str, Any], node_type: str) -> Dict[str, An
 
 
 def _focus_categories(node: Dict[str, Any]) -> List[str]:
-    categories = {"text_fidelity", "source_refs"}
+    categories: set[str] = set()
     node_type = node.get("type")
+
+    # Source fidelity: only when the node has text content to verify
+    if node.get("text") or node.get("raw_text") or node.get("operative_text"):
+        categories.add("text_fidelity")
+
+    # Source refs: only when the node actually has a source_ref
+    if node.get("source_ref"):
+        categories.add("source_refs")
+
+    # Structure/scope: clauses, sub-clauses, provisos, explanations
     if node_type in {"sub_rule", "clause", "sub_clause"}:
         categories.update({"structure_scope", "clauses"})
     if node_type in {"proviso", "explanation"}:
         categories.update({"provisos_explanations", "structure_scope"})
+
+    # Tables: only when table evidence exists
     if node_type == "table" or node.get("table_data"):
         categories.add("tables")
+
+    # Formulas
+    if node.get("formula_data"):
+        categories.add("formulas")
+
+    # Amendment/chronology: only when amendment markers or non-active status
     if node.get("amendment_markers") or node.get("status") != "active":
         categories.update({"amendment_markers", "status_chronology"})
+
+    # Cross-refs and duplicates: only when cross_refs exist
     if node.get("cross_refs"):
         categories.update({"cross_refs", "duplicates"})
+
     return sorted(categories)
 
 
@@ -284,9 +306,16 @@ def _build_cluster_dossier(
     metadata.update(
         {
             "rule_path": bundle.rule_path,
+            "rule_json_mtime": bundle.rule_metadata.get("mtime"),
+            "rule_json_sha256": bundle.rule_metadata.get("sha256"),
             "raw_html_path": bundle.raw_html_path,
+            "raw_html_mtime": bundle.raw_html_metadata.get("mtime"),
+            "raw_html_sha256": bundle.raw_html_metadata.get("sha256"),
             "hint_path": bundle.hint_path,
+            "hint_json_mtime": bundle.hint_metadata.get("mtime"),
+            "hint_json_sha256": bundle.hint_metadata.get("sha256"),
             "cluster_strategy": "parent_cluster",
+            "session_timestamp": time.time(),
         }
     )
     return Dossier(
@@ -370,7 +399,16 @@ def build_gst_dossiers(
                         payload=amendment,
                     )
                 ],
-                metadata={"rule_id": rule_id},
+                metadata={
+                    "rule_id": rule_id,
+                    "rule_path": bundle.rule_path,
+                    "rule_json_mtime": bundle.rule_metadata.get("mtime"),
+                    "rule_json_sha256": bundle.rule_metadata.get("sha256"),
+                    "hint_path": bundle.hint_path,
+                    "hint_json_mtime": bundle.hint_metadata.get("mtime"),
+                    "hint_json_sha256": bundle.hint_metadata.get("sha256"),
+                    "session_timestamp": __import__("time").time(),
+                },
             )
         )
     return dossiers

@@ -19,6 +19,19 @@ class GSTRuleBundle(BaseModel):
     raw_html: Optional[str] = None
     hint_json: Dict[str, Any] = {}
     section_content_json: Dict[str, Any] = {}
+    rule_metadata: Dict[str, Any] = {}
+    raw_html_metadata: Dict[str, Any] = {}
+    hint_metadata: Dict[str, Any] = {}
+
+def _compute_file_metadata(path: Optional[Path]) -> Dict[str, Any]:
+    if not path or not path.exists():
+        return {}
+    import hashlib
+    content = path.read_bytes()
+    return {
+        "mtime": path.stat().st_mtime,
+        "sha256": hashlib.sha256(content).hexdigest()
+    }
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
@@ -45,6 +58,9 @@ def load_rule_bundle(corpus_root: Path, rule_path: Path) -> GSTRuleBundle:
         raw_html=raw_html_path.read_text(encoding="utf-8") if raw_html_path.exists() else None,
         hint_json=_load_json(hint_path) if hint_path.exists() else {},
         section_content_json=_load_json(section_content_path) if section_content_path.exists() else {},
+        rule_metadata=_compute_file_metadata(rule_path),
+        raw_html_metadata=_compute_file_metadata(raw_html_path) if raw_html_path.exists() else {},
+        hint_metadata=_compute_file_metadata(hint_path) if hint_path.exists() else {},
     )
 
 
