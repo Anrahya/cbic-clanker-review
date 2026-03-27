@@ -18,7 +18,6 @@ from clanker_zone.config import CouncilConfig
 from clanker_zone.council import CouncilBuilder
 from clanker_zone.domains.gst.corpus import discover_rule_bundles, discover_rule_bundles_from_chapters
 from clanker_zone.domains.gst.dossiers import build_gst_dossiers
-from clanker_zone.domains.gst.false_positive_filter import apply_gst_false_positive_filter
 from clanker_zone.domains.gst.signals import run_heuristic_signals
 from clanker_zone.domains.gst.policy import GST_CONSTITUTION, GST_COUNSEL_ROSTER, GST_DOMAIN_OVERVIEW, GST_OUTPUT_CONTRACT
 from clanker_zone.domains.gst.prompts import build_issue_task_prompt, build_task_prompt
@@ -169,10 +168,6 @@ def background_council_run(session: Session, req: ReviewRequest, event_loop: asy
             on_event=emit,
         )
         
-        run.rule_report = apply_gst_false_positive_filter(
-            report=run.rule_report,
-            dossiers=plan.dossiers,
-        )
         
         run.rule_report = apply_manual_review_summarizer(
             report=run.rule_report,

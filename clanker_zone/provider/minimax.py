@@ -26,7 +26,7 @@ class MiniMaxProviderConfig(BaseModel):
     base_url: str = "https://api.minimax.io/anthropic"
     api_key_env: str = "MINIMAX_API_KEY"
     explicit_api_key: Optional[str] = None
-    temperature: float = Field(default=0.1, gt=0.0, le=1.0)
+    temperature: float = Field(default=0.5, gt=0.0, le=1.0)
     max_tokens: int = 4096
     anthropic_version: str = "2023-06-01"
     timeout_seconds: float = 180.0

@@ -9,7 +9,6 @@ from .config import CouncilConfig
 from .council import CouncilBuilder
 from .domains.gst.corpus import discover_rule_bundles, discover_rule_bundles_from_chapters
 from .domains.gst.dossiers import build_gst_dossiers
-from .domains.gst.false_positive_filter import apply_gst_false_positive_filter
 from .domains.gst.signals import run_heuristic_signals
 from .domains.gst.policy import (
     GST_CONSTITUTION,
@@ -181,10 +180,7 @@ def gst_review(
         specialist_counsel_names=specialist_names,
         max_concurrency=max_concurrency,
     )
-    run.rule_report = apply_gst_false_positive_filter(
-        report=run.rule_report,
-        dossiers=plan.dossiers,
-    )
+
     run.rule_report = apply_manual_review_summarizer(
         report=run.rule_report,
         dossiers=plan.dossiers,

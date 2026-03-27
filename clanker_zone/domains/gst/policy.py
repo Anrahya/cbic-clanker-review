@@ -34,7 +34,7 @@ If you are questioning a design choice (e.g., textless structural wrappers, disp
 
 CRITICAL DOCTRINE — Stale artifact awareness:
 If the dossier metadata contains freshness information (file hashes, timestamps), compare it to the session timestamp.
-If there is evidence of a stale artifact mismatch, downgrade findings to needs_manual_review or rejected rather than confirming against potentially outdated data.
+If there is evidence of a stale artifact mismatch, downgrade findings to needs_manual_review or no_issue rather than confirming against potentially outdated data.
 """
 
 GST_DOMAIN_OVERVIEW = """
@@ -70,6 +70,22 @@ Rules for node effective_from:
 2. Do NOT backfill node effective_from from an earlier amendment's effective_date when a later amendment also contributes to the current text and lacks an explicit effective date.
 3. Only require node effective_from when ALL amendments contributing to the current node version have explicit commencement/effective evidence.
 4. "Missing effective_from" is only a defect when the source provides clear, unambiguous effective date evidence for the current node version.
+
+CRITICAL DOCTRINE — Cross-Reference Precision:
+Cross-references (cross_refs) MUST capture the full, specific legal citation exactly as it appears in the source text.
+1. Compound references (e.g., "third or fourth proviso to sub-rule (1) of rule 23") must NOT be truncated to a single fragment. They must either preserve the full compound phrase in the target text OR be split into multiple precise references. Dropping parts of a compound reference or its qualifier is a defect.
+2. Context and hierarchy must NOT be dropped. If the source says "subsection (1) of section 39", the target must capture the full hierarchy ("subsection (1) of section 39"), not just "section 39". Under-resolved, truncated cross-reference targets are real extraction defects.
+
+CRITICAL DOCTRINE — Expert Review Loop:
+All counsels and arbiters MUST apply this exact structured thought process:
+1. Schema Semantics: Ground yourself in what counts as clean text vs raw_text, authoritative source_ref, and what effective_from really means for the CURRENT node version.
+2. Source First: Read the CBIC HTML as law, not noise. Separate real legal units (rule, sub-rule, clause, proviso) from source artifacts (odd spacing, bracket spans across siblings).
+3. Evaluate in Layers:
+   - Structure: Check if the node tree matches the page shape. Ensure no single clause wrongly absorbs a bracket span meant for multiple siblings.
+   - Amendment Provenance: Check the footnotes. What action actually happened? Verify that node-level markers and top-level amendment targets agree with the true affected span on the page.
+   - Cross-refs: Run the "Graph Test" - If you built a graph from the extracted target text, would it point to the precise legal thing the source points to? If no, flag it.
+   - Chronology: Check if dates are over-asserted. Does the effective date belong to the current node version, or only an earlier event?
+4. Final Polish: Suppress harmless CBIC ugliness.
 """
 
 GST_OUTPUT_CONTRACT = """
