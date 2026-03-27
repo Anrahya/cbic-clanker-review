@@ -170,8 +170,10 @@ def background_council_run(session: Session, req: ReviewRequest, event_loop: asy
             dossiers=plan.dossiers,
         )
         
-        # Persist run artifacts exactly like the CLI does
-        out_dir = Path("clanker_runs/live") / f"rule_{req.rule_number}_{session.id}"
+        # Persist run artifacts into a clean hierarchy under reports/
+        from datetime import datetime
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        out_dir = Path("reports") / f"rule_{req.rule_number}" / f"{ts}_{session.id}"
         write_deliberation_artifacts(out_dir=out_dir, plan=plan, run=run)
         
         # We need to emit the filtered report if the false-positive filter changed anything
