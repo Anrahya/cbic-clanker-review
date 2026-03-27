@@ -326,19 +326,28 @@ def _cluster_roots(bundle: GSTRuleBundle, rule_root: Dict[str, Any]) -> List[Nod
     return roots
 
 
-def build_gst_dossiers(bundle: GSTRuleBundle) -> List[Dossier]:
+def build_gst_dossiers(
+    bundle: GSTRuleBundle,
+    heuristic_signals: Optional[List[EvidenceSnippet]] = None,
+) -> List[Dossier]:
     dossiers: List[Dossier] = []
     rule_root = bundle.rule_json["node"]
     rule_id = rule_root["id"]
 
     for cluster_root, cluster_root_path in _cluster_roots(bundle, rule_root):
-        dossiers.append(
-            _build_cluster_dossier(
-                bundle,
-                cluster_root=cluster_root,
-                cluster_root_path=cluster_root_path,
-            )
+        dossier = _build_cluster_dossier(
+            bundle,
+            cluster_root=cluster_root,
+            cluster_root_path=cluster_root_path,
         )
+        # Inject heuristic signals relevant to nodes in this cluster
+        if heuristic_signals:
+            cluster_node_ids = _collect_node_ids(cluster_root)
+            for signal in heuristic_signals:
+                signal_node = signal.payload.get("node_id") if signal.payload else None
+                if signal_node and signal_node in cluster_node_ids:
+                    dossier.evidence.append(signal)
+        dossiers.append(dossier)
 
     for amendment in bundle.hint_json.get("amendments", []):
         marker = str(amendment.get("marker"))
@@ -365,3 +374,15 @@ def build_gst_dossiers(bundle: GSTRuleBundle) -> List[Dossier]:
             )
         )
     return dossiers
+
+
+def _collect_node_ids(node: Dict[str, Any]) -> Set[str]:
+    """Collect all node IDs in a subtree."""
+    ids: Set[str] = set()
+    node_id = node.get("id")
+    if node_id:
+        ids.add(node_id)
+    for bucket in ("children", "provisos", "explanations"):
+        for child in node.get(bucket, []):
+            ids.update(_collect_node_ids(child))
+    return ids

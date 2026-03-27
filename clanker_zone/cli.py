@@ -7,9 +7,10 @@ import typer
 
 from .config import CouncilConfig
 from .council import CouncilBuilder
-from .domains.gst.corpus import discover_rule_bundles
+from .domains.gst.corpus import discover_rule_bundles, discover_rule_bundles_from_chapters
 from .domains.gst.dossiers import build_gst_dossiers
 from .domains.gst.false_positive_filter import apply_gst_false_positive_filter
+from .domains.gst.signals import run_heuristic_signals
 from .domains.gst.policy import (
     GST_CONSTITUTION,
     GST_COUNSEL_ROSTER,
@@ -23,6 +24,13 @@ from .session import compile_plan_requests, execute_compiled_requests
 from .workflow import run_issue_council
 
 app = typer.Typer(help="Clanker Zone multi-agent council runner.")
+
+
+def _discover_bundles(corpus: Path):
+    """Auto-detect corpus layout: chapter-based vs flat."""
+    if any(corpus.glob("chapter_*")):
+        return discover_rule_bundles_from_chapters(corpus)
+    return discover_rule_bundles(corpus)
 
 
 def _select_dossiers(dossiers, target_id: Optional[str], dossier_limit: int):
@@ -52,7 +60,7 @@ def gst_plan(
     dossier_limit: int = typer.Option(8, help="Maximum dossiers to include"),
     target_id: Optional[str] = typer.Option(None, help="Optional node id or dossier id to isolate"),
 ) -> None:
-    bundles = discover_rule_bundles(corpus)
+    bundles = _discover_bundles(corpus)
     bundle = next(bundle for bundle in bundles if bundle.rule_json["metadata"]["rule_number"] == rule_number)
     dossiers = _select_dossiers(build_gst_dossiers(bundle), target_id, dossier_limit)
     builder = CouncilBuilder(CouncilConfig(), "gst", GST_COUNSEL_ROSTER)
@@ -82,7 +90,7 @@ def gst_run(
     timeout_seconds: float = typer.Option(180.0, help="HTTP timeout per MiniMax request"),
     max_retries: int = typer.Option(3, help="Retry count for transient MiniMax network timeouts"),
 ) -> None:
-    bundles = discover_rule_bundles(corpus)
+    bundles = _discover_bundles(corpus)
     bundle = next(bundle for bundle in bundles if bundle.rule_json["metadata"]["rule_number"] == rule_number)
     dossiers = _select_dossiers(build_gst_dossiers(bundle), target_id, dossier_limit)
     builder = CouncilBuilder(CouncilConfig(model_name=model), "gst", GST_COUNSEL_ROSTER)
@@ -129,9 +137,21 @@ def gst_review(
     max_retries: int = typer.Option(3, help="Retry count for transient MiniMax network timeouts"),
     max_concurrency: int = typer.Option(6, help="Maximum parallel MiniMax requests per stage"),
 ) -> None:
-    bundles = discover_rule_bundles(corpus)
+    bundles = _discover_bundles(corpus)
     bundle = next(bundle for bundle in bundles if bundle.rule_json["metadata"]["rule_number"] == rule_number)
-    dossiers = _select_dossiers(build_gst_dossiers(bundle), target_id, dossier_limit)
+    # Run deterministic checks and extract heuristic signals for dossier injection
+    heuristic_signals = []
+    try:
+        raw_path = Path(bundle.raw_html_path) if bundle.raw_html_path else None
+        heuristic_signals = run_heuristic_signals(
+            rule_path=Path(bundle.rule_path),
+            schema_path=Path(bundle.schema_path),
+            raw_path=raw_path,
+            hint_json=bundle.hint_json,
+        )
+    except Exception as exc:
+        typer.echo(f"Warning: deterministic signal generation failed: {exc}", err=True)
+    dossiers = _select_dossiers(build_gst_dossiers(bundle, heuristic_signals=heuristic_signals), target_id, dossier_limit)
     builder = CouncilBuilder(CouncilConfig(model_name=model), "gst", GST_COUNSEL_ROSTER)
     plan = builder.build_plan(
         dossiers=dossiers,

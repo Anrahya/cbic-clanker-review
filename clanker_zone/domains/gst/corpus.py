@@ -55,3 +55,28 @@ def discover_rule_bundles(corpus_root: Path) -> List[GSTRuleBundle]:
             continue
         bundles.append(load_rule_bundle(corpus_root, rule_path))
     return bundles
+
+
+def discover_rule_bundles_from_chapters(data_root: Path) -> List[GSTRuleBundle]:
+    """Discover rule bundles from a chapter-based directory layout.
+
+    Expected layout:
+        data_root/
+            chapter_01_xxx/rule_008.json, rule_009.json, ...
+            chapter_02_xxx/rule_010.json, ...
+            raw/html/CGST-R8.html, ...
+            raw/hints/CGST-R8.json, ...
+            rule_document.json  (schema)
+
+    The raw/ and schema files live at data_root level, while rule JSONs
+    are nested inside chapter_* subdirectories.
+    """
+    bundles: List[GSTRuleBundle] = []
+    for chapter_dir in sorted(data_root.glob("chapter_*")):
+        if not chapter_dir.is_dir():
+            continue
+        for rule_path in sorted(chapter_dir.glob("rule_*.json")):
+            if rule_path.name in ("rule_document.json", "chapter_manifest.json"):
+                continue
+            bundles.append(load_rule_bundle(data_root, rule_path))
+    return bundles

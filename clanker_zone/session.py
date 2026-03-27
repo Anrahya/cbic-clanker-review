@@ -9,6 +9,7 @@ from .provider.base import LLMProvider
 
 
 PromptBuilder = Callable[[str, Dossier, list[str]], str]
+TaskEventCallback = Callable[[dict], None]
 
 
 def compile_plan_requests(
@@ -53,14 +54,15 @@ def execute_compiled_requests(
     compiled_requests: List[CompiledTaskRequest],
     provider: LLMProvider,
     max_concurrency: int = 1,
+    on_task_event: Optional[TaskEventCallback] = None,
 ) -> List[ExecutedTaskResult]:
     if max_concurrency <= 1:
-        return [_execute_one(compiled, provider) for compiled in compiled_requests]
+        return [_execute_one(compiled, provider, on_task_event) for compiled in compiled_requests]
 
     indexed_results: List[Tuple[int, ExecutedTaskResult]] = []
     with ThreadPoolExecutor(max_workers=max_concurrency) as executor:
         future_map = {
-            executor.submit(_execute_one, compiled, provider): index
+            executor.submit(_execute_one, compiled, provider, on_task_event): index
             for index, compiled in enumerate(compiled_requests)
         }
         for future in as_completed(future_map):
@@ -69,8 +71,20 @@ def execute_compiled_requests(
     return [result for _, result in indexed_results]
 
 
-def _execute_one(compiled: CompiledTaskRequest, provider: LLMProvider) -> ExecutedTaskResult:
+def _execute_one(
+    compiled: CompiledTaskRequest,
+    provider: LLMProvider,
+    on_task_event: Optional[TaskEventCallback] = None,
+) -> ExecutedTaskResult:
     invoke_error: Optional[str] = None
+    import time
+    if on_task_event:
+        on_task_event({
+            "type": "counsel_start",
+            "timestamp": int(time.time() * 1000),
+            "counsel_name": compiled.counsel_name,
+            "stage": compiled.stage,
+        })
     try:
         response = provider.invoke(compiled.provider_request)
         response.metadata = {
@@ -101,6 +115,30 @@ def _execute_one(compiled: CompiledTaskRequest, provider: LLMProvider) -> Execut
                 judgment.metadata.setdefault("issue_id", issue_id)
         except Exception as exc:  # parser failure should not drop raw response
             parse_error = str(exc)
+            
+    if on_task_event:
+        import time
+        now_ms = int(time.time() * 1000)
+        if invoke_error or parse_error:
+            on_task_event({
+                "type": "error",
+                "timestamp": now_ms,
+                "error": invoke_error or parse_error,
+                "counsel_name": compiled.counsel_name,
+                "stage": compiled.stage,
+            })
+        else:
+            # Reconstruct content from blocks (usually just one text block)
+            content = "".join(b.text for b in response.blocks if b.text)
+            on_task_event({
+                "type": "counsel_result",
+                "timestamp": now_ms,
+                "counsel_name": compiled.counsel_name,
+                "stage": compiled.stage,
+                "content": content,
+                "token_count": response.usage.output_tokens,
+            })
+            
     return ExecutedTaskResult(
         task_id=compiled.task_id,
         counsel_name=compiled.counsel_name,

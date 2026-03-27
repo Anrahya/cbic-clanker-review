@@ -141,6 +141,11 @@ class ExecutedTaskResult(BaseModel):
     parse_error: Optional[str] = None
 
 
+FinalDisposition = Literal[
+    "confirmed_issue", "acceptable_artifact", "manual_review", "rejected"
+]
+
+
 class CandidateIssue(BaseModel):
     issue_id: str
     signature: str
@@ -155,11 +160,12 @@ class CandidateIssue(BaseModel):
     supporting_task_ids: List[str] = Field(default_factory=list)
     supporting_counsel: List[str] = Field(default_factory=list)
     metadata: Dict[str, Any] = Field(default_factory=dict)
+    final_disposition: Optional[FinalDisposition] = None
 
 
 class RuleSynthesisReport(BaseModel):
     rule_id: str
-    status: Literal["clean", "issues_found", "needs_manual_review"]
+    status: Literal["clean", "issues_found", "accepted_with_artifacts", "needs_manual_review"]
     confirmed_issues: List[CandidateIssue] = Field(default_factory=list)
     accepted_artifacts: List[CandidateIssue] = Field(default_factory=list)
     manual_review_issues: List[CandidateIssue] = Field(default_factory=list)

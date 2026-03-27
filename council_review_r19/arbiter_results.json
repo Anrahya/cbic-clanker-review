@@ -1,0 +1,226 @@
+[
+  {
+    "task_id": "arbiter-ISSUE-0001",
+    "counsel_name": "chief_arbiter",
+    "dossier_id": "gst-cluster-CGST-R19(1)",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me analyze this issue carefully as the chief_arbiter.\n\n## The Issue\nThe candidate issue claims that CGST-R19(1) has status \"active\" but should be \"pending\" because amendment marker [3] indicates \"Inserted (w.e.f. yet to be notified)\" per Notification No. 7/2025-CT, dated 23.01.2025.\n\n## Prior Judgments\n\n### Specialist (amendment_counsel) - CONFIRMED ISSUE\n- Argues the node's status should be \"pending\" to reflect the pending amendment\n- Confidence: 0.85\n\n### Skeptic (artifact_defender) - NEEDS MANUAL REVIEW\n- Key argument: The issue conflates the status of a sub-rule node with the status of a specific amendment within it\n- Points out that CGST-R19(1) as a whole is operative (existing clauses P1(a)-(d) and P2 are in force)\n- Amendment marker [3] is correctly recorded with effective_date=null, enacted_date=2025-01-23\n- Changing the sub-rule's status to \"pending\" would incorrectly imply the entire provision is unenforceable when only the specific amendment insertion is pending\n- Confidence: 0.55\n\n## Evidence Review\n\n### From the dossier:\n\n**Target node CGST-R19(1):**\n- status: \"active\"\n- amendment_markers: [3]\n- effective_from: null\n\n**Amendment marker 3:**\n- action: \"INSERTED\"\n- effective_date: null (correctly reflecting \"yet to be notified\")\n- enacted_date: \"2025-01-23\"\n- text: \"Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.\"\n\n**Source block 2:**\nContains the amendment marker <sup>3</sup> inline in the text:\n\"or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]\"\n\n\nThe key distinction here is whether the status field should apply to the entire sub-rule or only to the specific amendment. The schema indicates status represents \"Current legal status of the node in the consolidated rules view.\" The sub-rule contains multiple provisions—the First Proviso and Second Proviso—that were operative before this amendment. Marking the entire sub-rule as \"pending\" would obscure that those provisions remain enforceable, which conflicts with how the artifact defender interprets the data structure. The enacted_date alone doesn't establish operative effect—the explicit \"yet to be notified\" language is what matters here. But the skeptic's point stands: changing the entire node to \"pending\" would misrepresent the operative clauses P1(a)-(d) and P2, which are already in force. The amendment marker correctly signals that only the insertion (the FORM GST CMP-02 reference) is pending, not the whole rule. What needs clarification is the extraction system's handling of pending amendments—whether it can preserve status=active while documenting the null effective_from and pending state through amendment metadata. The amendment markers capture the pending state appropriately—the insertion has effective_date=null and enacted_date=2025-01-23 properly recorded. Changing CGST-R19(1) to \"pending\" would incorrectly suggest the entire provision is inactive, when in fact most of it remains operative. The amendment metadata itself serves as the accurate representation of which specific elements are affected by the pending change.",
+          "payload": {
+            "thinking": "Let me analyze this issue carefully as the chief_arbiter.\n\n## The Issue\nThe candidate issue claims that CGST-R19(1) has status \"active\" but should be \"pending\" because amendment marker [3] indicates \"Inserted (w.e.f. yet to be notified)\" per Notification No. 7/2025-CT, dated 23.01.2025.\n\n## Prior Judgments\n\n### Specialist (amendment_counsel) - CONFIRMED ISSUE\n- Argues the node's status should be \"pending\" to reflect the pending amendment\n- Confidence: 0.85\n\n### Skeptic (artifact_defender) - NEEDS MANUAL REVIEW\n- Key argument: The issue conflates the status of a sub-rule node with the status of a specific amendment within it\n- Points out that CGST-R19(1) as a whole is operative (existing clauses P1(a)-(d) and P2 are in force)\n- Amendment marker [3] is correctly recorded with effective_date=null, enacted_date=2025-01-23\n- Changing the sub-rule's status to \"pending\" would incorrectly imply the entire provision is unenforceable when only the specific amendment insertion is pending\n- Confidence: 0.55\n\n## Evidence Review\n\n### From the dossier:\n\n**Target node CGST-R19(1):**\n- status: \"active\"\n- amendment_markers: [3]\n- effective_from: null\n\n**Amendment marker 3:**\n- action: \"INSERTED\"\n- effective_date: null (correctly reflecting \"yet to be notified\")\n- enacted_date: \"2025-01-23\"\n- text: \"Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.\"\n\n**Source block 2:**\nContains the amendment marker <sup>3</sup> inline in the text:\n\"or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]\"\n\n\nThe key distinction here is whether the status field should apply to the entire sub-rule or only to the specific amendment. The schema indicates status represents \"Current legal status of the node in the consolidated rules view.\" The sub-rule contains multiple provisions—the First Proviso and Second Proviso—that were operative before this amendment. Marking the entire sub-rule as \"pending\" would obscure that those provisions remain enforceable, which conflicts with how the artifact defender interprets the data structure. The enacted_date alone doesn't establish operative effect—the explicit \"yet to be notified\" language is what matters here. But the skeptic's point stands: changing the entire node to \"pending\" would misrepresent the operative clauses P1(a)-(d) and P2, which are already in force. The amendment marker correctly signals that only the insertion (the FORM GST CMP-02 reference) is pending, not the whole rule. What needs clarification is the extraction system's handling of pending amendments—whether it can preserve status=active while documenting the null effective_from and pending state through amendment metadata. The amendment markers capture the pending state appropriately—the insertion has effective_date=null and enacted_date=2025-01-23 properly recorded. Changing CGST-R19(1) to \"pending\" would incorrectly suggest the entire provision is inactive, when in fact most of it remains operative. The amendment metadata itself serves as the accurate representation of which specific elements are affected by the pending change.",
+            "signature": "52e509bc61e3c8b5adbb308f680a1d3bf0630028ce164f2178c2709494475414",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"status_chronology\",\n  \"node_id\": \"CGST-R19(1)\",\n  \"severity\": \"moderate\",\n  \"title\": \"Amendment metadata adequately captures pending state; node-level status is defensible\",\n  \"problem\": \"The skeptic's objection succeeds: the candidate conflates node-level status with amendment-specific chronology. CGST-R19(1) contains pre-existing operative provisions (P1(a)-(d) and P2) that are in force. Only amendment marker [3]—a specific text insertion—is pending. The amendment metadata (effective_date=null, enacted_date=2025-01-23, 'yet to be notified' qualifier) already correctly captures the pending state at the amendment level. Changing the sub-rule's status to 'pending' would incorrectly imply the entire provision is unenforceable.\",\n  \"evidence_refs\": [\n    \"hint_amendment marker=3: effective_date=null, enacted_date='2025-01-23', 'yet to be notified' explicitly captures pending state\",\n    \"Target node CGST-R19(1)-P2: amendment_marker=[1], effective_from=2017-06-22, status=active - proves amendment metadata handles effective dates correctly\",\n    \"Target node CGST-R19(1)-P1(a)-(d): status=active with no amendment markers, proving pre-existing operative provisions are correctly recorded\",\n    \"Source block 2: amendment marker <sup>3</sup> is inline within the sub-rule text, not a structural replacement\"\n  ],\n  \"recommended_fix\": \"Retain CGST-R19(1).status='active'. The pending amendment is adequately represented through amendment_markers=[3] linked to marker 3 with effective_date=null. No node-level status change needed; the amendment metadata provides the precise pending state. If the consuming application requires a way to surface 'has pending amendment' at the node level, that is a schema enhancement request, not a data defect.\",\n  \"confidence\": 0.78\n}\n```",
+          "payload": {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"status_chronology\",\n  \"node_id\": \"CGST-R19(1)\",\n  \"severity\": \"moderate\",\n  \"title\": \"Amendment metadata adequately captures pending state; node-level status is defensible\",\n  \"problem\": \"The skeptic's objection succeeds: the candidate conflates node-level status with amendment-specific chronology. CGST-R19(1) contains pre-existing operative provisions (P1(a)-(d) and P2) that are in force. Only amendment marker [3]—a specific text insertion—is pending. The amendment metadata (effective_date=null, enacted_date=2025-01-23, 'yet to be notified' qualifier) already correctly captures the pending state at the amendment level. Changing the sub-rule's status to 'pending' would incorrectly imply the entire provision is unenforceable.\",\n  \"evidence_refs\": [\n    \"hint_amendment marker=3: effective_date=null, enacted_date='2025-01-23', 'yet to be notified' explicitly captures pending state\",\n    \"Target node CGST-R19(1)-P2: amendment_marker=[1], effective_from=2017-06-22, status=active - proves amendment metadata handles effective dates correctly\",\n    \"Target node CGST-R19(1)-P1(a)-(d): status=active with no amendment markers, proving pre-existing operative provisions are correctly recorded\",\n    \"Source block 2: amendment marker <sup>3</sup> is inline within the sub-rule text, not a structural replacement\"\n  ],\n  \"recommended_fix\": \"Retain CGST-R19(1).status='active'. The pending amendment is adequately represented through amendment_markers=[3] linked to marker 3 with effective_date=null. No node-level status change needed; the amendment metadata provides the precise pending state. If the consuming application requires a way to surface 'has pending amendment' at the node level, that is a schema enhancement request, not a data defect.\",\n  \"confidence\": 0.78\n}\n```",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0614e5c828257f591fb121a656a4b22c",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me analyze this issue carefully as the chief_arbiter.\n\n## The Issue\nThe candidate issue claims that CGST-R19(1) has status \"active\" but should be \"pending\" because amendment marker [3] indicates \"Inserted (w.e.f. yet to be notified)\" per Notification No. 7/2025-CT, dated 23.01.2025.\n\n## Prior Judgments\n\n### Specialist (amendment_counsel) - CONFIRMED ISSUE\n- Argues the node's status should be \"pending\" to reflect the pending amendment\n- Confidence: 0.85\n\n### Skeptic (artifact_defender) - NEEDS MANUAL REVIEW\n- Key argument: The issue conflates the status of a sub-rule node with the status of a specific amendment within it\n- Points out that CGST-R19(1) as a whole is operative (existing clauses P1(a)-(d) and P2 are in force)\n- Amendment marker [3] is correctly recorded with effective_date=null, enacted_date=2025-01-23\n- Changing the sub-rule's status to \"pending\" would incorrectly imply the entire provision is unenforceable when only the specific amendment insertion is pending\n- Confidence: 0.55\n\n## Evidence Review\n\n### From the dossier:\n\n**Target node CGST-R19(1):**\n- status: \"active\"\n- amendment_markers: [3]\n- effective_from: null\n\n**Amendment marker 3:**\n- action: \"INSERTED\"\n- effective_date: null (correctly reflecting \"yet to be notified\")\n- enacted_date: \"2025-01-23\"\n- text: \"Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.\"\n\n**Source block 2:**\nContains the amendment marker <sup>3</sup> inline in the text:\n\"or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]\"\n\n\nThe key distinction here is whether the status field should apply to the entire sub-rule or only to the specific amendment. The schema indicates status represents \"Current legal status of the node in the consolidated rules view.\" The sub-rule contains multiple provisions—the First Proviso and Second Proviso—that were operative before this amendment. Marking the entire sub-rule as \"pending\" would obscure that those provisions remain enforceable, which conflicts with how the artifact defender interprets the data structure. The enacted_date alone doesn't establish operative effect—the explicit \"yet to be notified\" language is what matters here. But the skeptic's point stands: changing the entire node to \"pending\" would misrepresent the operative clauses P1(a)-(d) and P2, which are already in force. The amendment marker correctly signals that only the insertion (the FORM GST CMP-02 reference) is pending, not the whole rule. What needs clarification is the extraction system's handling of pending amendments—whether it can preserve status=active while documenting the null effective_from and pending state through amendment metadata. The amendment markers capture the pending state appropriately—the insertion has effective_date=null and enacted_date=2025-01-23 properly recorded. Changing CGST-R19(1) to \"pending\" would incorrectly suggest the entire provision is inactive, when in fact most of it remains operative. The amendment metadata itself serves as the accurate representation of which specific elements are affected by the pending change.",
+            "signature": "52e509bc61e3c8b5adbb308f680a1d3bf0630028ce164f2178c2709494475414",
+            "type": "thinking"
+          },
+          {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"status_chronology\",\n  \"node_id\": \"CGST-R19(1)\",\n  \"severity\": \"moderate\",\n  \"title\": \"Amendment metadata adequately captures pending state; node-level status is defensible\",\n  \"problem\": \"The skeptic's objection succeeds: the candidate conflates node-level status with amendment-specific chronology. CGST-R19(1) contains pre-existing operative provisions (P1(a)-(d) and P2) that are in force. Only amendment marker [3]—a specific text insertion—is pending. The amendment metadata (effective_date=null, enacted_date=2025-01-23, 'yet to be notified' qualifier) already correctly captures the pending state at the amendment level. Changing the sub-rule's status to 'pending' would incorrectly imply the entire provision is unenforceable.\",\n  \"evidence_refs\": [\n    \"hint_amendment marker=3: effective_date=null, enacted_date='2025-01-23', 'yet to be notified' explicitly captures pending state\",\n    \"Target node CGST-R19(1)-P2: amendment_marker=[1], effective_from=2017-06-22, status=active - proves amendment metadata handles effective dates correctly\",\n    \"Target node CGST-R19(1)-P1(a)-(d): status=active with no amendment markers, proving pre-existing operative provisions are correctly recorded\",\n    \"Source block 2: amendment marker <sup>3</sup> is inline within the sub-rule text, not a structural replacement\"\n  ],\n  \"recommended_fix\": \"Retain CGST-R19(1).status='active'. The pending amendment is adequately represented through amendment_markers=[3] linked to marker 3 with effective_date=null. No node-level status change needed; the amendment metadata provides the precise pending state. If the consuming application requires a way to surface 'has pending amendment' at the node level, that is a schema enhancement request, not a data defect.\",\n  \"confidence\": 0.78\n}\n```",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 18889,
+          "output_tokens": 1146,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 445
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 18889,
+        "output_tokens": 1146,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 445
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0001",
+        "counsel_name": "chief_arbiter",
+        "dossier_id": "gst-cluster-CGST-R19(1)",
+        "stage": "arbiter",
+        "categories": [
+          "status_chronology"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0001",
+          "issue_signature": "gst-cluster-CGST-R19(1)::CGST-R19(1)::status_chronology::node-marked-active-despite-amendment-pending-notification::cgst-r19-1-has-status-active-but-amendment-marker-3-indicates-inserted-w-e-f-yet-to-be-notified-per-notification-no-7-2025-ct-dated-23-01-2025-the-enacted-date-2025-01-23-is-recorded-but-effective-date-is-null-correctly-reflecting-the-pending-state-however-the-node-s-status-remains-active-when-it-should-be-pending-to-accurately-reflect-that-the-inserted-text-form-gst-cmp-02-reference-has-not-yet-been-notified-into-force",
+          "source_dossier_id": "gst-cluster-CGST-R19(1)",
+          "node_id": "CGST-R19(1)",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "acceptable_artifact",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-cluster-CGST-R19(1)",
+      "category": "status_chronology",
+      "node_id": "CGST-R19(1)",
+      "severity": "moderate",
+      "title": "Amendment metadata adequately captures pending state; node-level status is defensible",
+      "problem": "The skeptic's objection succeeds: the candidate conflates node-level status with amendment-specific chronology. CGST-R19(1) contains pre-existing operative provisions (P1(a)-(d) and P2) that are in force. Only amendment marker [3]—a specific text insertion—is pending. The amendment metadata (effective_date=null, enacted_date=2025-01-23, 'yet to be notified' qualifier) already correctly captures the pending state at the amendment level. Changing the sub-rule's status to 'pending' would incorrectly imply the entire provision is unenforceable.",
+      "evidence_refs": [
+        "hint_amendment marker=3: effective_date=null, enacted_date='2025-01-23', 'yet to be notified' explicitly captures pending state",
+        "Target node CGST-R19(1)-P2: amendment_marker=[1], effective_from=2017-06-22, status=active - proves amendment metadata handles effective dates correctly",
+        "Target node CGST-R19(1)-P1(a)-(d): status=active with no amendment markers, proving pre-existing operative provisions are correctly recorded",
+        "Source block 2: amendment marker <sup>3</sup> is inline within the sub-rule text, not a structural replacement"
+      ],
+      "recommended_fix": "Retain CGST-R19(1).status='active'. The pending amendment is adequately represented through amendment_markers=[3] linked to marker 3 with effective_date=null. No node-level status change needed; the amendment metadata provides the precise pending state. If the consuming application requires a way to surface 'has pending amendment' at the node level, that is a schema enhancement request, not a data defect.",
+      "confidence": 0.78,
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0001",
+        "stage": "arbiter",
+        "categories": [
+          "status_chronology"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0001",
+          "issue_signature": "gst-cluster-CGST-R19(1)::CGST-R19(1)::status_chronology::node-marked-active-despite-amendment-pending-notification::cgst-r19-1-has-status-active-but-amendment-marker-3-indicates-inserted-w-e-f-yet-to-be-notified-per-notification-no-7-2025-ct-dated-23-01-2025-the-enacted-date-2025-01-23-is-recorded-but-effective-date-is-null-correctly-reflecting-the-pending-state-however-the-node-s-status-remains-active-when-it-should-be-pending-to-accurately-reflect-that-the-inserted-text-form-gst-cmp-02-reference-has-not-yet-been-notified-into-force",
+          "source_dossier_id": "gst-cluster-CGST-R19(1)",
+          "node_id": "CGST-R19(1)",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0001"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  },
+  {
+    "task_id": "arbiter-ISSUE-0002",
+    "counsel_name": "chief_arbiter",
+    "dossier_id": "gst-cluster-CGST-R19(4)",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me analyze this issue carefully.\n\nThe candidate issue claims that the source_ref.anchor_text for CGST-R19(4) is truncated and omits the operative tail of the sub-rule.\n\nLet me check the evidence:\n\n1. **Source block 16** contains: \"(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\n2. **source_ref.anchor_text** contains: \"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) \"\n\n3. **rule_json target card text**: \"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.\"\n\nSo the claim is:\n- The anchor_text stops at \"sub-rule (2)\" and omits \"within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.\"\n\nLet me verify:\n- Source block 16 full text: includes \"within the period prescribed in sub-rule (3), the proper officer shall reject...\"\n- anchor_text: stops at \"sub-rule (2)\" (ends with a space)\n\nThe anchor_text IS indeed truncated. It cuts off before \"within the period prescribed in sub-rule (3), the proper officer shall reject...\"\n\nThis is a genuine truncation issue. The source_ref.anchor_text should represent the complete source text for that block, but it only contains a prefix and is missing the critical operative tail that specifies the consequence (rejection of application).\n\n\nBoth the specialist and skeptic have confirmed this issue with confidence at 0.85. The truncation is real and consequential—the anchor_text fails to capture the operative outcome of rejection, which is essential to understanding the rule's full meaning. Since both reviewers agree on the factual truncation and its significance, I can confirm this as a legitimate issue requiring correction to the anchor_text field.",
+          "payload": {
+            "thinking": "Let me analyze this issue carefully.\n\nThe candidate issue claims that the source_ref.anchor_text for CGST-R19(4) is truncated and omits the operative tail of the sub-rule.\n\nLet me check the evidence:\n\n1. **Source block 16** contains: \"(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\n2. **source_ref.anchor_text** contains: \"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) \"\n\n3. **rule_json target card text**: \"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.\"\n\nSo the claim is:\n- The anchor_text stops at \"sub-rule (2)\" and omits \"within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.\"\n\nLet me verify:\n- Source block 16 full text: includes \"within the period prescribed in sub-rule (3), the proper officer shall reject...\"\n- anchor_text: stops at \"sub-rule (2)\" (ends with a space)\n\nThe anchor_text IS indeed truncated. It cuts off before \"within the period prescribed in sub-rule (3), the proper officer shall reject...\"\n\nThis is a genuine truncation issue. The source_ref.anchor_text should represent the complete source text for that block, but it only contains a prefix and is missing the critical operative tail that specifies the consequence (rejection of application).\n\n\nBoth the specialist and skeptic have confirmed this issue with confidence at 0.85. The truncation is real and consequential—the anchor_text fails to capture the operative outcome of rejection, which is essential to understanding the rule's full meaning. Since both reviewers agree on the factual truncation and its significance, I can confirm this as a legitimate issue requiring correction to the anchor_text field.",
+            "signature": "bc873948fd32cf14d072c7c1ce6ab2171d7acc478929c80254b89ff23af6fa3b",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "{\"label\":\"confirmed_issue\",\"category\":\"structure_scope\",\"node_id\":\"CGST-R19(4)\",\"severity\":\"moderate\",\"title\":\"source_ref anchor_text truncated, omitting operative tail\",\"problem\":\"The source_ref.anchor_text for CGST-R19(4) terminates at 'sub-rule (2)' and is missing the continuation 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' While the node's text field correctly preserves the complete sub-rule, the source_ref anchor_text only captures a prefix fragment. Source block 16 contains the full block text spanning the operative tail, but source_ref.start_block=16 and end_block=16 confirms single-block span yet anchor_text does not cover full block content, creating an incomplete provenance trail that omits the operative consequence (rejection of application) central to the sub-rule's scope.\",\"evidence_refs\":[\"source block 16: full text includes 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05'\",\"source_ref.anchor_text field: truncated at 'sub-rule (2)' without the operative tail\",\"rule_json target card text: complete sub-rule text preserved correctly\",\"source_ref.start_block=16 and end_block=16 confirms single-block span, yet anchor_text does not cover full block content\"],\"recommended_fix\":\"Update source_ref.anchor_text to capture the complete block text from source block 16, including the operative tail 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' The anchor_text must cover the entire source span for CGST-R19(4) to serve as a reliable audit anchor. Alternatively, if only a fragment is available and raw_text cannot faithfully represent the full source, set source_ref to null and rely on text field for the full text.\",\"confidence\":0.85}",
+          "payload": {
+            "text": "{\"label\":\"confirmed_issue\",\"category\":\"structure_scope\",\"node_id\":\"CGST-R19(4)\",\"severity\":\"moderate\",\"title\":\"source_ref anchor_text truncated, omitting operative tail\",\"problem\":\"The source_ref.anchor_text for CGST-R19(4) terminates at 'sub-rule (2)' and is missing the continuation 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' While the node's text field correctly preserves the complete sub-rule, the source_ref anchor_text only captures a prefix fragment. Source block 16 contains the full block text spanning the operative tail, but source_ref.start_block=16 and end_block=16 confirms single-block span yet anchor_text does not cover full block content, creating an incomplete provenance trail that omits the operative consequence (rejection of application) central to the sub-rule's scope.\",\"evidence_refs\":[\"source block 16: full text includes 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05'\",\"source_ref.anchor_text field: truncated at 'sub-rule (2)' without the operative tail\",\"rule_json target card text: complete sub-rule text preserved correctly\",\"source_ref.start_block=16 and end_block=16 confirms single-block span, yet anchor_text does not cover full block content\"],\"recommended_fix\":\"Update source_ref.anchor_text to capture the complete block text from source block 16, including the operative tail 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' The anchor_text must cover the entire source span for CGST-R19(4) to serve as a reliable audit anchor. Alternatively, if only a fragment is available and raw_text cannot faithfully represent the full source, set source_ref to null and rely on text field for the full text.\",\"confidence\":0.85}",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0614e5c8ea80ce7b71ecee222b10541f",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me analyze this issue carefully.\n\nThe candidate issue claims that the source_ref.anchor_text for CGST-R19(4) is truncated and omits the operative tail of the sub-rule.\n\nLet me check the evidence:\n\n1. **Source block 16** contains: \"(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\n2. **source_ref.anchor_text** contains: \"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) \"\n\n3. **rule_json target card text**: \"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.\"\n\nSo the claim is:\n- The anchor_text stops at \"sub-rule (2)\" and omits \"within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.\"\n\nLet me verify:\n- Source block 16 full text: includes \"within the period prescribed in sub-rule (3), the proper officer shall reject...\"\n- anchor_text: stops at \"sub-rule (2)\" (ends with a space)\n\nThe anchor_text IS indeed truncated. It cuts off before \"within the period prescribed in sub-rule (3), the proper officer shall reject...\"\n\nThis is a genuine truncation issue. The source_ref.anchor_text should represent the complete source text for that block, but it only contains a prefix and is missing the critical operative tail that specifies the consequence (rejection of application).\n\n\nBoth the specialist and skeptic have confirmed this issue with confidence at 0.85. The truncation is real and consequential—the anchor_text fails to capture the operative outcome of rejection, which is essential to understanding the rule's full meaning. Since both reviewers agree on the factual truncation and its significance, I can confirm this as a legitimate issue requiring correction to the anchor_text field.",
+            "signature": "bc873948fd32cf14d072c7c1ce6ab2171d7acc478929c80254b89ff23af6fa3b",
+            "type": "thinking"
+          },
+          {
+            "text": "{\"label\":\"confirmed_issue\",\"category\":\"structure_scope\",\"node_id\":\"CGST-R19(4)\",\"severity\":\"moderate\",\"title\":\"source_ref anchor_text truncated, omitting operative tail\",\"problem\":\"The source_ref.anchor_text for CGST-R19(4) terminates at 'sub-rule (2)' and is missing the continuation 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' While the node's text field correctly preserves the complete sub-rule, the source_ref anchor_text only captures a prefix fragment. Source block 16 contains the full block text spanning the operative tail, but source_ref.start_block=16 and end_block=16 confirms single-block span yet anchor_text does not cover full block content, creating an incomplete provenance trail that omits the operative consequence (rejection of application) central to the sub-rule's scope.\",\"evidence_refs\":[\"source block 16: full text includes 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05'\",\"source_ref.anchor_text field: truncated at 'sub-rule (2)' without the operative tail\",\"rule_json target card text: complete sub-rule text preserved correctly\",\"source_ref.start_block=16 and end_block=16 confirms single-block span, yet anchor_text does not cover full block content\"],\"recommended_fix\":\"Update source_ref.anchor_text to capture the complete block text from source block 16, including the operative tail 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' The anchor_text must cover the entire source span for CGST-R19(4) to serve as a reliable audit anchor. Alternatively, if only a fragment is available and raw_text cannot faithfully represent the full source, set source_ref to null and rely on text field for the full text.\",\"confidence\":0.85}",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 5748,
+          "output_tokens": 937
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 5748,
+        "output_tokens": 937,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0002",
+        "counsel_name": "chief_arbiter",
+        "dossier_id": "gst-cluster-CGST-R19(4)",
+        "stage": "arbiter",
+        "categories": [
+          "structure_scope"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0002",
+          "issue_signature": "gst-cluster-CGST-R19(4)::CGST-R19(4)::structure_scope::source-ref-anchor-text-truncated-omitting-operative-tail::the-source-ref-anchor-text-for-cgst-r19-4-only-contains-where-the-reply-furnished-under-sub-rule-3-is-found-to-be-not-satisfactory-or-where-no-reply-is-furnished-in-response-to-the-notice-issued-under-sub-rule-2-it-stops-at-sub-rule-2-and-omits-the-remainder-within-the-period-prescribed-in-sub-rule-3-the-proper-officer-shall-reject-the-application-submitted-under-sub-rule-1-and-pass-an-order-in-form-gst-reg-05-the-anchor-text-thus-fails-to-cover-the-full-block-span-and-drops-the-operative-consequence-rejection-of-application-that-is-central-to-the-sub-rule-s-scope",
+          "source_dossier_id": "gst-cluster-CGST-R19(4)",
+          "node_id": "CGST-R19(4)",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "confirmed_issue",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-cluster-CGST-R19(4)",
+      "category": "structure_scope",
+      "node_id": "CGST-R19(4)",
+      "severity": "moderate",
+      "title": "source_ref anchor_text truncated, omitting operative tail",
+      "problem": "The source_ref.anchor_text for CGST-R19(4) terminates at 'sub-rule (2)' and is missing the continuation 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' While the node's text field correctly preserves the complete sub-rule, the source_ref anchor_text only captures a prefix fragment. Source block 16 contains the full block text spanning the operative tail, but source_ref.start_block=16 and end_block=16 confirms single-block span yet anchor_text does not cover full block content, creating an incomplete provenance trail that omits the operative consequence (rejection of application) central to the sub-rule's scope.",
+      "evidence_refs": [
+        "source block 16: full text includes 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05'",
+        "source_ref.anchor_text field: truncated at 'sub-rule (2)' without the operative tail",
+        "rule_json target card text: complete sub-rule text preserved correctly",
+        "source_ref.start_block=16 and end_block=16 confirms single-block span, yet anchor_text does not cover full block content"
+      ],
+      "recommended_fix": "Update source_ref.anchor_text to capture the complete block text from source block 16, including the operative tail 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' The anchor_text must cover the entire source span for CGST-R19(4) to serve as a reliable audit anchor. Alternatively, if only a fragment is available and raw_text cannot faithfully represent the full source, set source_ref to null and rely on text field for the full text.",
+      "confidence": 0.85,
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0002",
+        "stage": "arbiter",
+        "categories": [
+          "structure_scope"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0002",
+          "issue_signature": "gst-cluster-CGST-R19(4)::CGST-R19(4)::structure_scope::source-ref-anchor-text-truncated-omitting-operative-tail::the-source-ref-anchor-text-for-cgst-r19-4-only-contains-where-the-reply-furnished-under-sub-rule-3-is-found-to-be-not-satisfactory-or-where-no-reply-is-furnished-in-response-to-the-notice-issued-under-sub-rule-2-it-stops-at-sub-rule-2-and-omits-the-remainder-within-the-period-prescribed-in-sub-rule-3-the-proper-officer-shall-reject-the-application-submitted-under-sub-rule-1-and-pass-an-order-in-form-gst-reg-05-the-anchor-text-thus-fails-to-cover-the-full-block-span-and-drops-the-operative-consequence-rejection-of-application-that-is-central-to-the-sub-rule-s-scope",
+          "source_dossier_id": "gst-cluster-CGST-R19(4)",
+          "node_id": "CGST-R19(4)",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0002"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  }
+]

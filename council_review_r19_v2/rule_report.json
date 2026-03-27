@@ -1,0 +1,99 @@
+{
+  "rule_id": "CGST-R19",
+  "status": "issues_found",
+  "confirmed_issues": [
+    {
+      "issue_id": "ISSUE-0002",
+      "signature": "gst-cluster-CGST-R19(4)::CGST-R19(4)::source_ref_precision::anchor-text-truncates-mid-sentence-omitting-clause-continuation::the-source-ref-anchor-text-cuts-off-at-issued-under-sub-rule-2-mid-sentence-omitting-within-the-period-prescribed-in-sub-rule-3-the-proper-officer-shall-reject-the-application-submitted-under-sub-rule-1-and-pass-an-order-in-form-gst-reg-05-source-block-16-shows-the-full-text-is-a-single-compound-sentence-containing-all-cross-referenced-sub-rules-1-2-and-3-plus-the-form-reference-the-truncated-anchor-text-fails-as-an-authoritative-audit-anchor-because-it-does-not-represent-the-complete-legal-text-of-sub-rule-4",
+      "dossier_id": "gst-cluster-CGST-R19(4)",
+      "node_id": "CGST-R19(4)",
+      "category": "source_ref_precision",
+      "severity": "major",
+      "title": "anchor_text truncates mid-sentence, omitting clause continuation",
+      "problem": "The source_ref.anchor_text cuts off at 'issued under sub-rule (2)' mid-sentence, omitting 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'. Source block 16 shows the full text is a single compound sentence containing all cross-referenced sub-rules (1), (2), and (3) plus the form reference. The truncated anchor_text fails as an authoritative audit anchor because it does not represent the complete legal text of sub-rule (4).",
+      "evidence_refs": [
+        "source_block:16 - full text: '(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'",
+        "candidate_fragment source_ref.anchor_text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) ' (truncated at clause boundary)"
+      ],
+      "recommended_fix": "Set anchor_text to the complete clause text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .' The source_ref already correctly points to block 16 as a whole; only the anchor_text display string needs extension.",
+      "supporting_task_ids": [
+        "specialist-reference_counsel-gst-cluster-CGST-R19(4)"
+      ],
+      "supporting_counsel": [
+        "reference_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "confirmed_issue"
+        ],
+        "max_confidence": 0.95,
+        "final_label": "confirmed_issue"
+      },
+      "final_disposition": "confirmed_issue"
+    }
+  ],
+  "accepted_artifacts": [
+    {
+      "issue_id": "ISSUE-0001",
+      "signature": "gst-cluster-CGST-R19(1)::CGST-R19(1)::status_chronology::active-status-inconsistent-with-pending-notification-amendment-marker::cgst-r19-1-carries-amendment-marker-3-which-has-effective-date-null-and-the-source-explicitly-states-w-e-f-yet-to-be-notified-despite-this-the-node-has-status-active-a-sub-rule-with-an-unnotified-prospective-amendment-cannot-be-in-active-operative-status-in-the-consolidated-rules-view",
+      "dossier_id": "gst-cluster-CGST-R19(1)",
+      "node_id": "CGST-R19(1)",
+      "category": "status_chronology",
+      "severity": "critical",
+      "title": "Active status inconsistent with pending-notification amendment marker",
+      "problem": "CGST-R19(1) carries amendment_marker [3] which has effective_date: null and the source explicitly states '(w.e.f. yet to be notified)'. Despite this, the node has status: \"active\". A sub-rule with an unnotified prospective amendment cannot be in active/operative status in the consolidated rules view.",
+      "evidence_refs": [
+        "hint_amendment marker=3: effective_date=null, enacted_date=2025-01-23, text='Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025'",
+        "target_card CGST-R19(1): status='active', amendment_markers=[3], effective_from=null",
+        "hint_segment: amendment_markers=['3','1'] present on same sub_rule segment"
+      ],
+      "recommended_fix": "Set status: \"pending\" for CGST-R19(1) because amendment marker 3 is explicitly 'yet to be notified' and has no effective_from date. The enacted_date (2025-01-23) establishes when the notification was issued, but the rule is not yet operative until notification is effective.",
+      "supporting_task_ids": [
+        "specialist-amendment_counsel-gst-cluster-CGST-R19(1)"
+      ],
+      "supporting_counsel": [
+        "amendment_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "acceptable_artifact"
+        ],
+        "max_confidence": 0.87,
+        "final_label": "acceptable_artifact"
+      },
+      "final_disposition": "acceptable_artifact"
+    },
+    {
+      "issue_id": "ISSUE-0003",
+      "signature": "gst-amendment-CGST-R19-1::1::missing_target::target-field-missing-in-amendment-marker-1::the-source-text-explicitly-states-for-the-said-rule-indicating-the-specific-element-that-was-substituted-the-target-field-is-null-but-should-carry-the-textual-target-reference-the-said-rule-to-preserve-the-complete-scope-of-the-amendment-action",
+      "dossier_id": "gst-amendment-CGST-R19-1",
+      "node_id": "1",
+      "category": "missing_target",
+      "severity": "minor",
+      "title": "Target field missing in amendment marker 1",
+      "problem": "The source text explicitly states 'for \"the said rule\"' indicating the specific element that was substituted. The `target` field is null but should carry the textual target reference 'the said rule' to preserve the complete scope of the amendment action.",
+      "evidence_refs": [
+        "hint_amendment:1:text"
+      ],
+      "recommended_fix": "Set target = \"the said rule\" in both the root object and the events array entry. The quoted phrase 'the said rule' in the source text serves as the textual selector of what was amended, which aligns with the schema description: 'Textual selector of what was affected.'",
+      "supporting_task_ids": [
+        "specialist-amendment_counsel-gst-amendment-CGST-R19-1"
+      ],
+      "supporting_counsel": [
+        "amendment_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "acceptable_artifact"
+        ],
+        "max_confidence": 0.82,
+        "final_label": "acceptable_artifact"
+      },
+      "final_disposition": "acceptable_artifact"
+    }
+  ],
+  "manual_review_issues": [],
+  "rejected_issues": [],
+  "summary": "1 confirmed issue(s) remain after challenge, arbitration, and GST false-positive filtering.",
+  "diagnostics": {}
+}

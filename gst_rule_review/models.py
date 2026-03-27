@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 
 Severity = Literal["critical", "major", "moderate", "minor"]
+SignalClass = Literal["hard_gate", "heuristic"]
 VerdictStatus = Literal[
     "production_ready",
     "close_but_not_ready",
@@ -26,6 +27,7 @@ class Finding(BaseModel):
     json_path: Optional[str] = None
     category: str
     severity: Severity
+    signal_class: SignalClass = "heuristic"
     title: str
     problem: str
     raw_source_fragment: Optional[str] = None
@@ -169,6 +171,7 @@ class CheckContext(BaseModel):
     raw_source: RawSourceModel
     indexed_rule: IndexedRule
     schema_validation: SchemaValidationResult
+    hint_json: Dict[str, Any] = Field(default_factory=dict)
 
 
 class CheckResult(BaseModel):

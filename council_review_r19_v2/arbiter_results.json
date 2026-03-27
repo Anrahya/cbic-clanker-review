@@ -1,0 +1,338 @@
+[
+  {
+    "task_id": "arbiter-ISSUE-0001",
+    "counsel_name": "chief_arbiter",
+    "dossier_id": "gst-cluster-CGST-R19(1)",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me carefully analyze this issue as chief_arbiter, reviewing the candidate issue alongside the specialist and skeptic judgments.\n\n**The Candidate Issue:**\n- CGST-R19(1) has amendment_marker [3] with effective_date: null\n- The source explicitly states \"(w.e.f. yet to be notified)\"\n- The node has status: \"active\"\n- The claim: A sub-rule with an unnotified prospective amendment cannot be in active/operative status\n\n**Specialist (amendment_counsel) says: CONFIRMED_ISSUE**\n- Argues that status should be \"pending\" because amendment marker 3 is explicitly \"yet to be notified\"\n- Points to effective_date=null and enacted_date=2025-01-23\n\n**Skeptic (artifact_defender) says: ACCEPTABLE_ARTIFACT**\n- Argues the base rule text IS currently operative - it existed before amendment marker 3 was enacted\n- Amendment 3 is just an INSERTED phrase \"or in the intimation furnished by the composition taxpayer in FORM GST CMP-02\" that is prospective\n- Per extraction instructions: \"if a node contains operative text that IS in force but also has a pending inline insertion, the node's overall status=active is correct — the pending state belongs to the amendment metadata\"\n- The node's operative text is active - only the amendment is pending\n\n**My Analysis:**\n\nLet me look at the evidence:\n\n1. The target card CGST-R19(1) shows:\n   - status: \"active\"\n   - amendment_markers: [3]\n   - effective_from: null (on the extracted node)\n\n2. The source block 2 shows:\n   - The rule text WITH the amendment 3 insertion already integrated into the text: \"FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]\"\n   \n3. The amendment metadata for marker 3 shows:\n   - effective_date: null\n   - enacted_date: \"2025-01-23\"\n   - text: \"Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.\"\n\nThe skeptic's position has merit—the rule text remains operative regardless of the pending amendment. The extraction correctly separates the node's active status from the amendment's pending effective date, since only the inserted phrase is prospective while the underlying rule continues to function.\n\nHowever, the proposed fix of setting status to \"pending\" conflates the node's current state with its future state. The source itself shows the amendment is already embedded in the consolidated text as \"yet to be notified,\" which accurately reflects that the rule is active but the amendment hasn't taken effect yet. The status field should reflect what's currently operative, not what will be.\n\nLooking at the schema definition and the skeptic's argument about the node's overall status being \"active,\" I'm convinced this is a schema design question rather than an extraction defect. The rule text is genuinely operative, amendment 3 is prospective, and the data correctly separates these concerns. The embedded bracket notation serves as a reference marker for the amendment without altering the underlying operative text. Since the consolidated rules view accurately reflects what's currently active versus what's pending, there's no extraction error here.",
+          "payload": {
+            "thinking": "Let me carefully analyze this issue as chief_arbiter, reviewing the candidate issue alongside the specialist and skeptic judgments.\n\n**The Candidate Issue:**\n- CGST-R19(1) has amendment_marker [3] with effective_date: null\n- The source explicitly states \"(w.e.f. yet to be notified)\"\n- The node has status: \"active\"\n- The claim: A sub-rule with an unnotified prospective amendment cannot be in active/operative status\n\n**Specialist (amendment_counsel) says: CONFIRMED_ISSUE**\n- Argues that status should be \"pending\" because amendment marker 3 is explicitly \"yet to be notified\"\n- Points to effective_date=null and enacted_date=2025-01-23\n\n**Skeptic (artifact_defender) says: ACCEPTABLE_ARTIFACT**\n- Argues the base rule text IS currently operative - it existed before amendment marker 3 was enacted\n- Amendment 3 is just an INSERTED phrase \"or in the intimation furnished by the composition taxpayer in FORM GST CMP-02\" that is prospective\n- Per extraction instructions: \"if a node contains operative text that IS in force but also has a pending inline insertion, the node's overall status=active is correct — the pending state belongs to the amendment metadata\"\n- The node's operative text is active - only the amendment is pending\n\n**My Analysis:**\n\nLet me look at the evidence:\n\n1. The target card CGST-R19(1) shows:\n   - status: \"active\"\n   - amendment_markers: [3]\n   - effective_from: null (on the extracted node)\n\n2. The source block 2 shows:\n   - The rule text WITH the amendment 3 insertion already integrated into the text: \"FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]\"\n   \n3. The amendment metadata for marker 3 shows:\n   - effective_date: null\n   - enacted_date: \"2025-01-23\"\n   - text: \"Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.\"\n\nThe skeptic's position has merit—the rule text remains operative regardless of the pending amendment. The extraction correctly separates the node's active status from the amendment's pending effective date, since only the inserted phrase is prospective while the underlying rule continues to function.\n\nHowever, the proposed fix of setting status to \"pending\" conflates the node's current state with its future state. The source itself shows the amendment is already embedded in the consolidated text as \"yet to be notified,\" which accurately reflects that the rule is active but the amendment hasn't taken effect yet. The status field should reflect what's currently operative, not what will be.\n\nLooking at the schema definition and the skeptic's argument about the node's overall status being \"active,\" I'm convinced this is a schema design question rather than an extraction defect. The rule text is genuinely operative, amendment 3 is prospective, and the data correctly separates these concerns. The embedded bracket notation serves as a reference marker for the amendment without altering the underlying operative text. Since the consolidated rules view accurately reflects what's currently active versus what's pending, there's no extraction error here.",
+            "signature": "42f468294e0c675c2843a8d32d560d17327337730568f3f927d9668d370287b5",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"status_chronology\",\n  \"node_id\": \"CGST-R19(1)\",\n  \"severity\": null,\n  \"title\": \"Active status reflects current operative state, not pending amendment status\",\n  \"problem\": \"CGST-R19(1) carries amendment_marker [3] which is 'yet to be notified', but the node's operative text IS currently in force. The rule existed long before amendment 3 was enacted; amendment 3 inserts one prospective phrase into the body of the sub-rule. Per the schema description: 'status' is 'Current legal status of the node in the consolidated rules view.' The consolidated view correctly shows the base rule as active while reflecting amendment 3's prospective status in its metadata. The candidate issue conflates a node's overall operative status with an amendment's effective-date metadata — this is a schema design question, not an extraction defect.\",\n  \"evidence_refs\": [\n    \"hint_amendment marker=3: action=INSERTED, effective_date=null, enacted_date=2025-01-23 — prospective insertion into existing rule\",\n    \"source_block 2: raw_text shows 'FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]' — amendment 3 bracket notation embedded in operative text as consolidated\",\n    \"target_card CGST-R19(1): status='active', amendment_markers=[3], effective_from=null — base rule is established, amendment pending\",\n    \"target_card CGST-R19(1)-P2: amendment_marker=[1] with effective_from=2017-06-22 and status=active — demonstrates mixed amendment chronology handled correctly at node level\",\n    \"schema property status: enum=['active','omitted','pending'] with description 'Current legal status of the node in the consolidated rules view' — operative text governs, not pending amendment metadata\"\n  ],\n  \"recommended_fix\": null,\n  \"confidence\": 0.87\n}\n```",
+          "payload": {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"status_chronology\",\n  \"node_id\": \"CGST-R19(1)\",\n  \"severity\": null,\n  \"title\": \"Active status reflects current operative state, not pending amendment status\",\n  \"problem\": \"CGST-R19(1) carries amendment_marker [3] which is 'yet to be notified', but the node's operative text IS currently in force. The rule existed long before amendment 3 was enacted; amendment 3 inserts one prospective phrase into the body of the sub-rule. Per the schema description: 'status' is 'Current legal status of the node in the consolidated rules view.' The consolidated view correctly shows the base rule as active while reflecting amendment 3's prospective status in its metadata. The candidate issue conflates a node's overall operative status with an amendment's effective-date metadata — this is a schema design question, not an extraction defect.\",\n  \"evidence_refs\": [\n    \"hint_amendment marker=3: action=INSERTED, effective_date=null, enacted_date=2025-01-23 — prospective insertion into existing rule\",\n    \"source_block 2: raw_text shows 'FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]' — amendment 3 bracket notation embedded in operative text as consolidated\",\n    \"target_card CGST-R19(1): status='active', amendment_markers=[3], effective_from=null — base rule is established, amendment pending\",\n    \"target_card CGST-R19(1)-P2: amendment_marker=[1] with effective_from=2017-06-22 and status=active — demonstrates mixed amendment chronology handled correctly at node level\",\n    \"schema property status: enum=['active','omitted','pending'] with description 'Current legal status of the node in the consolidated rules view' — operative text governs, not pending amendment metadata\"\n  ],\n  \"recommended_fix\": null,\n  \"confidence\": 0.87\n}\n```",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0614ec0d5ee2c7be4986f28876dd62fa",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me carefully analyze this issue as chief_arbiter, reviewing the candidate issue alongside the specialist and skeptic judgments.\n\n**The Candidate Issue:**\n- CGST-R19(1) has amendment_marker [3] with effective_date: null\n- The source explicitly states \"(w.e.f. yet to be notified)\"\n- The node has status: \"active\"\n- The claim: A sub-rule with an unnotified prospective amendment cannot be in active/operative status\n\n**Specialist (amendment_counsel) says: CONFIRMED_ISSUE**\n- Argues that status should be \"pending\" because amendment marker 3 is explicitly \"yet to be notified\"\n- Points to effective_date=null and enacted_date=2025-01-23\n\n**Skeptic (artifact_defender) says: ACCEPTABLE_ARTIFACT**\n- Argues the base rule text IS currently operative - it existed before amendment marker 3 was enacted\n- Amendment 3 is just an INSERTED phrase \"or in the intimation furnished by the composition taxpayer in FORM GST CMP-02\" that is prospective\n- Per extraction instructions: \"if a node contains operative text that IS in force but also has a pending inline insertion, the node's overall status=active is correct — the pending state belongs to the amendment metadata\"\n- The node's operative text is active - only the amendment is pending\n\n**My Analysis:**\n\nLet me look at the evidence:\n\n1. The target card CGST-R19(1) shows:\n   - status: \"active\"\n   - amendment_markers: [3]\n   - effective_from: null (on the extracted node)\n\n2. The source block 2 shows:\n   - The rule text WITH the amendment 3 insertion already integrated into the text: \"FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]\"\n   \n3. The amendment metadata for marker 3 shows:\n   - effective_date: null\n   - enacted_date: \"2025-01-23\"\n   - text: \"Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.\"\n\nThe skeptic's position has merit—the rule text remains operative regardless of the pending amendment. The extraction correctly separates the node's active status from the amendment's pending effective date, since only the inserted phrase is prospective while the underlying rule continues to function.\n\nHowever, the proposed fix of setting status to \"pending\" conflates the node's current state with its future state. The source itself shows the amendment is already embedded in the consolidated text as \"yet to be notified,\" which accurately reflects that the rule is active but the amendment hasn't taken effect yet. The status field should reflect what's currently operative, not what will be.\n\nLooking at the schema definition and the skeptic's argument about the node's overall status being \"active,\" I'm convinced this is a schema design question rather than an extraction defect. The rule text is genuinely operative, amendment 3 is prospective, and the data correctly separates these concerns. The embedded bracket notation serves as a reference marker for the amendment without altering the underlying operative text. Since the consolidated rules view accurately reflects what's currently active versus what's pending, there's no extraction error here.",
+            "signature": "42f468294e0c675c2843a8d32d560d17327337730568f3f927d9668d370287b5",
+            "type": "thinking"
+          },
+          {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"status_chronology\",\n  \"node_id\": \"CGST-R19(1)\",\n  \"severity\": null,\n  \"title\": \"Active status reflects current operative state, not pending amendment status\",\n  \"problem\": \"CGST-R19(1) carries amendment_marker [3] which is 'yet to be notified', but the node's operative text IS currently in force. The rule existed long before amendment 3 was enacted; amendment 3 inserts one prospective phrase into the body of the sub-rule. Per the schema description: 'status' is 'Current legal status of the node in the consolidated rules view.' The consolidated view correctly shows the base rule as active while reflecting amendment 3's prospective status in its metadata. The candidate issue conflates a node's overall operative status with an amendment's effective-date metadata — this is a schema design question, not an extraction defect.\",\n  \"evidence_refs\": [\n    \"hint_amendment marker=3: action=INSERTED, effective_date=null, enacted_date=2025-01-23 — prospective insertion into existing rule\",\n    \"source_block 2: raw_text shows 'FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]' — amendment 3 bracket notation embedded in operative text as consolidated\",\n    \"target_card CGST-R19(1): status='active', amendment_markers=[3], effective_from=null — base rule is established, amendment pending\",\n    \"target_card CGST-R19(1)-P2: amendment_marker=[1] with effective_from=2017-06-22 and status=active — demonstrates mixed amendment chronology handled correctly at node level\",\n    \"schema property status: enum=['active','omitted','pending'] with description 'Current legal status of the node in the consolidated rules view' — operative text governs, not pending amendment metadata\"\n  ],\n  \"recommended_fix\": null,\n  \"confidence\": 0.87\n}\n```",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 18671,
+          "output_tokens": 1105,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 445
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 18671,
+        "output_tokens": 1105,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 445
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0001",
+        "counsel_name": "chief_arbiter",
+        "dossier_id": "gst-cluster-CGST-R19(1)",
+        "stage": "arbiter",
+        "categories": [
+          "status_chronology"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0001",
+          "issue_signature": "gst-cluster-CGST-R19(1)::CGST-R19(1)::status_chronology::active-status-inconsistent-with-pending-notification-amendment-marker::cgst-r19-1-carries-amendment-marker-3-which-has-effective-date-null-and-the-source-explicitly-states-w-e-f-yet-to-be-notified-despite-this-the-node-has-status-active-a-sub-rule-with-an-unnotified-prospective-amendment-cannot-be-in-active-operative-status-in-the-consolidated-rules-view",
+          "source_dossier_id": "gst-cluster-CGST-R19(1)",
+          "node_id": "CGST-R19(1)",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "acceptable_artifact",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-cluster-CGST-R19(1)",
+      "category": "status_chronology",
+      "node_id": "CGST-R19(1)",
+      "severity": null,
+      "title": "Active status reflects current operative state, not pending amendment status",
+      "problem": "CGST-R19(1) carries amendment_marker [3] which is 'yet to be notified', but the node's operative text IS currently in force. The rule existed long before amendment 3 was enacted; amendment 3 inserts one prospective phrase into the body of the sub-rule. Per the schema description: 'status' is 'Current legal status of the node in the consolidated rules view.' The consolidated view correctly shows the base rule as active while reflecting amendment 3's prospective status in its metadata. The candidate issue conflates a node's overall operative status with an amendment's effective-date metadata — this is a schema design question, not an extraction defect.",
+      "evidence_refs": [
+        "hint_amendment marker=3: action=INSERTED, effective_date=null, enacted_date=2025-01-23 — prospective insertion into existing rule",
+        "source_block 2: raw_text shows 'FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]' — amendment 3 bracket notation embedded in operative text as consolidated",
+        "target_card CGST-R19(1): status='active', amendment_markers=[3], effective_from=null — base rule is established, amendment pending",
+        "target_card CGST-R19(1)-P2: amendment_marker=[1] with effective_from=2017-06-22 and status=active — demonstrates mixed amendment chronology handled correctly at node level",
+        "schema property status: enum=['active','omitted','pending'] with description 'Current legal status of the node in the consolidated rules view' — operative text governs, not pending amendment metadata"
+      ],
+      "recommended_fix": null,
+      "confidence": 0.87,
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0001",
+        "stage": "arbiter",
+        "categories": [
+          "status_chronology"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0001",
+          "issue_signature": "gst-cluster-CGST-R19(1)::CGST-R19(1)::status_chronology::active-status-inconsistent-with-pending-notification-amendment-marker::cgst-r19-1-carries-amendment-marker-3-which-has-effective-date-null-and-the-source-explicitly-states-w-e-f-yet-to-be-notified-despite-this-the-node-has-status-active-a-sub-rule-with-an-unnotified-prospective-amendment-cannot-be-in-active-operative-status-in-the-consolidated-rules-view",
+          "source_dossier_id": "gst-cluster-CGST-R19(1)",
+          "node_id": "CGST-R19(1)",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0001"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  },
+  {
+    "task_id": "arbiter-ISSUE-0002",
+    "counsel_name": "chief_arbiter",
+    "dossier_id": "gst-cluster-CGST-R19(4)",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me analyze this issue carefully as chief_arbiter.\n\nThe issue claims that the source_ref.anchor_text for CGST-R19(4) is truncated mid-sentence. Let me compare:\n\n**Source block 16 (full text):**\n\"(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\n**Current anchor_text in source_ref:**\n\"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) \"\n\n**What anchor_text is missing:**\n\"within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\nThis is a clear truncation. The anchor_text cuts off at \"issued under sub-rule (2)\" and omits the rest of the clause including:\n- \"within the period prescribed in sub-rule (3)\"\n- \"the proper officer shall reject the application submitted under sub-rule (1)\"\n- \"and pass an order in FORM GST REG-05 .\"\n\nThis is a significant omission because the truncated text doesn't include:\n1. The timing condition (\"within the period prescribed in sub-rule (3)\")\n2. The consequence (\"the proper officer shall reject the application\")\n3. The form reference (FORM GST REG-05)\n\nLooking at the evidence:\n- Source block 16 confirms the full text\n- The anchor_text does indeed truncate mid-sentence\n- The cluster_root text shows the complete text is preserved in the node's \"text\" field\n\n\n- Both specialist and skeptic labeled this as \"confirmed_issue\"\n\nThe truncated anchor_text omits critical operative language—the timing condition, the rejection consequence, and the form reference—that together define the full legal effect of the provision. The full text from source block 16 includes all the missing elements that the current anchor_text omits entirely.",
+          "payload": {
+            "thinking": "Let me analyze this issue carefully as chief_arbiter.\n\nThe issue claims that the source_ref.anchor_text for CGST-R19(4) is truncated mid-sentence. Let me compare:\n\n**Source block 16 (full text):**\n\"(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\n**Current anchor_text in source_ref:**\n\"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) \"\n\n**What anchor_text is missing:**\n\"within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\nThis is a clear truncation. The anchor_text cuts off at \"issued under sub-rule (2)\" and omits the rest of the clause including:\n- \"within the period prescribed in sub-rule (3)\"\n- \"the proper officer shall reject the application submitted under sub-rule (1)\"\n- \"and pass an order in FORM GST REG-05 .\"\n\nThis is a significant omission because the truncated text doesn't include:\n1. The timing condition (\"within the period prescribed in sub-rule (3)\")\n2. The consequence (\"the proper officer shall reject the application\")\n3. The form reference (FORM GST REG-05)\n\nLooking at the evidence:\n- Source block 16 confirms the full text\n- The anchor_text does indeed truncate mid-sentence\n- The cluster_root text shows the complete text is preserved in the node's \"text\" field\n\n\n- Both specialist and skeptic labeled this as \"confirmed_issue\"\n\nThe truncated anchor_text omits critical operative language—the timing condition, the rejection consequence, and the form reference—that together define the full legal effect of the provision. The full text from source block 16 includes all the missing elements that the current anchor_text omits entirely.",
+            "signature": "010f7f0ab4b54fea0b84e0c0900469cb211c70161690e900266b00ed128d2afb",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "{\n  \"label\": \"confirmed_issue\",\n  \"category\": \"source_ref_precision\",\n  \"node_id\": \"CGST-R19(4)\",\n  \"severity\": \"major\",\n  \"title\": \"anchor_text truncates mid-sentence, omitting clause continuation\",\n  \"problem\": \"The source_ref.anchor_text cuts off at 'issued under sub-rule (2)' mid-sentence, omitting 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'. Source block 16 confirms the full text is a single compound sentence containing all cross-referenced sub-rules (1), (2), and (3) plus the form reference. The truncated anchor_text fails as an authoritative audit anchor because it does not represent the complete legal text of sub-rule (4).\",\n  \"evidence_refs\": [\n    \"source_block:16 - full text: '(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'\",\n    \"candidate_fragment source_ref.anchor_text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) ' (truncated)\"\n  ],\n  \"recommended_fix\": \"Extend source_ref.anchor_text to the complete clause text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .' The source block resolution is correct (block 16); only the anchor_text display string needs extension to match the full operative text.\",\n  \"confidence\": 0.95\n}",
+          "payload": {
+            "text": "{\n  \"label\": \"confirmed_issue\",\n  \"category\": \"source_ref_precision\",\n  \"node_id\": \"CGST-R19(4)\",\n  \"severity\": \"major\",\n  \"title\": \"anchor_text truncates mid-sentence, omitting clause continuation\",\n  \"problem\": \"The source_ref.anchor_text cuts off at 'issued under sub-rule (2)' mid-sentence, omitting 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'. Source block 16 confirms the full text is a single compound sentence containing all cross-referenced sub-rules (1), (2), and (3) plus the form reference. The truncated anchor_text fails as an authoritative audit anchor because it does not represent the complete legal text of sub-rule (4).\",\n  \"evidence_refs\": [\n    \"source_block:16 - full text: '(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'\",\n    \"candidate_fragment source_ref.anchor_text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) ' (truncated)\"\n  ],\n  \"recommended_fix\": \"Extend source_ref.anchor_text to the complete clause text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .' The source block resolution is correct (block 16); only the anchor_text display string needs extension to match the full operative text.\",\n  \"confidence\": 0.95\n}",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0614ec0ce157e446f8e88097008a44d6",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me analyze this issue carefully as chief_arbiter.\n\nThe issue claims that the source_ref.anchor_text for CGST-R19(4) is truncated mid-sentence. Let me compare:\n\n**Source block 16 (full text):**\n\"(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\n**Current anchor_text in source_ref:**\n\"Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) \"\n\n**What anchor_text is missing:**\n\"within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .\"\n\nThis is a clear truncation. The anchor_text cuts off at \"issued under sub-rule (2)\" and omits the rest of the clause including:\n- \"within the period prescribed in sub-rule (3)\"\n- \"the proper officer shall reject the application submitted under sub-rule (1)\"\n- \"and pass an order in FORM GST REG-05 .\"\n\nThis is a significant omission because the truncated text doesn't include:\n1. The timing condition (\"within the period prescribed in sub-rule (3)\")\n2. The consequence (\"the proper officer shall reject the application\")\n3. The form reference (FORM GST REG-05)\n\nLooking at the evidence:\n- Source block 16 confirms the full text\n- The anchor_text does indeed truncate mid-sentence\n- The cluster_root text shows the complete text is preserved in the node's \"text\" field\n\n\n- Both specialist and skeptic labeled this as \"confirmed_issue\"\n\nThe truncated anchor_text omits critical operative language—the timing condition, the rejection consequence, and the form reference—that together define the full legal effect of the provision. The full text from source block 16 includes all the missing elements that the current anchor_text omits entirely.",
+            "signature": "010f7f0ab4b54fea0b84e0c0900469cb211c70161690e900266b00ed128d2afb",
+            "type": "thinking"
+          },
+          {
+            "text": "{\n  \"label\": \"confirmed_issue\",\n  \"category\": \"source_ref_precision\",\n  \"node_id\": \"CGST-R19(4)\",\n  \"severity\": \"major\",\n  \"title\": \"anchor_text truncates mid-sentence, omitting clause continuation\",\n  \"problem\": \"The source_ref.anchor_text cuts off at 'issued under sub-rule (2)' mid-sentence, omitting 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'. Source block 16 confirms the full text is a single compound sentence containing all cross-referenced sub-rules (1), (2), and (3) plus the form reference. The truncated anchor_text fails as an authoritative audit anchor because it does not represent the complete legal text of sub-rule (4).\",\n  \"evidence_refs\": [\n    \"source_block:16 - full text: '(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'\",\n    \"candidate_fragment source_ref.anchor_text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) ' (truncated)\"\n  ],\n  \"recommended_fix\": \"Extend source_ref.anchor_text to the complete clause text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .' The source block resolution is correct (block 16); only the anchor_text display string needs extension to match the full operative text.\",\n  \"confidence\": 0.95\n}",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 5600,
+          "output_tokens": 900,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 445
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 5600,
+        "output_tokens": 900,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 445
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0002",
+        "counsel_name": "chief_arbiter",
+        "dossier_id": "gst-cluster-CGST-R19(4)",
+        "stage": "arbiter",
+        "categories": [
+          "source_ref_precision"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0002",
+          "issue_signature": "gst-cluster-CGST-R19(4)::CGST-R19(4)::source_ref_precision::anchor-text-truncates-mid-sentence-omitting-clause-continuation::the-source-ref-anchor-text-cuts-off-at-issued-under-sub-rule-2-mid-sentence-omitting-within-the-period-prescribed-in-sub-rule-3-the-proper-officer-shall-reject-the-application-submitted-under-sub-rule-1-and-pass-an-order-in-form-gst-reg-05-source-block-16-shows-the-full-text-is-a-single-compound-sentence-containing-all-cross-referenced-sub-rules-1-2-and-3-plus-the-form-reference-the-truncated-anchor-text-fails-as-an-authoritative-audit-anchor-because-it-does-not-represent-the-complete-legal-text-of-sub-rule-4",
+          "source_dossier_id": "gst-cluster-CGST-R19(4)",
+          "node_id": "CGST-R19(4)",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "confirmed_issue",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-cluster-CGST-R19(4)",
+      "category": "source_ref_precision",
+      "node_id": "CGST-R19(4)",
+      "severity": "major",
+      "title": "anchor_text truncates mid-sentence, omitting clause continuation",
+      "problem": "The source_ref.anchor_text cuts off at 'issued under sub-rule (2)' mid-sentence, omitting 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'. Source block 16 confirms the full text is a single compound sentence containing all cross-referenced sub-rules (1), (2), and (3) plus the form reference. The truncated anchor_text fails as an authoritative audit anchor because it does not represent the complete legal text of sub-rule (4).",
+      "evidence_refs": [
+        "source_block:16 - full text: '(4) Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .'",
+        "candidate_fragment source_ref.anchor_text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) ' (truncated)"
+      ],
+      "recommended_fix": "Extend source_ref.anchor_text to the complete clause text: 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05 .' The source block resolution is correct (block 16); only the anchor_text display string needs extension to match the full operative text.",
+      "confidence": 0.95,
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0002",
+        "stage": "arbiter",
+        "categories": [
+          "source_ref_precision"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0002",
+          "issue_signature": "gst-cluster-CGST-R19(4)::CGST-R19(4)::source_ref_precision::anchor-text-truncates-mid-sentence-omitting-clause-continuation::the-source-ref-anchor-text-cuts-off-at-issued-under-sub-rule-2-mid-sentence-omitting-within-the-period-prescribed-in-sub-rule-3-the-proper-officer-shall-reject-the-application-submitted-under-sub-rule-1-and-pass-an-order-in-form-gst-reg-05-source-block-16-shows-the-full-text-is-a-single-compound-sentence-containing-all-cross-referenced-sub-rules-1-2-and-3-plus-the-form-reference-the-truncated-anchor-text-fails-as-an-authoritative-audit-anchor-because-it-does-not-represent-the-complete-legal-text-of-sub-rule-4",
+          "source_dossier_id": "gst-cluster-CGST-R19(4)",
+          "node_id": "CGST-R19(4)",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0002"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  },
+  {
+    "task_id": "arbiter-ISSUE-0003",
+    "counsel_name": "chief_arbiter",
+    "dossier_id": "gst-amendment-CGST-R19-1",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me analyze this case carefully as chief_arbiter.\n\nThe issue is: The source text says \"for 'the said rule'\" and the specialist claims the `target` field should be populated with \"the said rule\". The skeptic argues this is an acceptable artifact because \"the said rule\" is just a generic placeholder phrase used in CBIC drafting to reference the rule being amended, not a specific structural element like \"sub-rule (4)\" or \"clause (b)\".\n\nLet me review the evidence:\n\n1. **Source text**: \"1. Substituted (w.e.f. 22-6-2017) vide Notification No. 7/2017 -CT., dated 27.06.2017 for \"the said rule\".\"\n\n2. **Schema definition for `target`**: \"Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'.\"\n\n3. **The skeptic's argument**: The schema examples show specific structural selectors, not generic cross-references. \"The said rule\" is a CBIC drafting convention that just refers to the rule being amended (CGST Rule 19), and it's already captured by the `rule_id` in metadata.\n\n4. **The specialist's argument**: The phrase \"for 'the said rule'\" appears in the source and should be preserved as the target.\n\nNow, let me think about this carefully:\n\nThe key question is: Does \"the said rule\" constitute a meaningful \"textual selector of what was affected\" that should populate the `target` field?\n\nLooking at the schema examples: 'sub-rule (4)', 'clause (b)' - these are specific structural identifiers.\n\n\"The said rule\" in CBIC drafting is a generic reference to the rule itself. It's not pointing to a specific sub-clause, paragraph, or structural element within the rule. It's simply saying \"this whole rule was substituted.\"\n\nThe `rule_id` (CGST-R19) already captures what rule was amended. \n\nThe phrase \"the said rule\" doesn't add specificity—it just reiterates what the `rule_id` already indicates. Populating the `target` field with this generic placeholder would introduce noise rather than useful information, since the schema's examples emphasize specific structural elements. The skeptic's position seems sound here.\n\nThe null value for `target` is the right call: \"the said rule\" is standard CBIC drafting language pointing to the entire rule, which is already identified by `rule_id`. This isn't an extraction problem but rather how the source naturally phrases things.",
+          "payload": {
+            "thinking": "Let me analyze this case carefully as chief_arbiter.\n\nThe issue is: The source text says \"for 'the said rule'\" and the specialist claims the `target` field should be populated with \"the said rule\". The skeptic argues this is an acceptable artifact because \"the said rule\" is just a generic placeholder phrase used in CBIC drafting to reference the rule being amended, not a specific structural element like \"sub-rule (4)\" or \"clause (b)\".\n\nLet me review the evidence:\n\n1. **Source text**: \"1. Substituted (w.e.f. 22-6-2017) vide Notification No. 7/2017 -CT., dated 27.06.2017 for \"the said rule\".\"\n\n2. **Schema definition for `target`**: \"Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'.\"\n\n3. **The skeptic's argument**: The schema examples show specific structural selectors, not generic cross-references. \"The said rule\" is a CBIC drafting convention that just refers to the rule being amended (CGST Rule 19), and it's already captured by the `rule_id` in metadata.\n\n4. **The specialist's argument**: The phrase \"for 'the said rule'\" appears in the source and should be preserved as the target.\n\nNow, let me think about this carefully:\n\nThe key question is: Does \"the said rule\" constitute a meaningful \"textual selector of what was affected\" that should populate the `target` field?\n\nLooking at the schema examples: 'sub-rule (4)', 'clause (b)' - these are specific structural identifiers.\n\n\"The said rule\" in CBIC drafting is a generic reference to the rule itself. It's not pointing to a specific sub-clause, paragraph, or structural element within the rule. It's simply saying \"this whole rule was substituted.\"\n\nThe `rule_id` (CGST-R19) already captures what rule was amended. \n\nThe phrase \"the said rule\" doesn't add specificity—it just reiterates what the `rule_id` already indicates. Populating the `target` field with this generic placeholder would introduce noise rather than useful information, since the schema's examples emphasize specific structural elements. The skeptic's position seems sound here.\n\nThe null value for `target` is the right call: \"the said rule\" is standard CBIC drafting language pointing to the entire rule, which is already identified by `rule_id`. This isn't an extraction problem but rather how the source naturally phrases things.",
+            "signature": "551c30b915f28710ec7bf8a0b28364c52202f4aa9cd00ab1134fbe2458238fef",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"missing_target\",\n  \"node_id\": \"1\",\n  \"severity\": \"minor\",\n  \"title\": \"Target field null is correct for generic 'the said rule' reference\",\n  \"problem\": \"The source text phrase 'for \\\"the said rule\\\"' is a standard CBIC drafting convention referencing the rule being amended (CGST Rule 19) as a whole. The schema definition for `target` describes it as 'Textual selector of what was affected' with examples like 'sub-rule (4)' and 'clause (b)' — specific structural sub-elements, not generic rule-level references. The rule_id field already captures 'CGST-R19', making 'the said rule' redundant context rather than a meaningful structural selector. Populating target = 'the said rule' would add no precision beyond the rule_id already provides.\",\n  \"evidence_refs\": [\n    \"hint_amendment:1:text\",\n    \"schema_excerpt:target:description\"\n  ],\n  \"recommended_fix\": null,\n  \"confidence\": 0.82\n}\n```",
+          "payload": {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"missing_target\",\n  \"node_id\": \"1\",\n  \"severity\": \"minor\",\n  \"title\": \"Target field null is correct for generic 'the said rule' reference\",\n  \"problem\": \"The source text phrase 'for \\\"the said rule\\\"' is a standard CBIC drafting convention referencing the rule being amended (CGST Rule 19) as a whole. The schema definition for `target` describes it as 'Textual selector of what was affected' with examples like 'sub-rule (4)' and 'clause (b)' — specific structural sub-elements, not generic rule-level references. The rule_id field already captures 'CGST-R19', making 'the said rule' redundant context rather than a meaningful structural selector. Populating target = 'the said rule' would add no precision beyond the rule_id already provides.\",\n  \"evidence_refs\": [\n    \"hint_amendment:1:text\",\n    \"schema_excerpt:target:description\"\n  ],\n  \"recommended_fix\": null,\n  \"confidence\": 0.82\n}\n```",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0614ec0c44d495c821c98f8d7d790f0e",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me analyze this case carefully as chief_arbiter.\n\nThe issue is: The source text says \"for 'the said rule'\" and the specialist claims the `target` field should be populated with \"the said rule\". The skeptic argues this is an acceptable artifact because \"the said rule\" is just a generic placeholder phrase used in CBIC drafting to reference the rule being amended, not a specific structural element like \"sub-rule (4)\" or \"clause (b)\".\n\nLet me review the evidence:\n\n1. **Source text**: \"1. Substituted (w.e.f. 22-6-2017) vide Notification No. 7/2017 -CT., dated 27.06.2017 for \"the said rule\".\"\n\n2. **Schema definition for `target`**: \"Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'.\"\n\n3. **The skeptic's argument**: The schema examples show specific structural selectors, not generic cross-references. \"The said rule\" is a CBIC drafting convention that just refers to the rule being amended (CGST Rule 19), and it's already captured by the `rule_id` in metadata.\n\n4. **The specialist's argument**: The phrase \"for 'the said rule'\" appears in the source and should be preserved as the target.\n\nNow, let me think about this carefully:\n\nThe key question is: Does \"the said rule\" constitute a meaningful \"textual selector of what was affected\" that should populate the `target` field?\n\nLooking at the schema examples: 'sub-rule (4)', 'clause (b)' - these are specific structural identifiers.\n\n\"The said rule\" in CBIC drafting is a generic reference to the rule itself. It's not pointing to a specific sub-clause, paragraph, or structural element within the rule. It's simply saying \"this whole rule was substituted.\"\n\nThe `rule_id` (CGST-R19) already captures what rule was amended. \n\nThe phrase \"the said rule\" doesn't add specificity—it just reiterates what the `rule_id` already indicates. Populating the `target` field with this generic placeholder would introduce noise rather than useful information, since the schema's examples emphasize specific structural elements. The skeptic's position seems sound here.\n\nThe null value for `target` is the right call: \"the said rule\" is standard CBIC drafting language pointing to the entire rule, which is already identified by `rule_id`. This isn't an extraction problem but rather how the source naturally phrases things.",
+            "signature": "551c30b915f28710ec7bf8a0b28364c52202f4aa9cd00ab1134fbe2458238fef",
+            "type": "thinking"
+          },
+          {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"missing_target\",\n  \"node_id\": \"1\",\n  \"severity\": \"minor\",\n  \"title\": \"Target field null is correct for generic 'the said rule' reference\",\n  \"problem\": \"The source text phrase 'for \\\"the said rule\\\"' is a standard CBIC drafting convention referencing the rule being amended (CGST Rule 19) as a whole. The schema definition for `target` describes it as 'Textual selector of what was affected' with examples like 'sub-rule (4)' and 'clause (b)' — specific structural sub-elements, not generic rule-level references. The rule_id field already captures 'CGST-R19', making 'the said rule' redundant context rather than a meaningful structural selector. Populating target = 'the said rule' would add no precision beyond the rule_id already provides.\",\n  \"evidence_refs\": [\n    \"hint_amendment:1:text\",\n    \"schema_excerpt:target:description\"\n  ],\n  \"recommended_fix\": null,\n  \"confidence\": 0.82\n}\n```",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 3498,
+          "output_tokens": 765,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 445
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 3498,
+        "output_tokens": 765,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 445
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0003",
+        "counsel_name": "chief_arbiter",
+        "dossier_id": "gst-amendment-CGST-R19-1",
+        "stage": "arbiter",
+        "categories": [
+          "missing_target"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0003",
+          "issue_signature": "gst-amendment-CGST-R19-1::1::missing_target::target-field-missing-in-amendment-marker-1::the-source-text-explicitly-states-for-the-said-rule-indicating-the-specific-element-that-was-substituted-the-target-field-is-null-but-should-carry-the-textual-target-reference-the-said-rule-to-preserve-the-complete-scope-of-the-amendment-action",
+          "source_dossier_id": "gst-amendment-CGST-R19-1",
+          "node_id": "1",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "acceptable_artifact",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R19-1",
+      "category": "missing_target",
+      "node_id": "1",
+      "severity": "minor",
+      "title": "Target field null is correct for generic 'the said rule' reference",
+      "problem": "The source text phrase 'for \"the said rule\"' is a standard CBIC drafting convention referencing the rule being amended (CGST Rule 19) as a whole. The schema definition for `target` describes it as 'Textual selector of what was affected' with examples like 'sub-rule (4)' and 'clause (b)' — specific structural sub-elements, not generic rule-level references. The rule_id field already captures 'CGST-R19', making 'the said rule' redundant context rather than a meaningful structural selector. Populating target = 'the said rule' would add no precision beyond the rule_id already provides.",
+      "evidence_refs": [
+        "hint_amendment:1:text",
+        "schema_excerpt:target:description"
+      ],
+      "recommended_fix": null,
+      "confidence": 0.82,
+      "metadata": {
+        "task_id": "arbiter-ISSUE-0003",
+        "stage": "arbiter",
+        "categories": [
+          "missing_target"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0003",
+          "issue_signature": "gst-amendment-CGST-R19-1::1::missing_target::target-field-missing-in-amendment-marker-1::the-source-text-explicitly-states-for-the-said-rule-indicating-the-specific-element-that-was-substituted-the-target-field-is-null-but-should-carry-the-textual-target-reference-the-said-rule-to-preserve-the-complete-scope-of-the-amendment-action",
+          "source_dossier_id": "gst-amendment-CGST-R19-1",
+          "node_id": "1",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0003"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "rule_id": "CGST-R19",
+  "status": "clean",
+  "confirmed_issues": [],
+  "accepted_artifacts": [
+    {
+      "issue_id": "ISSUE-0001",
+      "signature": "gst-cluster-CGST-R19(1)::CGST-R19(1)::status_chronology::node-marked-active-despite-amendment-pending-notification::cgst-r19-1-has-status-active-but-amendment-marker-3-indicates-inserted-w-e-f-yet-to-be-notified-per-notification-no-7-2025-ct-dated-23-01-2025-the-enacted-date-2025-01-23-is-recorded-but-effective-date-is-null-correctly-reflecting-the-pending-state-however-the-node-s-status-remains-active-when-it-should-be-pending-to-accurately-reflect-that-the-inserted-text-form-gst-cmp-02-reference-has-not-yet-been-notified-into-force",
+      "dossier_id": "gst-cluster-CGST-R19(1)",
+      "node_id": "CGST-R19(1)",
+      "category": "status_chronology",
+      "severity": "major",
+      "title": "Node marked active despite amendment pending notification",
+      "problem": "CGST-R19(1) has status \"active\" but amendment marker [3] indicates \"Inserted (w.e.f. yet to be notified)\" per Notification No. 7/2025-CT, dated 23.01.2025. The enacted_date 2025-01-23 is recorded but effective_date is null, correctly reflecting the pending state. However, the node's status remains \"active\" when it should be \"pending\" to accurately reflect that the inserted text (FORM GST CMP-02 reference) has not yet been notified into force.",
+      "evidence_refs": [
+        "hint_amendment marker=3: '3. Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.' with effective_date: null, enacted_date: '2025-01-23'",
+        "Target node CGST-R19(1): status=active, amendment_markers=[3], effective_from=null",
+        "Source block 2: contains <sup>3</sup>[or in the intimation furnished by the composition taxpayer in FORM GST CMP-02]",
+        "Hint segment amendment_markers: ['3', '1']"
+      ],
+      "recommended_fix": "Change CGST-R19(1).status from 'active' to 'pending'. The enacted_date alone does not establish operative effect; the explicit 'yet to be notified' qualifier confirms the amendment is not yet in force. Alternatively, if the extraction system handles pending amendments by keeping status=active, ensure a corresponding effective_from field is null as currently recorded and consider adding a chronological note explaining the pending status.",
+      "supporting_task_ids": [
+        "specialist-amendment_counsel-gst-cluster-CGST-R19(1)"
+      ],
+      "supporting_counsel": [
+        "amendment_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "confirmed_issue"
+        ],
+        "max_confidence": 0.85
+      }
+    },
+    {
+      "issue_id": "ISSUE-0002",
+      "signature": "gst-cluster-CGST-R19(4)::CGST-R19(4)::structure_scope::source-ref-anchor-text-truncated-omitting-operative-tail::the-source-ref-anchor-text-for-cgst-r19-4-only-contains-where-the-reply-furnished-under-sub-rule-3-is-found-to-be-not-satisfactory-or-where-no-reply-is-furnished-in-response-to-the-notice-issued-under-sub-rule-2-it-stops-at-sub-rule-2-and-omits-the-remainder-within-the-period-prescribed-in-sub-rule-3-the-proper-officer-shall-reject-the-application-submitted-under-sub-rule-1-and-pass-an-order-in-form-gst-reg-05-the-anchor-text-thus-fails-to-cover-the-full-block-span-and-drops-the-operative-consequence-rejection-of-application-that-is-central-to-the-sub-rule-s-scope",
+      "dossier_id": "gst-cluster-CGST-R19(4)",
+      "node_id": "CGST-R19(4)",
+      "category": "structure_scope",
+      "severity": "moderate",
+      "title": "source_ref anchor_text truncated, omitting operative tail",
+      "problem": "The source_ref.anchor_text for CGST-R19(4) only contains 'Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) ' — it stops at sub-rule (2) and omits the remainder 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.' The anchor_text thus fails to cover the full block span and drops the operative consequence (rejection of application) that is central to the sub-rule's scope.",
+      "evidence_refs": [
+        "source block 16: full text includes 'within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05'",
+        "source_ref.anchor_text field: truncated at 'sub-rule (2) '",
+        "rule_json target card text: complete sub-rule text preserved correctly"
+      ],
+      "recommended_fix": "Update source_ref.anchor_text to capture the complete block text, or set source_ref to null if only a fragment is available and raw_text cannot faithfully represent the full source. The anchor_text must cover the entire source span for CGST-R19(4) to serve as a reliable audit trail.",
+      "supporting_task_ids": [
+        "specialist-structure_scope_counsel-gst-cluster-CGST-R19(4)"
+      ],
+      "supporting_counsel": [
+        "structure_scope_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "confirmed_issue"
+        ],
+        "max_confidence": 0.85
+      }
+    }
+  ],
+  "manual_review_issues": [],
+  "rejected_issues": [],
+  "summary": "No candidate issues survived challenge, arbitration, and GST false-positive filtering.",
+  "diagnostics": {}
+}

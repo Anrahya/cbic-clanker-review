@@ -20,7 +20,7 @@ from ..checks import (
 )
 from ..config import ReviewConfig
 from ..extracted.node_index import index_rule_json
-from ..loader import load_json, resolve_raw_html
+from ..loader import load_json, resolve_hint_json, resolve_raw_html
 from ..models import CheckContext, InputSummary, ReviewReport
 from ..raw_source.parse_html import parse_raw_html
 from ..schema_validate import validate_rule_json
@@ -55,6 +55,7 @@ def review_rule(
     rule_path: Optional[str] = None,
     schema_path: Optional[str] = None,
     raw_path: Optional[str] = None,
+    hint_json: Optional[Dict[str, Any]] = None,
 ) -> ReviewReport:
     config = config or ReviewConfig()
     schema_validation = validate_rule_json(rule_json, schema_json)
@@ -67,6 +68,7 @@ def review_rule(
         raw_source=raw_source,
         indexed_rule=indexed_rule,
         schema_validation=schema_validation,
+        hint_json=hint_json or {},
     )
     findings = []
     likely_false_positives = []
@@ -106,10 +108,14 @@ def review_rule_files(
     raw_path: Optional[Union[str, Path]] = None,
     source_url: Optional[str] = None,
     config: Optional[ReviewConfig] = None,
+    hint_json: Optional[Dict[str, Any]] = None,
 ) -> ReviewReport:
     rule_json = load_json(rule_path)
     schema_json = load_json(schema_path)
     raw_html, resolved_raw_path = resolve_raw_html(raw_path, source_url, rule_json.get("metadata"))
+    # Auto-resolve hint JSON if not explicitly provided
+    if hint_json is None:
+        hint_json = resolve_hint_json(rule_json, resolved_raw_path)
     return review_rule(
         rule_json,
         schema_json,
@@ -119,4 +125,5 @@ def review_rule_files(
         rule_path=str(rule_path),
         schema_path=str(schema_path),
         raw_path=resolved_raw_path,
+        hint_json=hint_json,
     )

@@ -22,13 +22,21 @@ def apply_gst_false_positive_filter(
     rejected = list(report.rejected_issues)
 
     for issue in report.confirmed_issues:
+        # Don't auto-reclassify high-confidence confirmed issues
+        confidence = float(issue.metadata.get("max_confidence", 0.0))
+        if confidence >= 0.9:
+            confirmed.append(issue)
+            continue
+
         dossier = dossier_map.get(issue.dossier_id) or node_map.get(issue.node_id or "")
         if issue.node_id and issue.node_id in node_map:
             dossier = node_map[issue.node_id]
         disposition = _classify_issue(issue, dossier)
         if disposition == "acceptable_artifact":
+            issue.final_disposition = "acceptable_artifact"
             accepted.append(issue)
         elif disposition == "needs_manual_review":
+            issue.final_disposition = "manual_review"
             manual.append(issue)
         else:
             confirmed.append(issue)
@@ -36,6 +44,9 @@ def apply_gst_false_positive_filter(
     if confirmed:
         status = "issues_found"
         summary = f"{len(confirmed)} confirmed issue(s) remain after challenge, arbitration, and GST false-positive filtering."
+    elif accepted:
+        status = "accepted_with_artifacts"
+        summary = f"No confirmed issues after GST false-positive filtering, but {len(accepted)} finding(s) accepted as source-faithful artifacts."
     elif manual:
         status = "needs_manual_review"
         summary = f"No issue survived GST false-positive filtering, but {len(manual)} item(s) still need manual review."
@@ -63,8 +74,12 @@ def _classify_issue(issue: CandidateIssue, dossier: Optional[Dossier]) -> Option
     if "target_id" in text and "external_act" in text:
         return "acceptable_artifact"
 
+    # Only auto-accept anchor_text issues about SHORT PREVIEW length, not real truncation
     if "anchor_text" in text:
-        return "acceptable_artifact"
+        if "truncat" in text or "omit" in text or "missing" in text:
+            pass  # Let real truncation issues through for council judgment
+        else:
+            return "acceptable_artifact"
 
     if "bracket" in text and carry_in_span:
         return "acceptable_artifact"

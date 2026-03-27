@@ -30,6 +30,8 @@ def synthesize_rule_report(
     for issue_id, issue in issue_map.items():
         arbiter = arbiter_index.get(issue_id)
         challenge = challenge_index.get(issue_id)
+
+        # Determine the final label from the latest stage
         if arbiter is not None and arbiter.parsed_judgment is not None:
             label = arbiter.parsed_judgment.label
         elif challenge is not None and challenge.parsed_judgment is not None:
@@ -37,21 +39,42 @@ def synthesize_rule_report(
         else:
             label = "needs_manual_review"
 
-        if label == "confirmed_issue":
+        # Map label to final_disposition
+        disposition_map = {
+            "confirmed_issue": "confirmed_issue",
+            "needs_manual_review": "manual_review",
+            "acceptable_artifact": "acceptable_artifact",
+            "no_issue": "rejected",
+        }
+        disposition = disposition_map.get(label, "rejected")
+        issue.final_disposition = disposition  # type: ignore[assignment]
+
+        # Update metadata to reflect the arbiter's final judgment, not stale specialist labels
+        issue.metadata["final_label"] = label
+        if arbiter is not None and arbiter.parsed_judgment is not None:
+            issue.metadata["judgment_labels"] = [arbiter.parsed_judgment.label]
+            if arbiter.parsed_judgment.confidence:
+                issue.metadata["max_confidence"] = arbiter.parsed_judgment.confidence
+
+        if disposition == "confirmed_issue":
             confirmed.append(issue)
-        elif label == "needs_manual_review":
-            manual.append(issue)
-        elif label == "acceptable_artifact":
+        elif disposition == "acceptable_artifact":
             accepted.append(issue)
+        elif disposition == "manual_review":
+            manual.append(issue)
         else:
             rejected.append(issue)
 
+    # Derive status from final_disposition values
     failed_tasks = diagnostics["failed_task_count"]
     if confirmed:
         status = "issues_found"
         summary = f"{len(confirmed)} confirmed issue(s) remain after challenge and arbitration."
         if failed_tasks:
-            summary += f" The run also had {failed_tasks} failed task(s), so unraised issues may still need manual review."
+            summary += f" The run also had {failed_tasks} failed task(s)."
+    elif accepted:
+        status = "accepted_with_artifacts"
+        summary = f"No confirmed issues, but {len(accepted)} finding(s) accepted as source-faithful artifacts requiring awareness."
     elif manual or failed_tasks:
         status = "needs_manual_review"
         if manual and failed_tasks:

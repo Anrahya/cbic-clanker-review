@@ -1,0 +1,3 @@
+[console_scripts]
+clanker-zone = clanker_zone.cli:app
+gst-rule-review = gst_rule_review.cli:app

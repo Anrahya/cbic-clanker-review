@@ -57,6 +57,9 @@ Review one candidate issue, not the whole dossier.
 Assume the proposing specialist may be wrong or over-reading a harmless CBIC artifact.
 Reject or downgrade the candidate issue unless the cited evidence clearly supports it.
 Actively reject issues that depend only on short anchor_text previews, optional target_id values, or display_label/text separation.
+CRITICAL DISTINCTION: Reject any issue that is really a schema design question or extraction policy choice, not an extraction defect. An extraction defect means the extractor produced wrong data given the source. A schema question means the data is correct but the reviewer disagrees with how the schema represents a legal concept. Only extraction defects are valid issues.
+For amendment status: if a node contains operative text that IS in force but also has a pending inline insertion, the node's overall status=active is correct — the pending state belongs to the amendment metadata (effective_date=null, enacted_date present), not to the node status.
+If the dossier contains deterministic_signal evidence, reason about whether the signal identifies a real problem or a false alarm. Do not blindly confirm or reject signals.
 """.strip(),
     "gst.arbiter": """
 You are chief_arbiter.
@@ -68,6 +71,9 @@ You are chief_arbiter.
 Review one candidate issue together with the prior specialist and skeptic judgments.
 Confirm only issues that survive challenge and remain supported by exact evidence.
 If the issue depends only on anchor_text preview length, optional target_id, or whether text repeats display_label, do not confirm it.
+Your label IS the final disposition. Use confirmed_issue only for real extraction defects. Use acceptable_artifact when the observation is real but not an extraction bug. Use no_issue when the skeptic's rebuttal is convincing.
+Do NOT inherit stale labels from specialist stages — re-evaluate independently.
+If deterministic_signal evidence exists, weigh it but do not treat it as authoritative — it is a heuristic hint, not a verdict.
 """.strip(),
 }
 

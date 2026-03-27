@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Callable, List, Optional
 
 from .deliberation import build_issue_stage_tasks, compile_issue_requests
 from .issues import aggregate_candidate_issues
 from .models import CouncilDeliberationRun, CouncilRunPlan
 from .report.finalize import synthesize_rule_report
-from .session import compile_plan_requests, execute_compiled_requests
+from .session import TaskEventCallback, compile_plan_requests, execute_compiled_requests
 
 
 def run_issue_council(
@@ -18,7 +18,9 @@ def run_issue_council(
     issue_prompt_builder,
     specialist_counsel_names: Optional[List[str]] = None,
     max_concurrency: int = 1,
+    on_event: Optional[TaskEventCallback] = None,
 ) -> CouncilDeliberationRun:
+    import time
     specialist_tasks = [
         task
         for task in plan.tasks
@@ -35,7 +37,10 @@ def run_issue_council(
         compiled_requests=specialist_compiled,
         provider=provider,
         max_concurrency=max_concurrency,
+        on_task_event=on_event,
     )
+    if on_event:
+        on_event({"type": "stage_complete", "timestamp": int(time.time() * 1000), "stage": "specialist"})
 
     candidate_issues = aggregate_candidate_issues(specialist_results)
     challenge_tasks = build_issue_stage_tasks(issues=candidate_issues, roster=roster, stage="skeptic")
@@ -51,7 +56,10 @@ def run_issue_council(
         compiled_requests=challenge_compiled,
         provider=provider,
         max_concurrency=max_concurrency,
+        on_task_event=on_event,
     )
+    if on_event:
+        on_event({"type": "stage_complete", "timestamp": int(time.time() * 1000), "stage": "skeptic"})
 
     arbiter_tasks = build_issue_stage_tasks(issues=candidate_issues, roster=roster, stage="arbiter")
     arbiter_compiled = compile_issue_requests(
@@ -66,7 +74,10 @@ def run_issue_council(
         compiled_requests=arbiter_compiled,
         provider=provider,
         max_concurrency=max_concurrency,
+        on_task_event=on_event,
     )
+    if on_event:
+        on_event({"type": "stage_complete", "timestamp": int(time.time() * 1000), "stage": "arbiter"})
 
     rule_number = str(plan.metadata.get("rule_number") or plan.metadata.get("rule_id") or "unknown")
     rule_report = synthesize_rule_report(
@@ -76,6 +87,13 @@ def run_issue_council(
         challenge_results=challenge_results,
         arbiter_results=arbiter_results,
     )
+    if on_event:
+        on_event({
+            "type": "report_complete", 
+            "timestamp": int(time.time() * 1000), 
+            "report": rule_report.model_dump(mode="json")
+        })
+        
     return CouncilDeliberationRun(
         specialist_compiled_requests=specialist_compiled,
         specialist_results=specialist_results,

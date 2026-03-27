@@ -1,0 +1,2900 @@
+{
+  "input_summary": {
+    "rule_path": "D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017\\chapter_03_registration\\rule_019.json",
+    "schema_path": "D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017\\rule_document.json",
+    "raw_path": "D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017\\raw\\html\\CGST-R19.html",
+    "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+    "rule_id": "$",
+    "node_count": 19,
+    "raw_block_count": 20,
+    "table_count": 0
+  },
+  "schema_validation": {
+    "valid": true,
+    "blocking": false,
+    "errors": []
+  },
+  "confirmed_issues": [
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(1)",
+      "node_id": "CGST-R19(1)",
+      "json_path": "$.node.children[0]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 or in the intimation furnished by the composition taxpayer in FORM GST CMP-02 or for Unique Identity Number in FORM GST-REG-13, either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14, along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "1",
+        "display_label": "(1)",
+        "type": "sub_rule",
+        "id": "CGST-R19(1)",
+        "full_path": "R19(1)",
+        "order": 1,
+        "text": "Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 or in the intimation furnished by the composition taxpayer in FORM GST CMP-02 or for Unique Identity Number in FORM GST-REG-13, either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14, along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+        "raw_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02] or for Unique Identity Number in FORM GST-REG-13 , either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14 , along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+        "children": [],
+        "provisos": [
+          {
+            "label": "proviso-1",
+            "display_label": "First Proviso",
+            "type": "proviso",
+            "id": "CGST-R19(1)-P1",
+            "full_path": "R19(1)-P1",
+            "order": 1,
+            "text": "Provided that -",
+            "children": [
+              {
+                "label": "a",
+                "display_label": "(a)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(a)",
+                "full_path": "R19(1)-P1(a)",
+                "order": 1,
+                "text": "where the change relates to, -",
+                "operative_text": "which does not warrant cancellation of registration under section 29, the proper officer shall, after due verification, approve the amendment within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14 and issue an order in FORM GST REG-15 electronically and such amendment shall take effect from the date of the occurrence of the event warranting such amendment;",
+                "children": [
+                  {
+                    "label": "i",
+                    "display_label": "(i)",
+                    "type": "sub_clause",
+                    "id": "CGST-R19(1)-P1(a)(i)",
+                    "full_path": "R19(1)-P1(a)(i)",
+                    "order": 1,
+                    "text": "( i ) legal name of business;",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 5,
+                      "end_block": 5,
+                      "resolution": "exact",
+                      "anchor_text": "( i ) legal name of business;"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "ii",
+                    "display_label": "(ii)",
+                    "type": "sub_clause",
+                    "id": "CGST-R19(1)-P1(a)(ii)",
+                    "full_path": "R19(1)-P1(a)(ii)",
+                    "order": 2,
+                    "text": "address of the principal place of business or any additional place(s) of business; or",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 6,
+                      "end_block": 6,
+                      "resolution": "exact",
+                      "anchor_text": "address of the principal place of business or any additional place(s) of business; or"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "iii",
+                    "display_label": "(iii)",
+                    "type": "sub_clause",
+                    "id": "CGST-R19(1)-P1(a)(iii)",
+                    "full_path": "R19(1)-P1(a)(iii)",
+                    "order": 3,
+                    "text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for the day today affairs of the business, -",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 7,
+                      "end_block": 7,
+                      "resolution": "exact",
+                      "anchor_text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for "
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  }
+                ],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "section 29",
+                    "target_type": "act_section",
+                    "relationship": "under",
+                    "context": "cancellation of registration under section 29"
+                  },
+                  {
+                    "target": "FORM GST REG-14",
+                    "target_id": "1000040",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "application in FORM GST REG-14"
+                  },
+                  {
+                    "target": "FORM GST REG-15",
+                    "target_id": "1000041",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "issue an order in FORM GST REG-15"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 4,
+                  "end_block": 8,
+                  "resolution": "exact",
+                  "anchor_text": "where the change relates to, -"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "b",
+                "display_label": "(b)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(b)",
+                "full_path": "R19(1)-P1(b)",
+                "order": 2,
+                "text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the registered person obtained under the provisions of this Chapter on the same Permanent Account Number;",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "sub-clause (i)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "relating to sub-clause (i)"
+                  },
+                  {
+                    "target": "sub-clause (iii)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "and sub-clause (iii)"
+                  },
+                  {
+                    "target": "clause (a)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "of clause (a)"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 9,
+                  "end_block": 9,
+                  "resolution": "exact",
+                  "anchor_text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the regi"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "c",
+                "display_label": "(c)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(c)",
+                "full_path": "R19(1)-P1(c)",
+                "order": 3,
+                "text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the application in FORM GST REG- 14 on the common portal;",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "clause (a)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "specified in clause (a)"
+                  },
+                  {
+                    "target": "FORM GST REG-14",
+                    "target_id": "1000040",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "application in FORM GST REG-14"
+                  },
+                  {
+                    "target": "common portal",
+                    "target_type": "system_artifact",
+                    "relationship": "mentions",
+                    "context": "on the common portal"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 10,
+                  "end_block": 10,
+                  "resolution": "exact",
+                  "anchor_text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "d",
+                "display_label": "(d)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(d)",
+                "full_path": "R19(1)-P1(d)",
+                "order": 4,
+                "text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for fresh registration in FORM GST REG-01 :",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "FORM GST REG-01",
+                    "target_id": "1000027",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "fresh registration in FORM GST REG-01"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 11,
+                  "end_block": 11,
+                  "resolution": "exact",
+                  "anchor_text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              }
+            ],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 3,
+              "end_block": 3,
+              "resolution": "exact",
+              "anchor_text": "Provided that -"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active",
+            "proviso_level": 1
+          },
+          {
+            "label": "proviso-2",
+            "display_label": "Second Proviso",
+            "type": "proviso",
+            "id": "CGST-R19(1)-P2",
+            "full_path": "R19(1)-P2",
+            "order": 2,
+            "text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under sub-rule (2) of rule 8.",
+            "raw_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under 1 [sub-rule (2) of rule 8 ].",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "this rule",
+                "target_type": "self",
+                "relationship": "under",
+                "context": "submitted under this rule"
+              },
+              {
+                "target": "common portal",
+                "target_type": "system_artifact",
+                "relationship": "mentions",
+                "context": "through the common portal"
+              },
+              {
+                "target": "sub-rule (2) of rule 8",
+                "target_id": "1000089",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "provided under sub-rule (2) of rule 8"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 12,
+              "end_block": 12,
+              "resolution": "exact",
+              "anchor_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, sha"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              1
+            ],
+            "effective_from": "2017-06-22",
+            "status": "active",
+            "proviso_level": 2
+          }
+        ],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "FORM GST REG-01",
+            "target_id": "1000027",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application for registration in FORM GST REG-01"
+          },
+          {
+            "target": "FORM GST REG-07",
+            "target_id": "1000033",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "or FORM GST REG-07"
+          },
+          {
+            "target": "FORM GST REG-09",
+            "target_id": "1000035",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "or FORM GST REG-09"
+          },
+          {
+            "target": "FORM GST REG-10",
+            "target_id": "1000036",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "or FORM GST REG-10"
+          },
+          {
+            "target": "FORM GST CMP-02",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "composition taxpayer in FORM GST CMP-02"
+          },
+          {
+            "target": "FORM GST-REG-13",
+            "target_id": "1000039",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "Unique Identity Number in FORM GST-REG-13"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "electronically in FORM GST REG-14"
+          },
+          {
+            "target": "common portal",
+            "target_type": "system_artifact",
+            "relationship": "mentions",
+            "context": "at the common portal"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 2,
+          "end_block": 2,
+          "resolution": "exact",
+          "anchor_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 o"
+        },
+        "is_amended": true,
+        "amendment_markers": [
+          3
+        ],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(1)-P1(a)",
+      "node_id": "CGST-R19(1)-P1(a)",
+      "json_path": "$.node.children[0].provisos[0].children[0]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "which does not warrant cancellation of registration under section 29, the proper officer shall, after due verification, approve the amendment within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14 and issue an order in FORM GST REG-15 electronically and such amendment shall take effect from the date of the occurrence of the event warranting such amendment;",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "a",
+        "display_label": "(a)",
+        "type": "clause",
+        "id": "CGST-R19(1)-P1(a)",
+        "full_path": "R19(1)-P1(a)",
+        "order": 1,
+        "text": "where the change relates to, -",
+        "operative_text": "which does not warrant cancellation of registration under section 29, the proper officer shall, after due verification, approve the amendment within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14 and issue an order in FORM GST REG-15 electronically and such amendment shall take effect from the date of the occurrence of the event warranting such amendment;",
+        "children": [
+          {
+            "label": "i",
+            "display_label": "(i)",
+            "type": "sub_clause",
+            "id": "CGST-R19(1)-P1(a)(i)",
+            "full_path": "R19(1)-P1(a)(i)",
+            "order": 1,
+            "text": "( i ) legal name of business;",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 5,
+              "end_block": 5,
+              "resolution": "exact",
+              "anchor_text": "( i ) legal name of business;"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          },
+          {
+            "label": "ii",
+            "display_label": "(ii)",
+            "type": "sub_clause",
+            "id": "CGST-R19(1)-P1(a)(ii)",
+            "full_path": "R19(1)-P1(a)(ii)",
+            "order": 2,
+            "text": "address of the principal place of business or any additional place(s) of business; or",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 6,
+              "end_block": 6,
+              "resolution": "exact",
+              "anchor_text": "address of the principal place of business or any additional place(s) of business; or"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          },
+          {
+            "label": "iii",
+            "display_label": "(iii)",
+            "type": "sub_clause",
+            "id": "CGST-R19(1)-P1(a)(iii)",
+            "full_path": "R19(1)-P1(a)(iii)",
+            "order": 3,
+            "text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for the day today affairs of the business, -",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 7,
+              "end_block": 7,
+              "resolution": "exact",
+              "anchor_text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for "
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          }
+        ],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "section 29",
+            "target_type": "act_section",
+            "relationship": "under",
+            "context": "cancellation of registration under section 29"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application in FORM GST REG-14"
+          },
+          {
+            "target": "FORM GST REG-15",
+            "target_id": "1000041",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "issue an order in FORM GST REG-15"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 4,
+          "end_block": 8,
+          "resolution": "exact",
+          "anchor_text": "where the change relates to, -"
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(1)-P1(b)",
+      "node_id": "CGST-R19(1)-P1(b)",
+      "json_path": "$.node.children[0].provisos[0].children[1]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the registered person obtained under the provisions of this Chapter on the same Permanent Account Number;",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "b",
+        "display_label": "(b)",
+        "type": "clause",
+        "id": "CGST-R19(1)-P1(b)",
+        "full_path": "R19(1)-P1(b)",
+        "order": 2,
+        "text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the registered person obtained under the provisions of this Chapter on the same Permanent Account Number;",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "sub-clause (i)",
+            "target_type": "rule_fragment",
+            "relationship": "mentions",
+            "context": "relating to sub-clause (i)"
+          },
+          {
+            "target": "sub-clause (iii)",
+            "target_type": "rule_fragment",
+            "relationship": "mentions",
+            "context": "and sub-clause (iii)"
+          },
+          {
+            "target": "clause (a)",
+            "target_type": "rule_fragment",
+            "relationship": "mentions",
+            "context": "of clause (a)"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 9,
+          "end_block": 9,
+          "resolution": "exact",
+          "anchor_text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the regi"
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(1)-P1(c)",
+      "node_id": "CGST-R19(1)-P1(c)",
+      "json_path": "$.node.children[0].provisos[0].children[2]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the application in FORM GST REG- 14 on the common portal;",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "c",
+        "display_label": "(c)",
+        "type": "clause",
+        "id": "CGST-R19(1)-P1(c)",
+        "full_path": "R19(1)-P1(c)",
+        "order": 3,
+        "text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the application in FORM GST REG- 14 on the common portal;",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "clause (a)",
+            "target_type": "rule_fragment",
+            "relationship": "mentions",
+            "context": "specified in clause (a)"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application in FORM GST REG-14"
+          },
+          {
+            "target": "common portal",
+            "target_type": "system_artifact",
+            "relationship": "mentions",
+            "context": "on the common portal"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 10,
+          "end_block": 10,
+          "resolution": "exact",
+          "anchor_text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the"
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(1)-P2",
+      "node_id": "CGST-R19(1)-P2",
+      "json_path": "$.node.children[0].provisos[1]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under sub-rule (2) of rule 8.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "proviso-2",
+        "display_label": "Second Proviso",
+        "type": "proviso",
+        "id": "CGST-R19(1)-P2",
+        "full_path": "R19(1)-P2",
+        "order": 2,
+        "text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under sub-rule (2) of rule 8.",
+        "raw_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under 1 [sub-rule (2) of rule 8 ].",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "this rule",
+            "target_type": "self",
+            "relationship": "under",
+            "context": "submitted under this rule"
+          },
+          {
+            "target": "common portal",
+            "target_type": "system_artifact",
+            "relationship": "mentions",
+            "context": "through the common portal"
+          },
+          {
+            "target": "sub-rule (2) of rule 8",
+            "target_id": "1000089",
+            "target_type": "rule_fragment",
+            "relationship": "under",
+            "context": "provided under sub-rule (2) of rule 8"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 12,
+          "end_block": 12,
+          "resolution": "exact",
+          "anchor_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, sha"
+        },
+        "is_amended": true,
+        "amendment_markers": [
+          1
+        ],
+        "effective_from": "2017-06-22",
+        "status": "active",
+        "proviso_level": 2
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(1A)",
+      "node_id": "CGST-R19(1A)",
+      "json_path": "$.node.children[1]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "1A",
+        "display_label": "(1A)",
+        "type": "sub_rule",
+        "id": "CGST-R19(1A)",
+        "full_path": "R19(1A)",
+        "order": 2,
+        "text": "Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.",
+        "raw_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.]",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "sub-rule (1)",
+            "target_type": "rule_fragment",
+            "relationship": "notwithstanding",
+            "context": "contained in sub-rule (1)"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application in FORM GST REG-14"
+          },
+          {
+            "target": "common portal",
+            "target_type": "system_artifact",
+            "relationship": "mentions",
+            "context": "on the common portal"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 13,
+          "end_block": 13,
+          "resolution": "exact",
+          "anchor_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date e"
+        },
+        "is_amended": true,
+        "amendment_markers": [
+          2
+        ],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(2)",
+      "node_id": "CGST-R19(2)",
+      "json_path": "$.node.children[2]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incomplete or incorrect, he may, within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14, serve a notice in FORM GST REG-03, requiring the registered person to show cause, within a period of seven working days of the service of the said notice, as to why the application submitted under sub-rule (1) shall not be rejected.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "2",
+        "display_label": "(2)",
+        "type": "sub_rule",
+        "id": "CGST-R19(2)",
+        "full_path": "R19(2)",
+        "order": 3,
+        "text": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incomplete or incorrect, he may, within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14, serve a notice in FORM GST REG-03, requiring the registered person to show cause, within a period of seven working days of the service of the said notice, as to why the application submitted under sub-rule (1) shall not be rejected.",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "sub-rule (1)",
+            "target_type": "rule_fragment",
+            "relationship": "under",
+            "context": "amendment sought under sub-rule (1)"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application in FORM GST REG-14"
+          },
+          {
+            "target": "FORM GST REG-03",
+            "target_id": "1000029",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "serve a notice in FORM GST REG-03"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 14,
+          "end_block": 14,
+          "resolution": "exact",
+          "anchor_text": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incompl"
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(3)",
+      "node_id": "CGST-R19(3)",
+      "json_path": "$.node.children[3]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days from the date of the service of the said notice.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "3",
+        "display_label": "(3)",
+        "type": "sub_rule",
+        "id": "CGST-R19(3)",
+        "full_path": "R19(3)",
+        "order": 4,
+        "text": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days from the date of the service of the said notice.",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "sub rule (2)",
+            "target_type": "rule_fragment",
+            "relationship": "under",
+            "context": "issued under sub rule (2)"
+          },
+          {
+            "target": "FORM GST REG-04",
+            "target_id": "1000030",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "in FORM GST REG-04"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 15,
+          "end_block": 15,
+          "resolution": "exact",
+          "anchor_text": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days fr"
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "XREF-DUPE-CGST-R19(4)",
+      "node_id": "CGST-R19(4)",
+      "json_path": "$.node.children[4]",
+      "category": "cross_refs",
+      "severity": "moderate",
+      "title": "Duplicate cross-reference emitted for one source mention",
+      "problem": "The same cross-reference target has been emitted multiple times from the same textual mention.",
+      "raw_source_fragment": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "4",
+        "display_label": "(4)",
+        "type": "sub_rule",
+        "id": "CGST-R19(4)",
+        "full_path": "R19(4)",
+        "order": 5,
+        "text": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "sub-rule (3)",
+            "target_type": "rule_fragment",
+            "relationship": "under",
+            "context": "furnished under sub-rule (3)"
+          },
+          {
+            "target": "sub-rule (2)",
+            "target_type": "rule_fragment",
+            "relationship": "under",
+            "context": "issued under sub-rule (2)"
+          },
+          {
+            "target": "sub-rule (1)",
+            "target_type": "rule_fragment",
+            "relationship": "under",
+            "context": "submitted under sub-rule (1)"
+          },
+          {
+            "target": "FORM GST REG-05",
+            "target_id": "1000031",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "order in FORM GST REG-05"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 16,
+          "end_block": 16,
+          "resolution": "exact",
+          "anchor_text": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) "
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      },
+      "why_real_defect": "Duplicate graph edges add noise and can distort downstream relationship counts.",
+      "recommended_fix": "Deduplicate cross_refs by mention and target within a node.",
+      "confidence": 0.96
+    },
+    {
+      "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R19(1)-3",
+      "node_id": "CGST-R19(1)",
+      "json_path": "$.node.children[0]",
+      "category": "chronology",
+      "severity": "moderate",
+      "title": "Amendment has enacted_date but no clear effective date",
+      "problem": "The hint amendment for marker 3 was enacted on '2025-01-23' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+      "raw_source_fragment": "3. Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "1",
+        "display_label": "(1)",
+        "type": "sub_rule",
+        "id": "CGST-R19(1)",
+        "full_path": "R19(1)",
+        "order": 1,
+        "text": "Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 or in the intimation furnished by the composition taxpayer in FORM GST CMP-02 or for Unique Identity Number in FORM GST-REG-13, either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14, along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+        "raw_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02] or for Unique Identity Number in FORM GST-REG-13 , either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14 , along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+        "children": [],
+        "provisos": [
+          {
+            "label": "proviso-1",
+            "display_label": "First Proviso",
+            "type": "proviso",
+            "id": "CGST-R19(1)-P1",
+            "full_path": "R19(1)-P1",
+            "order": 1,
+            "text": "Provided that -",
+            "children": [
+              {
+                "label": "a",
+                "display_label": "(a)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(a)",
+                "full_path": "R19(1)-P1(a)",
+                "order": 1,
+                "text": "where the change relates to, -",
+                "operative_text": "which does not warrant cancellation of registration under section 29, the proper officer shall, after due verification, approve the amendment within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14 and issue an order in FORM GST REG-15 electronically and such amendment shall take effect from the date of the occurrence of the event warranting such amendment;",
+                "children": [
+                  {
+                    "label": "i",
+                    "display_label": "(i)",
+                    "type": "sub_clause",
+                    "id": "CGST-R19(1)-P1(a)(i)",
+                    "full_path": "R19(1)-P1(a)(i)",
+                    "order": 1,
+                    "text": "( i ) legal name of business;",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 5,
+                      "end_block": 5,
+                      "resolution": "exact",
+                      "anchor_text": "( i ) legal name of business;"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "ii",
+                    "display_label": "(ii)",
+                    "type": "sub_clause",
+                    "id": "CGST-R19(1)-P1(a)(ii)",
+                    "full_path": "R19(1)-P1(a)(ii)",
+                    "order": 2,
+                    "text": "address of the principal place of business or any additional place(s) of business; or",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 6,
+                      "end_block": 6,
+                      "resolution": "exact",
+                      "anchor_text": "address of the principal place of business or any additional place(s) of business; or"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "iii",
+                    "display_label": "(iii)",
+                    "type": "sub_clause",
+                    "id": "CGST-R19(1)-P1(a)(iii)",
+                    "full_path": "R19(1)-P1(a)(iii)",
+                    "order": 3,
+                    "text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for the day today affairs of the business, -",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 7,
+                      "end_block": 7,
+                      "resolution": "exact",
+                      "anchor_text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for "
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  }
+                ],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "section 29",
+                    "target_type": "act_section",
+                    "relationship": "under",
+                    "context": "cancellation of registration under section 29"
+                  },
+                  {
+                    "target": "FORM GST REG-14",
+                    "target_id": "1000040",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "application in FORM GST REG-14"
+                  },
+                  {
+                    "target": "FORM GST REG-15",
+                    "target_id": "1000041",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "issue an order in FORM GST REG-15"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 4,
+                  "end_block": 8,
+                  "resolution": "exact",
+                  "anchor_text": "where the change relates to, -"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "b",
+                "display_label": "(b)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(b)",
+                "full_path": "R19(1)-P1(b)",
+                "order": 2,
+                "text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the registered person obtained under the provisions of this Chapter on the same Permanent Account Number;",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "sub-clause (i)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "relating to sub-clause (i)"
+                  },
+                  {
+                    "target": "sub-clause (iii)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "and sub-clause (iii)"
+                  },
+                  {
+                    "target": "clause (a)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "of clause (a)"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 9,
+                  "end_block": 9,
+                  "resolution": "exact",
+                  "anchor_text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the regi"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "c",
+                "display_label": "(c)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(c)",
+                "full_path": "R19(1)-P1(c)",
+                "order": 3,
+                "text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the application in FORM GST REG- 14 on the common portal;",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "clause (a)",
+                    "target_type": "rule_fragment",
+                    "relationship": "mentions",
+                    "context": "specified in clause (a)"
+                  },
+                  {
+                    "target": "FORM GST REG-14",
+                    "target_id": "1000040",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "application in FORM GST REG-14"
+                  },
+                  {
+                    "target": "common portal",
+                    "target_type": "system_artifact",
+                    "relationship": "mentions",
+                    "context": "on the common portal"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 10,
+                  "end_block": 10,
+                  "resolution": "exact",
+                  "anchor_text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "d",
+                "display_label": "(d)",
+                "type": "clause",
+                "id": "CGST-R19(1)-P1(d)",
+                "full_path": "R19(1)-P1(d)",
+                "order": 4,
+                "text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for fresh registration in FORM GST REG-01 :",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "FORM GST REG-01",
+                    "target_id": "1000027",
+                    "target_type": "form",
+                    "relationship": "mentions",
+                    "context": "fresh registration in FORM GST REG-01"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 11,
+                  "end_block": 11,
+                  "resolution": "exact",
+                  "anchor_text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              }
+            ],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 3,
+              "end_block": 3,
+              "resolution": "exact",
+              "anchor_text": "Provided that -"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active",
+            "proviso_level": 1
+          },
+          {
+            "label": "proviso-2",
+            "display_label": "Second Proviso",
+            "type": "proviso",
+            "id": "CGST-R19(1)-P2",
+            "full_path": "R19(1)-P2",
+            "order": 2,
+            "text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under sub-rule (2) of rule 8.",
+            "raw_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under 1 [sub-rule (2) of rule 8 ].",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "this rule",
+                "target_type": "self",
+                "relationship": "under",
+                "context": "submitted under this rule"
+              },
+              {
+                "target": "common portal",
+                "target_type": "system_artifact",
+                "relationship": "mentions",
+                "context": "through the common portal"
+              },
+              {
+                "target": "sub-rule (2) of rule 8",
+                "target_id": "1000089",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "provided under sub-rule (2) of rule 8"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 12,
+              "end_block": 12,
+              "resolution": "exact",
+              "anchor_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, sha"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              1
+            ],
+            "effective_from": "2017-06-22",
+            "status": "active",
+            "proviso_level": 2
+          }
+        ],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "FORM GST REG-01",
+            "target_id": "1000027",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application for registration in FORM GST REG-01"
+          },
+          {
+            "target": "FORM GST REG-07",
+            "target_id": "1000033",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "or FORM GST REG-07"
+          },
+          {
+            "target": "FORM GST REG-09",
+            "target_id": "1000035",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "or FORM GST REG-09"
+          },
+          {
+            "target": "FORM GST REG-10",
+            "target_id": "1000036",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "or FORM GST REG-10"
+          },
+          {
+            "target": "FORM GST CMP-02",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "composition taxpayer in FORM GST CMP-02"
+          },
+          {
+            "target": "FORM GST-REG-13",
+            "target_id": "1000039",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "Unique Identity Number in FORM GST-REG-13"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "electronically in FORM GST REG-14"
+          },
+          {
+            "target": "common portal",
+            "target_type": "system_artifact",
+            "relationship": "mentions",
+            "context": "at the common portal"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 2,
+          "end_block": 2,
+          "resolution": "exact",
+          "anchor_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 o"
+        },
+        "is_amended": true,
+        "amendment_markers": [
+          3
+        ],
+        "status": "active"
+      },
+      "why_real_defect": "When a notification does not specify 'w.e.f.', the effective date may default to the notification date or to a separately notified enforcement date. This ambiguity requires manual legal review.",
+      "recommended_fix": "Verify whether the amendment took effect on the enacted date or awaits a separate enforcement notification. Set effective_from accordingly.",
+      "confidence": 0.72
+    },
+    {
+      "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R19(1A)-2",
+      "node_id": "CGST-R19(1A)",
+      "json_path": "$.node.children[1]",
+      "category": "chronology",
+      "severity": "moderate",
+      "title": "Amendment has enacted_date but no clear effective date",
+      "problem": "The hint amendment for marker 2 was enacted on '2017-12-29' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+      "raw_source_fragment": "2. Inserted vide Notification No.75/2017 -CT., dated 29.12.2017.",
+      "source_locator": {
+        "block_ids": [],
+        "line_hint": null,
+        "dom_path": null
+      },
+      "json_fragment": {
+        "label": "1A",
+        "display_label": "(1A)",
+        "type": "sub_rule",
+        "id": "CGST-R19(1A)",
+        "full_path": "R19(1A)",
+        "order": 2,
+        "text": "Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.",
+        "raw_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.]",
+        "children": [],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [
+          {
+            "target": "sub-rule (1)",
+            "target_type": "rule_fragment",
+            "relationship": "notwithstanding",
+            "context": "contained in sub-rule (1)"
+          },
+          {
+            "target": "FORM GST REG-14",
+            "target_id": "1000040",
+            "target_type": "form",
+            "relationship": "mentions",
+            "context": "application in FORM GST REG-14"
+          },
+          {
+            "target": "common portal",
+            "target_type": "system_artifact",
+            "relationship": "mentions",
+            "context": "on the common portal"
+          }
+        ],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 13,
+          "end_block": 13,
+          "resolution": "exact",
+          "anchor_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date e"
+        },
+        "is_amended": true,
+        "amendment_markers": [
+          2
+        ],
+        "status": "active"
+      },
+      "why_real_defect": "When a notification does not specify 'w.e.f.', the effective date may default to the notification date or to a separately notified enforcement date. This ambiguity requires manual legal review.",
+      "recommended_fix": "Verify whether the amendment took effect on the enacted date or awaits a separate enforcement notification. Set effective_from accordingly.",
+      "confidence": 0.72
+    }
+  ],
+  "likely_false_positives": [
+    {
+      "title": "Textless structural container allowed by config/schema",
+      "reason": "The node has children and no operative text. The reviewer is configured to treat textless containers as acceptable unless source evidence shows otherwise.",
+      "raw_source_fragment": null,
+      "json_fragment": {
+        "metadata": {
+          "act": "CGST Act 2017",
+          "rules_title": "Central Goods and Services Tax Rules, 2017",
+          "jurisdiction": "CGST",
+          "chapter_id": 1000013,
+          "chapter_number": "III",
+          "chapter_title": "Registration",
+          "rule_number": "19",
+          "rule_cbic_id": 1000101,
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "version": "v1.00",
+          "scraped_at": "2026-03-26T21:27:01.288812+00:00",
+          "topic": "Registration"
+        },
+        "node": {
+          "label": "19",
+          "type": "rule",
+          "id": "CGST-R19",
+          "full_path": "R19",
+          "order": 1,
+          "title": "Amendment of registration.",
+          "children": [
+            {
+              "label": "1",
+              "display_label": "(1)",
+              "type": "sub_rule",
+              "id": "CGST-R19(1)",
+              "full_path": "R19(1)",
+              "order": 1,
+              "text": "Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 or in the intimation furnished by the composition taxpayer in FORM GST CMP-02 or for Unique Identity Number in FORM GST-REG-13, either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14, along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+              "raw_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02] or for Unique Identity Number in FORM GST-REG-13 , either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14 , along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+              "children": [],
+              "provisos": [
+                {
+                  "label": "proviso-1",
+                  "display_label": "First Proviso",
+                  "type": "proviso",
+                  "id": "CGST-R19(1)-P1",
+                  "full_path": "R19(1)-P1",
+                  "order": 1,
+                  "text": "Provided that -",
+                  "children": [
+                    {
+                      "label": "a",
+                      "display_label": "(a)",
+                      "type": "clause",
+                      "id": "CGST-R19(1)-P1(a)",
+                      "full_path": "R19(1)-P1(a)",
+                      "order": 1,
+                      "text": "where the change relates to, -",
+                      "operative_text": "which does not warrant cancellation of registration under section 29, the proper officer shall, after due verification, approve the amendment within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14 and issue an order in FORM GST REG-15 electronically and such amendment shall take effect from the date of the occurrence of the event warranting such amendment;",
+                      "children": [
+                        {
+                          "label": "i",
+                          "display_label": "(i)",
+                          "type": "sub_clause",
+                          "id": "CGST-R19(1)-P1(a)(i)",
+                          "full_path": "R19(1)-P1(a)(i)",
+                          "order": 1,
+                          "text": "( i ) legal name of business;",
+                          "children": [],
+                          "provisos": [],
+                          "explanations": [],
+                          "cross_refs": [],
+                          "source_ref": {
+                            "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                            "start_block": 5,
+                            "end_block": 5,
+                            "resolution": "exact",
+                            "anchor_text": "( i ) legal name of business;"
+                          },
+                          "is_amended": false,
+                          "amendment_markers": [],
+                          "status": "active"
+                        },
+                        {
+                          "label": "ii",
+                          "display_label": "(ii)",
+                          "type": "sub_clause",
+                          "id": "CGST-R19(1)-P1(a)(ii)",
+                          "full_path": "R19(1)-P1(a)(ii)",
+                          "order": 2,
+                          "text": "address of the principal place of business or any additional place(s) of business; or",
+                          "children": [],
+                          "provisos": [],
+                          "explanations": [],
+                          "cross_refs": [],
+                          "source_ref": {
+                            "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                            "start_block": 6,
+                            "end_block": 6,
+                            "resolution": "exact",
+                            "anchor_text": "address of the principal place of business or any additional place(s) of business; or"
+                          },
+                          "is_amended": false,
+                          "amendment_markers": [],
+                          "status": "active"
+                        },
+                        {
+                          "label": "iii",
+                          "display_label": "(iii)",
+                          "type": "sub_clause",
+                          "id": "CGST-R19(1)-P1(a)(iii)",
+                          "full_path": "R19(1)-P1(a)(iii)",
+                          "order": 3,
+                          "text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for the day today affairs of the business, -",
+                          "children": [],
+                          "provisos": [],
+                          "explanations": [],
+                          "cross_refs": [],
+                          "source_ref": {
+                            "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                            "start_block": 7,
+                            "end_block": 7,
+                            "resolution": "exact",
+                            "anchor_text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for "
+                          },
+                          "is_amended": false,
+                          "amendment_markers": [],
+                          "status": "active"
+                        }
+                      ],
+                      "provisos": [],
+                      "explanations": [],
+                      "cross_refs": [
+                        {
+                          "target": "section 29",
+                          "target_type": "act_section",
+                          "relationship": "under",
+                          "context": "cancellation of registration under section 29"
+                        },
+                        {
+                          "target": "FORM GST REG-14",
+                          "target_id": "1000040",
+                          "target_type": "form",
+                          "relationship": "mentions",
+                          "context": "application in FORM GST REG-14"
+                        },
+                        {
+                          "target": "FORM GST REG-15",
+                          "target_id": "1000041",
+                          "target_type": "form",
+                          "relationship": "mentions",
+                          "context": "issue an order in FORM GST REG-15"
+                        }
+                      ],
+                      "source_ref": {
+                        "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                        "start_block": 4,
+                        "end_block": 8,
+                        "resolution": "exact",
+                        "anchor_text": "where the change relates to, -"
+                      },
+                      "is_amended": false,
+                      "amendment_markers": [],
+                      "status": "active"
+                    },
+                    {
+                      "label": "b",
+                      "display_label": "(b)",
+                      "type": "clause",
+                      "id": "CGST-R19(1)-P1(b)",
+                      "full_path": "R19(1)-P1(b)",
+                      "order": 2,
+                      "text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the registered person obtained under the provisions of this Chapter on the same Permanent Account Number;",
+                      "children": [],
+                      "provisos": [],
+                      "explanations": [],
+                      "cross_refs": [
+                        {
+                          "target": "sub-clause (i)",
+                          "target_type": "rule_fragment",
+                          "relationship": "mentions",
+                          "context": "relating to sub-clause (i)"
+                        },
+                        {
+                          "target": "sub-clause (iii)",
+                          "target_type": "rule_fragment",
+                          "relationship": "mentions",
+                          "context": "and sub-clause (iii)"
+                        },
+                        {
+                          "target": "clause (a)",
+                          "target_type": "rule_fragment",
+                          "relationship": "mentions",
+                          "context": "of clause (a)"
+                        }
+                      ],
+                      "source_ref": {
+                        "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                        "start_block": 9,
+                        "end_block": 9,
+                        "resolution": "exact",
+                        "anchor_text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the regi"
+                      },
+                      "is_amended": false,
+                      "amendment_markers": [],
+                      "status": "active"
+                    },
+                    {
+                      "label": "c",
+                      "display_label": "(c)",
+                      "type": "clause",
+                      "id": "CGST-R19(1)-P1(c)",
+                      "full_path": "R19(1)-P1(c)",
+                      "order": 3,
+                      "text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the application in FORM GST REG- 14 on the common portal;",
+                      "children": [],
+                      "provisos": [],
+                      "explanations": [],
+                      "cross_refs": [
+                        {
+                          "target": "clause (a)",
+                          "target_type": "rule_fragment",
+                          "relationship": "mentions",
+                          "context": "specified in clause (a)"
+                        },
+                        {
+                          "target": "FORM GST REG-14",
+                          "target_id": "1000040",
+                          "target_type": "form",
+                          "relationship": "mentions",
+                          "context": "application in FORM GST REG-14"
+                        },
+                        {
+                          "target": "common portal",
+                          "target_type": "system_artifact",
+                          "relationship": "mentions",
+                          "context": "on the common portal"
+                        }
+                      ],
+                      "source_ref": {
+                        "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                        "start_block": 10,
+                        "end_block": 10,
+                        "resolution": "exact",
+                        "anchor_text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the"
+                      },
+                      "is_amended": false,
+                      "amendment_markers": [],
+                      "status": "active"
+                    },
+                    {
+                      "label": "d",
+                      "display_label": "(d)",
+                      "type": "clause",
+                      "id": "CGST-R19(1)-P1(d)",
+                      "full_path": "R19(1)-P1(d)",
+                      "order": 4,
+                      "text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for fresh registration in FORM GST REG-01 :",
+                      "children": [],
+                      "provisos": [],
+                      "explanations": [],
+                      "cross_refs": [
+                        {
+                          "target": "FORM GST REG-01",
+                          "target_id": "1000027",
+                          "target_type": "form",
+                          "relationship": "mentions",
+                          "context": "fresh registration in FORM GST REG-01"
+                        }
+                      ],
+                      "source_ref": {
+                        "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                        "start_block": 11,
+                        "end_block": 11,
+                        "resolution": "exact",
+                        "anchor_text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for"
+                      },
+                      "is_amended": false,
+                      "amendment_markers": [],
+                      "status": "active"
+                    }
+                  ],
+                  "provisos": [],
+                  "explanations": [],
+                  "cross_refs": [],
+                  "source_ref": {
+                    "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                    "start_block": 3,
+                    "end_block": 3,
+                    "resolution": "exact",
+                    "anchor_text": "Provided that -"
+                  },
+                  "is_amended": false,
+                  "amendment_markers": [],
+                  "status": "active",
+                  "proviso_level": 1
+                },
+                {
+                  "label": "proviso-2",
+                  "display_label": "Second Proviso",
+                  "type": "proviso",
+                  "id": "CGST-R19(1)-P2",
+                  "full_path": "R19(1)-P2",
+                  "order": 2,
+                  "text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under sub-rule (2) of rule 8.",
+                  "raw_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under 1 [sub-rule (2) of rule 8 ].",
+                  "children": [],
+                  "provisos": [],
+                  "explanations": [],
+                  "cross_refs": [
+                    {
+                      "target": "this rule",
+                      "target_type": "self",
+                      "relationship": "under",
+                      "context": "submitted under this rule"
+                    },
+                    {
+                      "target": "common portal",
+                      "target_type": "system_artifact",
+                      "relationship": "mentions",
+                      "context": "through the common portal"
+                    },
+                    {
+                      "target": "sub-rule (2) of rule 8",
+                      "target_id": "1000089",
+                      "target_type": "rule_fragment",
+                      "relationship": "under",
+                      "context": "provided under sub-rule (2) of rule 8"
+                    }
+                  ],
+                  "source_ref": {
+                    "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                    "start_block": 12,
+                    "end_block": 12,
+                    "resolution": "exact",
+                    "anchor_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, sha"
+                  },
+                  "is_amended": true,
+                  "amendment_markers": [
+                    1
+                  ],
+                  "effective_from": "2017-06-22",
+                  "status": "active",
+                  "proviso_level": 2
+                }
+              ],
+              "explanations": [],
+              "cross_refs": [
+                {
+                  "target": "FORM GST REG-01",
+                  "target_id": "1000027",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "application for registration in FORM GST REG-01"
+                },
+                {
+                  "target": "FORM GST REG-07",
+                  "target_id": "1000033",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "or FORM GST REG-07"
+                },
+                {
+                  "target": "FORM GST REG-09",
+                  "target_id": "1000035",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "or FORM GST REG-09"
+                },
+                {
+                  "target": "FORM GST REG-10",
+                  "target_id": "1000036",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "or FORM GST REG-10"
+                },
+                {
+                  "target": "FORM GST CMP-02",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "composition taxpayer in FORM GST CMP-02"
+                },
+                {
+                  "target": "FORM GST-REG-13",
+                  "target_id": "1000039",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "Unique Identity Number in FORM GST-REG-13"
+                },
+                {
+                  "target": "FORM GST REG-14",
+                  "target_id": "1000040",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "electronically in FORM GST REG-14"
+                },
+                {
+                  "target": "common portal",
+                  "target_type": "system_artifact",
+                  "relationship": "mentions",
+                  "context": "at the common portal"
+                }
+              ],
+              "source_ref": {
+                "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                "start_block": 2,
+                "end_block": 2,
+                "resolution": "exact",
+                "anchor_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 o"
+              },
+              "is_amended": true,
+              "amendment_markers": [
+                3
+              ],
+              "status": "active"
+            },
+            {
+              "label": "1A",
+              "display_label": "(1A)",
+              "type": "sub_rule",
+              "id": "CGST-R19(1A)",
+              "full_path": "R19(1A)",
+              "order": 2,
+              "text": "Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.",
+              "raw_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.]",
+              "children": [],
+              "provisos": [],
+              "explanations": [],
+              "cross_refs": [
+                {
+                  "target": "sub-rule (1)",
+                  "target_type": "rule_fragment",
+                  "relationship": "notwithstanding",
+                  "context": "contained in sub-rule (1)"
+                },
+                {
+                  "target": "FORM GST REG-14",
+                  "target_id": "1000040",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "application in FORM GST REG-14"
+                },
+                {
+                  "target": "common portal",
+                  "target_type": "system_artifact",
+                  "relationship": "mentions",
+                  "context": "on the common portal"
+                }
+              ],
+              "source_ref": {
+                "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                "start_block": 13,
+                "end_block": 13,
+                "resolution": "exact",
+                "anchor_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date e"
+              },
+              "is_amended": true,
+              "amendment_markers": [
+                2
+              ],
+              "status": "active"
+            },
+            {
+              "label": "2",
+              "display_label": "(2)",
+              "type": "sub_rule",
+              "id": "CGST-R19(2)",
+              "full_path": "R19(2)",
+              "order": 3,
+              "text": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incomplete or incorrect, he may, within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14, serve a notice in FORM GST REG-03, requiring the registered person to show cause, within a period of seven working days of the service of the said notice, as to why the application submitted under sub-rule (1) shall not be rejected.",
+              "children": [],
+              "provisos": [],
+              "explanations": [],
+              "cross_refs": [
+                {
+                  "target": "sub-rule (1)",
+                  "target_type": "rule_fragment",
+                  "relationship": "under",
+                  "context": "amendment sought under sub-rule (1)"
+                },
+                {
+                  "target": "FORM GST REG-14",
+                  "target_id": "1000040",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "application in FORM GST REG-14"
+                },
+                {
+                  "target": "FORM GST REG-03",
+                  "target_id": "1000029",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "serve a notice in FORM GST REG-03"
+                }
+              ],
+              "source_ref": {
+                "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                "start_block": 14,
+                "end_block": 14,
+                "resolution": "exact",
+                "anchor_text": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incompl"
+              },
+              "is_amended": false,
+              "amendment_markers": [],
+              "status": "active"
+            },
+            {
+              "label": "3",
+              "display_label": "(3)",
+              "type": "sub_rule",
+              "id": "CGST-R19(3)",
+              "full_path": "R19(3)",
+              "order": 4,
+              "text": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days from the date of the service of the said notice.",
+              "children": [],
+              "provisos": [],
+              "explanations": [],
+              "cross_refs": [
+                {
+                  "target": "sub rule (2)",
+                  "target_type": "rule_fragment",
+                  "relationship": "under",
+                  "context": "issued under sub rule (2)"
+                },
+                {
+                  "target": "FORM GST REG-04",
+                  "target_id": "1000030",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "in FORM GST REG-04"
+                }
+              ],
+              "source_ref": {
+                "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                "start_block": 15,
+                "end_block": 15,
+                "resolution": "exact",
+                "anchor_text": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days fr"
+              },
+              "is_amended": false,
+              "amendment_markers": [],
+              "status": "active"
+            },
+            {
+              "label": "4",
+              "display_label": "(4)",
+              "type": "sub_rule",
+              "id": "CGST-R19(4)",
+              "full_path": "R19(4)",
+              "order": 5,
+              "text": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.",
+              "children": [],
+              "provisos": [],
+              "explanations": [],
+              "cross_refs": [
+                {
+                  "target": "sub-rule (3)",
+                  "target_type": "rule_fragment",
+                  "relationship": "under",
+                  "context": "furnished under sub-rule (3)"
+                },
+                {
+                  "target": "sub-rule (2)",
+                  "target_type": "rule_fragment",
+                  "relationship": "under",
+                  "context": "issued under sub-rule (2)"
+                },
+                {
+                  "target": "sub-rule (1)",
+                  "target_type": "rule_fragment",
+                  "relationship": "under",
+                  "context": "submitted under sub-rule (1)"
+                },
+                {
+                  "target": "FORM GST REG-05",
+                  "target_id": "1000031",
+                  "target_type": "form",
+                  "relationship": "mentions",
+                  "context": "order in FORM GST REG-05"
+                }
+              ],
+              "source_ref": {
+                "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                "start_block": 16,
+                "end_block": 16,
+                "resolution": "exact",
+                "anchor_text": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) "
+              },
+              "is_amended": false,
+              "amendment_markers": [],
+              "status": "active"
+            },
+            {
+              "label": "5",
+              "display_label": "(5)",
+              "type": "sub_rule",
+              "id": "CGST-R19(5)",
+              "full_path": "R19(5)",
+              "order": 6,
+              "text": "If the proper officer fails to take any action, -",
+              "operative_text": "the certificate of registration shall stand amended to the extent applied for and the amended certificate shall be made available to the registered person on the common portal.",
+              "children": [
+                {
+                  "label": "a",
+                  "display_label": "(a)",
+                  "type": "clause",
+                  "id": "CGST-R19(5)(a)",
+                  "full_path": "R19(5)(a)",
+                  "order": 1,
+                  "text": "within a period of fifteen working days from the date of submission of the application, or",
+                  "children": [],
+                  "provisos": [],
+                  "explanations": [],
+                  "cross_refs": [],
+                  "source_ref": {
+                    "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                    "start_block": 18,
+                    "end_block": 18,
+                    "resolution": "exact",
+                    "anchor_text": "within a period of fifteen working days from the date of submission of the application, or"
+                  },
+                  "is_amended": false,
+                  "amendment_markers": [],
+                  "status": "active"
+                },
+                {
+                  "label": "b",
+                  "display_label": "(b)",
+                  "type": "clause",
+                  "id": "CGST-R19(5)(b)",
+                  "full_path": "R19(5)(b)",
+                  "order": 2,
+                  "text": "within a period of seven working days from the date of the receipt of the reply to the notice to show cause under sub-rule (3),",
+                  "children": [],
+                  "provisos": [],
+                  "explanations": [],
+                  "cross_refs": [
+                    {
+                      "target": "sub-rule (3)",
+                      "target_type": "rule_fragment",
+                      "relationship": "under",
+                      "context": "show cause under sub-rule (3)"
+                    }
+                  ],
+                  "source_ref": {
+                    "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                    "start_block": 19,
+                    "end_block": 19,
+                    "resolution": "exact",
+                    "anchor_text": "within a period of seven working days from the date of the receipt of the reply to the notice to show cause under sub-rule (3),"
+                  },
+                  "is_amended": false,
+                  "amendment_markers": [],
+                  "status": "active"
+                }
+              ],
+              "provisos": [],
+              "explanations": [],
+              "cross_refs": [
+                {
+                  "target": "common portal",
+                  "target_type": "system_artifact",
+                  "relationship": "mentions",
+                  "context": "on the common portal"
+                }
+              ],
+              "source_ref": {
+                "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                "start_block": 17,
+                "end_block": 20,
+                "resolution": "exact",
+                "anchor_text": "If the proper officer fails to take any action, -"
+              },
+              "is_amended": false,
+              "amendment_markers": [],
+              "status": "active"
+            }
+          ],
+          "provisos": [],
+          "explanations": [],
+          "cross_refs": [],
+          "source_ref": {
+            "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+            "start_block": 1,
+            "end_block": 1,
+            "resolution": "exact",
+            "anchor_text": "Amendment of registration."
+          },
+          "is_amended": false,
+          "amendment_markers": [],
+          "status": "active"
+        },
+        "amendments": [
+          {
+            "marker": "1",
+            "action": "SUBSTITUTED",
+            "text": "1. Substituted (w.e.f. 22-6-2017) vide Notification No. 7/2017 -CT., dated 27.06.2017 for \"the said rule\".",
+            "effective_date": "2017-06-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 7/2017-CT, dated 27.06.2017",
+            "notification_number": "7/2017-CT.",
+            "notification_date": "2017-06-27",
+            "target": "R19(1)-P2",
+            "events": [
+              {
+                "text": "Substituted (w.e.f. 22-6-2017) vide Notification No. 7/2017 -CT., dated 27.06.2017",
+                "action": "SUBSTITUTED",
+                "effective_date": "2017-06-22",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 7/2017-CT, dated 27.06.2017",
+                "notification_number": "7/2017-CT.",
+                "notification_date": "2017-06-27"
+              }
+            ],
+            "historical_text": "the said rule"
+          },
+          {
+            "marker": "2",
+            "action": "INSERTED",
+            "text": "2. Inserted vide Notification No.75/2017 -CT., dated 29.12.2017.",
+            "enacted_date": "2017-12-29",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 75/2017-CT, dated 29.12.2017",
+            "notification_number": "75/2017-CT.",
+            "notification_date": "2017-12-29",
+            "target": "R19(1A)",
+            "events": [
+              {
+                "text": "Inserted vide Notification No.75/2017 -CT., dated 29.12.2017",
+                "action": "INSERTED",
+                "enacted_date": "2017-12-29",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 75/2017-CT, dated 29.12.2017",
+                "notification_number": "75/2017-CT.",
+                "notification_date": "2017-12-29"
+              }
+            ]
+          },
+          {
+            "marker": "3",
+            "action": "INSERTED",
+            "text": "3. Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025.",
+            "enacted_date": "2025-01-23",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 7/2025-CT, dated 23.01.2025",
+            "notification_number": "7/2025-CT.",
+            "notification_date": "2025-01-23",
+            "target": "R19(1)",
+            "events": [
+              {
+                "text": "Inserted (w.e.f. yet to be notified) vide Notification No. 7/2025 -CT., dated 23.01.2025",
+                "action": "INSERTED",
+                "enacted_date": "2025-01-23",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 7/2025-CT, dated 23.01.2025",
+                "notification_number": "7/2025-CT.",
+                "notification_date": "2025-01-23"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Textless structural container allowed by config/schema",
+      "reason": "The node has children and no operative text. The reviewer is configured to treat textless containers as acceptable unless source evidence shows otherwise.",
+      "raw_source_fragment": null,
+      "json_fragment": {
+        "label": "19",
+        "type": "rule",
+        "id": "CGST-R19",
+        "full_path": "R19",
+        "order": 1,
+        "title": "Amendment of registration.",
+        "children": [
+          {
+            "label": "1",
+            "display_label": "(1)",
+            "type": "sub_rule",
+            "id": "CGST-R19(1)",
+            "full_path": "R19(1)",
+            "order": 1,
+            "text": "Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 or in the intimation furnished by the composition taxpayer in FORM GST CMP-02 or for Unique Identity Number in FORM GST-REG-13, either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14, along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+            "raw_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 or FORM GST REG-10 3 [or in the intimation furnished by the composition taxpayer in FORM GST CMP-02] or for Unique Identity Number in FORM GST-REG-13 , either at the time of obtaining registration or Unique Identity Number or as amended from time to time, the registered person shall, within a period of fifteen days of such change, submit an application, duly signed or verified through electronic verification code, electronically in FORM GST REG-14 , along with the documents relating to such change at the common portal, either directly or through a Facilitation Centre notified by the Commissioner:",
+            "children": [],
+            "provisos": [
+              {
+                "label": "proviso-1",
+                "display_label": "First Proviso",
+                "type": "proviso",
+                "id": "CGST-R19(1)-P1",
+                "full_path": "R19(1)-P1",
+                "order": 1,
+                "text": "Provided that -",
+                "children": [
+                  {
+                    "label": "a",
+                    "display_label": "(a)",
+                    "type": "clause",
+                    "id": "CGST-R19(1)-P1(a)",
+                    "full_path": "R19(1)-P1(a)",
+                    "order": 1,
+                    "text": "where the change relates to, -",
+                    "operative_text": "which does not warrant cancellation of registration under section 29, the proper officer shall, after due verification, approve the amendment within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14 and issue an order in FORM GST REG-15 electronically and such amendment shall take effect from the date of the occurrence of the event warranting such amendment;",
+                    "children": [
+                      {
+                        "label": "i",
+                        "display_label": "(i)",
+                        "type": "sub_clause",
+                        "id": "CGST-R19(1)-P1(a)(i)",
+                        "full_path": "R19(1)-P1(a)(i)",
+                        "order": 1,
+                        "text": "( i ) legal name of business;",
+                        "children": [],
+                        "provisos": [],
+                        "explanations": [],
+                        "cross_refs": [],
+                        "source_ref": {
+                          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                          "start_block": 5,
+                          "end_block": 5,
+                          "resolution": "exact",
+                          "anchor_text": "( i ) legal name of business;"
+                        },
+                        "is_amended": false,
+                        "amendment_markers": [],
+                        "status": "active"
+                      },
+                      {
+                        "label": "ii",
+                        "display_label": "(ii)",
+                        "type": "sub_clause",
+                        "id": "CGST-R19(1)-P1(a)(ii)",
+                        "full_path": "R19(1)-P1(a)(ii)",
+                        "order": 2,
+                        "text": "address of the principal place of business or any additional place(s) of business; or",
+                        "children": [],
+                        "provisos": [],
+                        "explanations": [],
+                        "cross_refs": [],
+                        "source_ref": {
+                          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                          "start_block": 6,
+                          "end_block": 6,
+                          "resolution": "exact",
+                          "anchor_text": "address of the principal place of business or any additional place(s) of business; or"
+                        },
+                        "is_amended": false,
+                        "amendment_markers": [],
+                        "status": "active"
+                      },
+                      {
+                        "label": "iii",
+                        "display_label": "(iii)",
+                        "type": "sub_clause",
+                        "id": "CGST-R19(1)-P1(a)(iii)",
+                        "full_path": "R19(1)-P1(a)(iii)",
+                        "order": 3,
+                        "text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for the day today affairs of the business, -",
+                        "children": [],
+                        "provisos": [],
+                        "explanations": [],
+                        "cross_refs": [],
+                        "source_ref": {
+                          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                          "start_block": 7,
+                          "end_block": 7,
+                          "resolution": "exact",
+                          "anchor_text": "addition, deletion or retirement of partners or directors, Karta, Managing Committee, Board of Trustees, Chief Executive Officer or equivalent, responsible for "
+                        },
+                        "is_amended": false,
+                        "amendment_markers": [],
+                        "status": "active"
+                      }
+                    ],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [
+                      {
+                        "target": "section 29",
+                        "target_type": "act_section",
+                        "relationship": "under",
+                        "context": "cancellation of registration under section 29"
+                      },
+                      {
+                        "target": "FORM GST REG-14",
+                        "target_id": "1000040",
+                        "target_type": "form",
+                        "relationship": "mentions",
+                        "context": "application in FORM GST REG-14"
+                      },
+                      {
+                        "target": "FORM GST REG-15",
+                        "target_id": "1000041",
+                        "target_type": "form",
+                        "relationship": "mentions",
+                        "context": "issue an order in FORM GST REG-15"
+                      }
+                    ],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 4,
+                      "end_block": 8,
+                      "resolution": "exact",
+                      "anchor_text": "where the change relates to, -"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "b",
+                    "display_label": "(b)",
+                    "type": "clause",
+                    "id": "CGST-R19(1)-P1(b)",
+                    "full_path": "R19(1)-P1(b)",
+                    "order": 2,
+                    "text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the registered person obtained under the provisions of this Chapter on the same Permanent Account Number;",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [
+                      {
+                        "target": "sub-clause (i)",
+                        "target_type": "rule_fragment",
+                        "relationship": "mentions",
+                        "context": "relating to sub-clause (i)"
+                      },
+                      {
+                        "target": "sub-clause (iii)",
+                        "target_type": "rule_fragment",
+                        "relationship": "mentions",
+                        "context": "and sub-clause (iii)"
+                      },
+                      {
+                        "target": "clause (a)",
+                        "target_type": "rule_fragment",
+                        "relationship": "mentions",
+                        "context": "of clause (a)"
+                      }
+                    ],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 9,
+                      "end_block": 9,
+                      "resolution": "exact",
+                      "anchor_text": "the change relating to sub-clause ( i ) and sub-clause (iii) of clause (a) in any State or Union territory shall be applicable for all registrations of the regi"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "c",
+                    "display_label": "(c)",
+                    "type": "clause",
+                    "id": "CGST-R19(1)-P1(c)",
+                    "full_path": "R19(1)-P1(c)",
+                    "order": 3,
+                    "text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the application in FORM GST REG- 14 on the common portal;",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [
+                      {
+                        "target": "clause (a)",
+                        "target_type": "rule_fragment",
+                        "relationship": "mentions",
+                        "context": "specified in clause (a)"
+                      },
+                      {
+                        "target": "FORM GST REG-14",
+                        "target_id": "1000040",
+                        "target_type": "form",
+                        "relationship": "mentions",
+                        "context": "application in FORM GST REG-14"
+                      },
+                      {
+                        "target": "common portal",
+                        "target_type": "system_artifact",
+                        "relationship": "mentions",
+                        "context": "on the common portal"
+                      }
+                    ],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 10,
+                      "end_block": 10,
+                      "resolution": "exact",
+                      "anchor_text": "where the change relates to any particulars other than those specified in clause (a), the certificate of registration shall stand amended upon submission of the"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  },
+                  {
+                    "label": "d",
+                    "display_label": "(d)",
+                    "type": "clause",
+                    "id": "CGST-R19(1)-P1(d)",
+                    "full_path": "R19(1)-P1(d)",
+                    "order": 4,
+                    "text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for fresh registration in FORM GST REG-01 :",
+                    "children": [],
+                    "provisos": [],
+                    "explanations": [],
+                    "cross_refs": [
+                      {
+                        "target": "FORM GST REG-01",
+                        "target_id": "1000027",
+                        "target_type": "form",
+                        "relationship": "mentions",
+                        "context": "fresh registration in FORM GST REG-01"
+                      }
+                    ],
+                    "source_ref": {
+                      "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                      "start_block": 11,
+                      "end_block": 11,
+                      "resolution": "exact",
+                      "anchor_text": "where a change in the constitution of any business results in the change of the Permanent Account Number of a registered person, the said person shall apply for"
+                    },
+                    "is_amended": false,
+                    "amendment_markers": [],
+                    "status": "active"
+                  }
+                ],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 3,
+                  "end_block": 3,
+                  "resolution": "exact",
+                  "anchor_text": "Provided that -"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active",
+                "proviso_level": 1
+              },
+              {
+                "label": "proviso-2",
+                "display_label": "Second Proviso",
+                "type": "proviso",
+                "id": "CGST-R19(1)-P2",
+                "full_path": "R19(1)-P2",
+                "order": 2,
+                "text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under sub-rule (2) of rule 8.",
+                "raw_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, shall be carried out only after online verification through the common portal in the manner provided under 1 [sub-rule (2) of rule 8 ].",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "this rule",
+                    "target_type": "self",
+                    "relationship": "under",
+                    "context": "submitted under this rule"
+                  },
+                  {
+                    "target": "common portal",
+                    "target_type": "system_artifact",
+                    "relationship": "mentions",
+                    "context": "through the common portal"
+                  },
+                  {
+                    "target": "sub-rule (2) of rule 8",
+                    "target_id": "1000089",
+                    "target_type": "rule_fragment",
+                    "relationship": "under",
+                    "context": "provided under sub-rule (2) of rule 8"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 12,
+                  "end_block": 12,
+                  "resolution": "exact",
+                  "anchor_text": "Provided further that any change in the mobile number or e-mail address of the authorised signatory submitted under this rule, as amended from time to time, sha"
+                },
+                "is_amended": true,
+                "amendment_markers": [
+                  1
+                ],
+                "effective_from": "2017-06-22",
+                "status": "active",
+                "proviso_level": 2
+              }
+            ],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "FORM GST REG-01",
+                "target_id": "1000027",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "application for registration in FORM GST REG-01"
+              },
+              {
+                "target": "FORM GST REG-07",
+                "target_id": "1000033",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "or FORM GST REG-07"
+              },
+              {
+                "target": "FORM GST REG-09",
+                "target_id": "1000035",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "or FORM GST REG-09"
+              },
+              {
+                "target": "FORM GST REG-10",
+                "target_id": "1000036",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "or FORM GST REG-10"
+              },
+              {
+                "target": "FORM GST CMP-02",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "composition taxpayer in FORM GST CMP-02"
+              },
+              {
+                "target": "FORM GST-REG-13",
+                "target_id": "1000039",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "Unique Identity Number in FORM GST-REG-13"
+              },
+              {
+                "target": "FORM GST REG-14",
+                "target_id": "1000040",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "electronically in FORM GST REG-14"
+              },
+              {
+                "target": "common portal",
+                "target_type": "system_artifact",
+                "relationship": "mentions",
+                "context": "at the common portal"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 2,
+              "end_block": 2,
+              "resolution": "exact",
+              "anchor_text": "(1) Where there is any change in any of the particulars furnished in the application for registration in FORM GST REG-01 or FORM GST REG-07 or FORM GST REG-09 o"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              3
+            ],
+            "status": "active"
+          },
+          {
+            "label": "1A",
+            "display_label": "(1A)",
+            "type": "sub_rule",
+            "id": "CGST-R19(1A)",
+            "full_path": "R19(1A)",
+            "order": 2,
+            "text": "Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.",
+            "raw_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date earlier than the date of submission of the application in FORM GST REG-14 on the common portal except with the order of the Commissioner for reasons to be recorded in writing and subject to such conditions as the Commissioner may, in the said order, specify.]",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "sub-rule (1)",
+                "target_type": "rule_fragment",
+                "relationship": "notwithstanding",
+                "context": "contained in sub-rule (1)"
+              },
+              {
+                "target": "FORM GST REG-14",
+                "target_id": "1000040",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "application in FORM GST REG-14"
+              },
+              {
+                "target": "common portal",
+                "target_type": "system_artifact",
+                "relationship": "mentions",
+                "context": "on the common portal"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 13,
+              "end_block": 13,
+              "resolution": "exact",
+              "anchor_text": "2 [(1A) Notwithstanding anything contained in sub-rule (1), any particular of the application for registration shall not stand amended with effect from a date e"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              2
+            ],
+            "status": "active"
+          },
+          {
+            "label": "2",
+            "display_label": "(2)",
+            "type": "sub_rule",
+            "id": "CGST-R19(2)",
+            "full_path": "R19(2)",
+            "order": 3,
+            "text": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incomplete or incorrect, he may, within a period of fifteen working days from the date of the receipt of the application in FORM GST REG-14, serve a notice in FORM GST REG-03, requiring the registered person to show cause, within a period of seven working days of the service of the said notice, as to why the application submitted under sub-rule (1) shall not be rejected.",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "sub-rule (1)",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "amendment sought under sub-rule (1)"
+              },
+              {
+                "target": "FORM GST REG-14",
+                "target_id": "1000040",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "application in FORM GST REG-14"
+              },
+              {
+                "target": "FORM GST REG-03",
+                "target_id": "1000029",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "serve a notice in FORM GST REG-03"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 14,
+              "end_block": 14,
+              "resolution": "exact",
+              "anchor_text": "Where the proper officer is of the opinion that the amendment sought under sub-rule (1) is either not warranted or the documents furnished therewith are incompl"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          },
+          {
+            "label": "3",
+            "display_label": "(3)",
+            "type": "sub_rule",
+            "id": "CGST-R19(3)",
+            "full_path": "R19(3)",
+            "order": 4,
+            "text": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days from the date of the service of the said notice.",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "sub rule (2)",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "issued under sub rule (2)"
+              },
+              {
+                "target": "FORM GST REG-04",
+                "target_id": "1000030",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "in FORM GST REG-04"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 15,
+              "end_block": 15,
+              "resolution": "exact",
+              "anchor_text": "The registered person shall furnish a reply to the notice to show cause, issued under sub rule (2), in FORM GST REG-04, within a period of seven working days fr"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          },
+          {
+            "label": "4",
+            "display_label": "(4)",
+            "type": "sub_rule",
+            "id": "CGST-R19(4)",
+            "full_path": "R19(4)",
+            "order": 5,
+            "text": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) within the period prescribed in sub-rule (3), the proper officer shall reject the application submitted under sub-rule (1) and pass an order in FORM GST REG-05.",
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "sub-rule (3)",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "furnished under sub-rule (3)"
+              },
+              {
+                "target": "sub-rule (2)",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "issued under sub-rule (2)"
+              },
+              {
+                "target": "sub-rule (1)",
+                "target_type": "rule_fragment",
+                "relationship": "under",
+                "context": "submitted under sub-rule (1)"
+              },
+              {
+                "target": "FORM GST REG-05",
+                "target_id": "1000031",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "order in FORM GST REG-05"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 16,
+              "end_block": 16,
+              "resolution": "exact",
+              "anchor_text": "Where the reply furnished under sub-rule (3) is found to be not satisfactory or where no reply is furnished in response to the notice issued under sub-rule (2) "
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          },
+          {
+            "label": "5",
+            "display_label": "(5)",
+            "type": "sub_rule",
+            "id": "CGST-R19(5)",
+            "full_path": "R19(5)",
+            "order": 6,
+            "text": "If the proper officer fails to take any action, -",
+            "operative_text": "the certificate of registration shall stand amended to the extent applied for and the amended certificate shall be made available to the registered person on the common portal.",
+            "children": [
+              {
+                "label": "a",
+                "display_label": "(a)",
+                "type": "clause",
+                "id": "CGST-R19(5)(a)",
+                "full_path": "R19(5)(a)",
+                "order": 1,
+                "text": "within a period of fifteen working days from the date of submission of the application, or",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 18,
+                  "end_block": 18,
+                  "resolution": "exact",
+                  "anchor_text": "within a period of fifteen working days from the date of submission of the application, or"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              },
+              {
+                "label": "b",
+                "display_label": "(b)",
+                "type": "clause",
+                "id": "CGST-R19(5)(b)",
+                "full_path": "R19(5)(b)",
+                "order": 2,
+                "text": "within a period of seven working days from the date of the receipt of the reply to the notice to show cause under sub-rule (3),",
+                "children": [],
+                "provisos": [],
+                "explanations": [],
+                "cross_refs": [
+                  {
+                    "target": "sub-rule (3)",
+                    "target_type": "rule_fragment",
+                    "relationship": "under",
+                    "context": "show cause under sub-rule (3)"
+                  }
+                ],
+                "source_ref": {
+                  "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+                  "start_block": 19,
+                  "end_block": 19,
+                  "resolution": "exact",
+                  "anchor_text": "within a period of seven working days from the date of the receipt of the reply to the notice to show cause under sub-rule (3),"
+                },
+                "is_amended": false,
+                "amendment_markers": [],
+                "status": "active"
+              }
+            ],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "common portal",
+                "target_type": "system_artifact",
+                "relationship": "mentions",
+                "context": "on the common portal"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+              "start_block": 17,
+              "end_block": 20,
+              "resolution": "exact",
+              "anchor_text": "If the proper officer fails to take any action, -"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "status": "active"
+          }
+        ],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule19_v1.00.html",
+          "start_block": 1,
+          "end_block": 1,
+          "resolution": "exact",
+          "anchor_text": "Amendment of registration."
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "status": "active"
+      }
+    }
+  ],
+  "overall_verdict": {
+    "status": "close_but_not_ready",
+    "summary": "Only moderate/minor confirmed issues were found, but the extraction still needs correction before production use."
+  }
+}

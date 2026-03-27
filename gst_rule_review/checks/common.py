@@ -30,6 +30,7 @@ def build_finding(
     why_real_defect: str,
     recommended_fix: str,
     confidence: float = 0.85,
+    signal_class: str = "heuristic",
 ) -> Finding:
     locator = SourceLocator()
     json_fragment: Any = None
@@ -47,6 +48,7 @@ def build_finding(
         json_path=node.json_path if node else None,
         category=category,
         severity=severity,  # type: ignore[arg-type]
+        signal_class=signal_class,  # type: ignore[arg-type]
         title=title,
         problem=problem,
         raw_source_fragment=raw_source_fragment or None,
