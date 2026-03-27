@@ -41,15 +41,27 @@ def apply_gst_false_positive_filter(
         else:
             confirmed.append(issue)
 
+    failed_tasks = report.diagnostics.get("failed_task_count", 0)
+
     if confirmed:
         status = "issues_found"
         summary = f"{len(confirmed)} confirmed issue(s) remain after challenge, arbitration, and GST false-positive filtering."
+        if failed_tasks:
+            summary += f" The run also had {failed_tasks} failed task(s)."
     elif accepted:
         status = "accepted_with_artifacts"
-        summary = f"No confirmed issues after GST false-positive filtering, but {len(accepted)} finding(s) accepted as source-faithful artifacts."
-    elif manual:
+        summary = f"No confirmed issues after GST filtering, but {len(accepted)} finding(s) accepted as source-faithful artifacts."
+    elif manual or failed_tasks:
         status = "needs_manual_review"
-        summary = f"No issue survived GST false-positive filtering, but {len(manual)} item(s) still need manual review."
+        if manual and failed_tasks:
+            summary = (
+                f"No issue survived GST filtering, but {len(manual)} item(s) still need manual review "
+                f"and the run had {failed_tasks} failed task(s)."
+            )
+        elif manual:
+            summary = f"No issue survived GST filtering, but {len(manual)} item(s) still need manual review."
+        else:
+            summary = f"No issue survived GST filtering, but the run had {failed_tasks} failed task(s)."
     else:
         status = "clean"
         summary = "No candidate issues survived challenge, arbitration, and GST false-positive filtering."
@@ -62,6 +74,7 @@ def apply_gst_false_positive_filter(
         manual_review_issues=manual,
         rejected_issues=rejected,
         summary=summary,
+        diagnostics=report.diagnostics,
     )
 
 
