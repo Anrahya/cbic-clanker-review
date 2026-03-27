@@ -1,0 +1,72 @@
+{
+  "rule_id": "CGST-R21",
+  "status": "issues_found",
+  "confirmed_issues": [
+    {
+      "issue_id": "ISSUE-0001",
+      "signature": "gst-cluster-CGST-R21::CGST-R21-b::chronology::missing-effective-from-for-clause-b-amendment-marker-1::node-cgst-r21-b-carries-amendment-marker-1-but-has-no-effective-from-amendment-hint-1-states-effective-date-2017-06-22-w-e-f-22-06-2017-this-is-a-genuine-chronology-defect-the-clause-s-effective-date-is-determinable-from-the-hint-but-missing-from-the-node",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "node_id": "CGST-R21-b",
+      "category": "chronology",
+      "severity": "major",
+      "title": "Missing effective_from for clause (b) amendment marker 1",
+      "problem": "Node CGST-R21-b carries amendment marker [1] but has no effective_from. Amendment hint 1 states effective_date '2017-06-22' (w.e.f. 22.06.2017). This is a genuine chronology defect: the clause's effective date is determinable from the hint but missing from the node.",
+      "evidence_refs": [
+        "CGST-R21-b amendment_markers=[1,2]",
+        "Hint amendment marker 1: effective_date='2017-06-22'",
+        "Signal: CHRON-EFFECTIVE-MISSING-CGST-R21-b-1"
+      ],
+      "recommended_fix": "Set effective_from='2017-06-22' on CGST-R21-b to propagate from hint amendment 1.",
+      "supporting_task_ids": [
+        "specialist-structure_scope_counsel-gst-cluster-CGST-R21"
+      ],
+      "supporting_counsel": [
+        "structure_scope_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "confirmed_issue"
+        ],
+        "max_confidence": 0.93,
+        "final_label": "confirmed_issue"
+      },
+      "final_disposition": "confirmed_issue"
+    }
+  ],
+  "accepted_artifacts": [],
+  "manual_review_issues": [
+    {
+      "issue_id": "ISSUE-0002",
+      "signature": "gst-cluster-CGST-R21::CGST-R21-b::chronology::node-missing-effective-from-despite-hint-providing-effective-date::cgst-r21-b-carries-amendment-marker-1-which-has-effective-date-2017-06-22-from-the-substituted-action-in-hint-amendment-marker-1-however-the-node-s-effective-from-field-is-null-causing-the-operative-effective-date-to-be-lost-in-extraction",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "node_id": "CGST-R21-b",
+      "category": "chronology",
+      "severity": "critical",
+      "title": "Node missing effective_from despite hint providing effective_date",
+      "problem": "CGST-R21-b carries amendment marker [1] which has effective_date '2017-06-22' from the SUBSTITUTED action in hint amendment marker 1. However, the node's effective_from field is null, causing the operative effective date to be lost in extraction.",
+      "evidence_refs": [
+        "Hint amendment marker 1: 'effective_date': '2017-06-22'",
+        "Node CGST-R21-b: amendment_markers [1,2], effective_from null",
+        "Source block 4: anchor_text referencing marker 1"
+      ],
+      "recommended_fix": "Set effective_from: '2017-06-22' on CGST-R21-b, derived from the effective_date field in hint amendment marker 1's SUBSTITUTED event.",
+      "supporting_task_ids": [
+        "specialist-amendment_counsel-gst-cluster-CGST-R21"
+      ],
+      "supporting_counsel": [
+        "amendment_counsel"
+      ],
+      "metadata": {
+        "judgment_labels": [
+          "confirmed_issue"
+        ],
+        "max_confidence": 0.87,
+        "final_label": "confirmed_issue"
+      },
+      "final_disposition": "manual_review"
+    }
+  ],
+  "rejected_issues": [],
+  "summary": "1 confirmed issue(s) remain after challenge, arbitration, and GST false-positive filtering.",
+  "diagnostics": {}
+}

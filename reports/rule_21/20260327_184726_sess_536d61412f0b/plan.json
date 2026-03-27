@@ -1,0 +1,3982 @@
+{
+  "council_name": "clanker zone",
+  "domain": "gst",
+  "shared_prefix": "You are part of Clanker Zone, a strict evidence-first review council.\nReview only real defects.\nDo not punish harmless CBIC formatting artifacts.\nTreat hint-derived source blocks and raw HTML as provenance evidence.\nEvery confirmed issue must cite exact evidence and explain why it is a real defect.\nIf uncertain, return needs_manual_review instead of over-asserting.\n\nDomain: GST rule extraction review.\nPrimary evidence hierarchy:\n1. raw source meaning\n2. hint-derived structured evidence\n3. schema semantics\n4. extracted rule JSON\nKnown source quirks:\n- amendment markers can span multiple blocks and provisos\n- CBIC spacing and punctuation are often ugly but legally harmless\n- numbered table rows like (1) and (2) may still be header structure\n- source_ref.anchor_text is a short UI anchor phrase, not a verbatim exact quote\n- display_label may legitimately hold the clause/proviso label while text omits it\n- raw_text may legitimately be null when source_ref is the authoritative audit anchor\n- cross_ref.target_id may legitimately be null when deterministic resolution is unavailable\n- effective_until on an omitted node can be valid chronology, not duplicate status\n- enacted_date alone does not prove effective_from\nKnown non-issues unless stronger source evidence proves otherwise:\n- anchor_text being shorter than the full source block\n- anchor_text omitting a clause label like (b), (e), or (h)\n- separate sibling nodes each carrying the same cross_ref when the source repeats the mention separately\n- missing target_id for external_act references\n- text omitting a legal label that is already preserved in display_label\n\nReturn only one of:\n- confirmed_issue\n- acceptable_artifact\n- needs_manual_review\n- no_issue\nReturn JSON only with this shape:\n{\n  \"label\": \"...\",\n  \"category\": \"...\",\n  \"node_id\": \"...\",\n  \"severity\": \"...\",\n  \"title\": \"...\",\n  \"problem\": \"...\",\n  \"evidence_refs\": [\"...\"],\n  \"recommended_fix\": \"...\",\n  \"confidence\": 0.0\n}\nThe dossier may cover a whole sub-rule or clause cluster.\nWhen you return a finding, node_id must point to the exact affected node from the dossier's target cards, not just the cluster root.\nSeverity must be exactly one of: critical, major, moderate, minor.\nUse [] for evidence_refs when there is no concrete citation.\nUse a numeric confidence. If uncertain, use 0.5 and downgrade the label instead of inventing certainty.\nUse null where a field does not apply. Do not emit markdown.",
+  "dossiers": [
+    {
+      "dossier_id": "gst-cluster-CGST-R21",
+      "kind": "cluster",
+      "domain": "gst",
+      "target_id": "CGST-R21",
+      "title": "Cluster dossier for CGST-R21",
+      "category_focus": [
+        "amendment_markers",
+        "clauses",
+        "cross_refs",
+        "duplicates",
+        "source_refs",
+        "status_chronology",
+        "structure_scope",
+        "text_fidelity"
+      ],
+      "candidate_fragment": {
+        "label": "21",
+        "display_label": null,
+        "type": "rule",
+        "id": "CGST-R21",
+        "full_path": "R21",
+        "order": 1,
+        "title": "Registration to be cancelled in certain cases.",
+        "text": "The registration granted to a person is liable to be cancelled, if the said person, -",
+        "raw_text": null,
+        "operative_text": null,
+        "children": [
+          {
+            "label": "a",
+            "display_label": "(a)",
+            "type": "clause",
+            "id": "CGST-R21-a",
+            "full_path": "R21-a",
+            "order": 1,
+            "title": null,
+            "text": "does not conduct any business from the declared place of business; or",
+            "raw_text": null,
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 3,
+              "end_block": 3,
+              "resolution": "exact",
+              "anchor_text": "(a) does not conduct any business from the declared place of business; or"
+            },
+            "is_amended": false,
+            "amendment_markers": [],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "b",
+            "display_label": "(b)",
+            "type": "clause",
+            "id": "CGST-R21-b",
+            "full_path": "R21-b",
+            "order": 2,
+            "title": null,
+            "text": "issues invoice or bill without supply of goods or services or both in violation of the provisions of this Act, or the rules made thereunder; or",
+            "raw_text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 4,
+              "end_block": 4,
+              "resolution": "exact",
+              "anchor_text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              1,
+              2
+            ],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "c",
+            "display_label": "(c)",
+            "type": "clause",
+            "id": "CGST-R21-c",
+            "full_path": "R21-c",
+            "order": 3,
+            "title": null,
+            "text": "violates the provisions of section 171 of the Act or the rules made thereunder.",
+            "raw_text": "(c) violates the provisions of section 171 of the Act or the rules made thereunder].",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "section 171",
+                "target_id": "1000449",
+                "target_type": "act_section",
+                "relationship": "mentions",
+                "context": "violates the provisions of section 171 of the Act"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 5,
+              "end_block": 5,
+              "resolution": "exact",
+              "anchor_text": "(c) violates the provisions of section 171 of the Act or the rules made thereunder]."
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              1
+            ],
+            "effective_from": "2017-06-22",
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "d",
+            "display_label": "(d)",
+            "type": "clause",
+            "id": "CGST-R21-d",
+            "full_path": "R21-d",
+            "order": 4,
+            "title": null,
+            "text": "violates the provision of rule 10A",
+            "raw_text": "3 [(d) violates the provision of rule 10A ]",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "rule 10A",
+                "target_id": "1000092",
+                "target_type": "rule",
+                "relationship": "mentions",
+                "context": "violates the provision of rule 10A"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 6,
+              "end_block": 6,
+              "resolution": "exact",
+              "anchor_text": "3 [(d) violates the provision of rule 10A ]"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              3
+            ],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "e",
+            "display_label": "(e)",
+            "type": "clause",
+            "id": "CGST-R21-e",
+            "full_path": "R21-e",
+            "order": 5,
+            "title": null,
+            "text": "avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or",
+            "raw_text": "4 [(e) avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "section 16",
+                "target_id": "1000285",
+                "target_type": "act_section",
+                "relationship": "mentions",
+                "context": "provisions of section 16 of the Act"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 7,
+              "end_block": 7,
+              "resolution": "exact",
+              "anchor_text": "4 [(e) avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              4
+            ],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "f",
+            "display_label": "(f)",
+            "type": "clause",
+            "id": "CGST-R21-f",
+            "full_path": "R21-f",
+            "order": 6,
+            "title": null,
+            "text": "furnishes the details of outward supplies in FORM GSTR-1 as amended in FORM GSTR-1A if any, under section 37 for one or more tax periods which is in excess of the outward supplies declared by him in his valid return under section 39 for the said tax periods; or",
+            "raw_text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in excess of the outward supplies declared by him in his valid return under section 39 for the said tax periods; or",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "FORM GSTR-1",
+                "target_id": "1000065",
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "details of outward supplies in FORM GSTR-1"
+              },
+              {
+                "target": "FORM GSTR-1A",
+                "target_id": null,
+                "target_type": "form",
+                "relationship": "mentions",
+                "context": "as amended in FORM GSTR-1A if any"
+              },
+              {
+                "target": "section 37",
+                "target_id": "1000307",
+                "target_type": "act_section",
+                "relationship": "under",
+                "context": "under section 37 for one or more tax periods"
+              },
+              {
+                "target": "section 39",
+                "target_id": "1000309",
+                "target_type": "act_section",
+                "relationship": "under",
+                "context": "valid return under section 39 for the said tax periods"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 8,
+              "end_block": 8,
+              "resolution": "exact",
+              "anchor_text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in excess of the outward supplies declared by him in his valid return under section 39 for the said tax periods; or"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              4,
+              6
+            ],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "g",
+            "display_label": "(g)",
+            "type": "clause",
+            "id": "CGST-R21-g",
+            "full_path": "R21-g",
+            "order": 7,
+            "title": null,
+            "text": "violates the provision of rule 86B.",
+            "raw_text": "(g) violates the provision of rule 86B .]",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "rule 86B",
+                "target_id": "1000479",
+                "target_type": "rule",
+                "relationship": "mentions",
+                "context": "violates the provision of rule 86B"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 9,
+              "end_block": 9,
+              "resolution": "exact",
+              "anchor_text": "(g) violates the provision of rule 86B .]"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              4
+            ],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "ga",
+            "display_label": "(ga)",
+            "type": "clause",
+            "id": "CGST-R21-ga",
+            "full_path": "R21-ga",
+            "order": 8,
+            "title": null,
+            "text": "violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or",
+            "raw_text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "fourth proviso to sub-rule (1)",
+                "target_id": null,
+                "target_type": "rule_fragment",
+                "relationship": "mentions",
+                "context": "provisions of third or fourth proviso to sub-rule (1) of rule 23"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 10,
+              "end_block": 10,
+              "resolution": "exact",
+              "anchor_text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              6
+            ],
+            "effective_from": null,
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "h",
+            "display_label": "(h)",
+            "type": "clause",
+            "id": "CGST-R21-h",
+            "full_path": "R21-h",
+            "order": 9,
+            "title": null,
+            "text": "being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a continuous period of six months;",
+            "raw_text": "5 [(h) being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a continuous period of six months;",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "section 39",
+                "target_id": "1000309",
+                "target_type": "act_section",
+                "relationship": "under",
+                "context": "file return under subsection (1) of section 39"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 11,
+              "end_block": 11,
+              "resolution": "exact",
+              "anchor_text": "5 [(h) being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a continuous period of six months;"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              5
+            ],
+            "effective_from": "2022-10-01",
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          },
+          {
+            "label": "i",
+            "display_label": "(i)",
+            "type": "clause",
+            "id": "CGST-R21-i",
+            "full_path": "R21-i",
+            "order": 10,
+            "title": null,
+            "text": "being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns for a continuous period of two tax periods.",
+            "raw_text": "(i) being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns for a continuous period of two tax periods.]",
+            "operative_text": null,
+            "children": [],
+            "provisos": [],
+            "explanations": [],
+            "cross_refs": [
+              {
+                "target": "section 39",
+                "target_id": "1000309",
+                "target_type": "act_section",
+                "relationship": "under",
+                "context": "file return under proviso to subsection (1) of section 39"
+              }
+            ],
+            "source_ref": {
+              "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+              "start_block": 12,
+              "end_block": 12,
+              "resolution": "exact",
+              "anchor_text": "(i) being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns for a continuous period of two tax periods.]"
+            },
+            "is_amended": true,
+            "amendment_markers": [
+              5
+            ],
+            "effective_from": "2022-10-01",
+            "effective_until": null,
+            "status": "active",
+            "proviso_level": null,
+            "table_data": null,
+            "formula_data": null
+          }
+        ],
+        "provisos": [],
+        "explanations": [],
+        "cross_refs": [],
+        "source_ref": {
+          "source_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule21_v1.00.html",
+          "start_block": 1,
+          "end_block": 2,
+          "resolution": "exact",
+          "anchor_text": "The registration granted to a person is liable to be cancelled, if the said person, -"
+        },
+        "is_amended": false,
+        "amendment_markers": [],
+        "effective_from": null,
+        "effective_until": null,
+        "status": "active",
+        "proviso_level": null,
+        "table_data": null,
+        "formula_data": null
+      },
+      "schema_excerpt": {
+        "node_type": "rule",
+        "required": [
+          "label",
+          "type",
+          "id",
+          "full_path",
+          "order"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Machine identifier within parent. Rules: '36', '10B'. Sub-rules: '1', '4A'. Clauses: 'a'. Sub-clauses: 'i'. Tables: 'table-1'. Formulas: 'formula-1'."
+          },
+          "display_label": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "Human/legal display label. e.g. 'First Proviso', 'Explanation', 'Table', 'Formula'."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "rule",
+              "sub_rule",
+              "clause",
+              "sub_clause",
+              "table",
+              "formula",
+              "proviso",
+              "explanation",
+              "illustration"
+            ],
+            "description": "Structural or qualifier node type for rule extraction."
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "Clean current text with amendment markers stripped. For a root rule this may hold the chapeau before children. For table/formula nodes it may hold the intro sentence or surrounding legal text. Required for content-bearing node types except pure structural container nodes whose children start immediately with no standalone chapeau text of their own."
+          },
+          "raw_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "Original current text with inline amendment markers preserved when different from 'text'. For textless structural container nodes, raw_text must also be null; source_ref remains the authoritative audit anchor."
+          },
+          "operative_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "Continuation text that appears after enumerated children in the same sentence."
+          },
+          "children": {
+            "type": "array",
+            "default": [],
+            "description": "Structural children only - sub-rules, clauses, sub-clauses, tables, and formulas.",
+            "items": {
+              "$ref": "#/definitions/node"
+            }
+          },
+          "provisos": {
+            "type": "array",
+            "default": [],
+            "description": "Provisos that qualify this node.",
+            "items": {
+              "$ref": "#/definitions/node"
+            }
+          },
+          "explanations": {
+            "type": "array",
+            "default": [],
+            "description": "Explanations and illustrations that qualify or define terms for this node.",
+            "items": {
+              "$ref": "#/definitions/node"
+            }
+          },
+          "cross_refs": {
+            "type": "array",
+            "default": [],
+            "description": "Cross-references found in this node's text.",
+            "items": {
+              "$ref": "#/definitions/cross_ref"
+            }
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/source_ref"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Deterministic source citation span for this node. Authoritative for UI/source linking; raw_text may remain a node-local fragment."
+          },
+          "amendment_markers": {
+            "type": "array",
+            "default": [],
+            "description": "Links this node to numeric items in the top-level amendments array. Non-numeric markers like '*' remain top-level amendment entries only and must not appear here.",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "effective_from": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "When this current node version became effective."
+          },
+          "effective_until": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "When this node version was superseded. Null means currently in force."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "omitted",
+              "pending"
+            ],
+            "default": "active",
+            "description": "Current legal status of the node in the consolidated rules view."
+          },
+          "table_data": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/table_payload"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Structured payload for table nodes."
+          },
+          "formula_data": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/formula_payload"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Structured payload for formula nodes."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "cluster_root",
+          "label": "Cluster root CGST-R21",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node",
+            "start": 1,
+            "end": 12
+          },
+          "text": "The registration granted to a person is liable to be cancelled, if the said person, -",
+          "payload": {
+            "id": "CGST-R21",
+            "type": "rule",
+            "display_label": null,
+            "status": "active"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node::blocks=1-2",
+            "start": 1,
+            "end": 2
+          },
+          "text": "The registration granted to a person is liable to be cancelled, if the said person, -",
+          "payload": {
+            "id": "CGST-R21",
+            "type": "rule",
+            "display_label": null,
+            "status": "active",
+            "depth": 0,
+            "amendment_markers": [],
+            "json_path": "$.node"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-a",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[0]::blocks=3-3",
+            "start": 3,
+            "end": 3
+          },
+          "text": "does not conduct any business from the declared place of business; or",
+          "payload": {
+            "id": "CGST-R21-a",
+            "type": "clause",
+            "display_label": "(a)",
+            "status": "active",
+            "depth": 1,
+            "amendment_markers": [],
+            "json_path": "$.node.children[0]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-b",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[1]::blocks=4-4",
+            "start": 4,
+            "end": 4
+          },
+          "text": "issues invoice or bill without supply of goods or services or both in violation of the provisions of this Act, or the rules made thereunder; or",
+          "payload": {
+            "id": "CGST-R21-b",
+            "type": "clause",
+            "display_label": "(b)",
+            "status": "active",
+            "depth": 2,
+            "amendment_markers": [
+              1,
+              2
+            ],
+            "json_path": "$.node.children[1]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-c",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[2]::blocks=5-5",
+            "start": 5,
+            "end": 5
+          },
+          "text": "violates the provisions of section 171 of the Act or the rules made thereunder.",
+          "payload": {
+            "id": "CGST-R21-c",
+            "type": "clause",
+            "display_label": "(c)",
+            "status": "active",
+            "depth": 3,
+            "amendment_markers": [
+              1
+            ],
+            "json_path": "$.node.children[2]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-d",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[3]::blocks=6-6",
+            "start": 6,
+            "end": 6
+          },
+          "text": "violates the provision of rule 10A",
+          "payload": {
+            "id": "CGST-R21-d",
+            "type": "clause",
+            "display_label": "(d)",
+            "status": "active",
+            "depth": 4,
+            "amendment_markers": [
+              3
+            ],
+            "json_path": "$.node.children[3]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-e",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[4]::blocks=7-7",
+            "start": 7,
+            "end": 7
+          },
+          "text": "avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or",
+          "payload": {
+            "id": "CGST-R21-e",
+            "type": "clause",
+            "display_label": "(e)",
+            "status": "active",
+            "depth": 5,
+            "amendment_markers": [
+              4
+            ],
+            "json_path": "$.node.children[4]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-f",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[5]::blocks=8-8",
+            "start": 8,
+            "end": 8
+          },
+          "text": "furnishes the details of outward supplies in FORM GSTR-1 as amended in FORM GSTR-1A if any, under section 37 for one or more tax periods which is in excess of the outward supplies declared by him in his valid return under section 39 for the said tax periods; or",
+          "payload": {
+            "id": "CGST-R21-f",
+            "type": "clause",
+            "display_label": "(f)",
+            "status": "active",
+            "depth": 6,
+            "amendment_markers": [
+              4,
+              6
+            ],
+            "json_path": "$.node.children[5]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-g",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[6]::blocks=9-9",
+            "start": 9,
+            "end": 9
+          },
+          "text": "violates the provision of rule 86B.",
+          "payload": {
+            "id": "CGST-R21-g",
+            "type": "clause",
+            "display_label": "(g)",
+            "status": "active",
+            "depth": 7,
+            "amendment_markers": [
+              4
+            ],
+            "json_path": "$.node.children[6]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-ga",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[7]::blocks=10-10",
+            "start": 10,
+            "end": 10
+          },
+          "text": "violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or",
+          "payload": {
+            "id": "CGST-R21-ga",
+            "type": "clause",
+            "display_label": "(ga)",
+            "status": "active",
+            "depth": 8,
+            "amendment_markers": [
+              6
+            ],
+            "json_path": "$.node.children[7]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-h",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[8]::blocks=11-11",
+            "start": 11,
+            "end": 11
+          },
+          "text": "being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a continuous period of six months;",
+          "payload": {
+            "id": "CGST-R21-h",
+            "type": "clause",
+            "display_label": "(h)",
+            "status": "active",
+            "depth": 9,
+            "amendment_markers": [
+              5
+            ],
+            "json_path": "$.node.children[8]"
+          }
+        },
+        {
+          "kind": "target_card",
+          "label": "Target node CGST-R21-i",
+          "locator": {
+            "source_name": "rule_json",
+            "pointer": "$.node.children[9]::blocks=12-12",
+            "start": 12,
+            "end": 12
+          },
+          "text": "being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns for a continuous period of two tax periods.",
+          "payload": {
+            "id": "CGST-R21-i",
+            "type": "clause",
+            "display_label": "(i)",
+            "status": "active",
+            "depth": 10,
+            "amendment_markers": [
+              5
+            ],
+            "json_path": "$.node.children[9]"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 1",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=1",
+            "start": 1,
+            "end": 1
+          },
+          "text": "Rule 21. Registration to be cancelled in certain cases. -",
+          "payload": {
+            "order": 1,
+            "text": "Rule 21. Registration to be cancelled in certain cases. -"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 2",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=2",
+            "start": 2,
+            "end": 2
+          },
+          "text": "The registration granted to a person is liable to be cancelled, if the said person, -",
+          "payload": {
+            "order": 2,
+            "text": "The registration granted to a person is liable to be cancelled, if the said person, -"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 3",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=3",
+            "start": 3,
+            "end": 3
+          },
+          "text": "(a) does not conduct any business from the declared place of business; or",
+          "payload": {
+            "order": 3,
+            "text": "(a) does not conduct any business from the declared place of business; or"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 4",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=4",
+            "start": 4,
+            "end": 4
+          },
+          "text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or",
+          "payload": {
+            "order": 4,
+            "text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 5",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=5",
+            "start": 5,
+            "end": 5
+          },
+          "text": "(c) violates the provisions of section 171 of the Act or the rules made thereunder].",
+          "payload": {
+            "order": 5,
+            "text": "(c) violates the provisions of section 171 of the Act or the rules made thereunder]."
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 6",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=6",
+            "start": 6,
+            "end": 6
+          },
+          "text": "3 [(d) violates the provision of rule 10A ]",
+          "payload": {
+            "order": 6,
+            "text": "3 [(d) violates the provision of rule 10A ]"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 7",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=7",
+            "start": 7,
+            "end": 7
+          },
+          "text": "4 [(e) avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or",
+          "payload": {
+            "order": 7,
+            "text": "4 [(e) avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 8",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=8",
+            "start": 8,
+            "end": 8
+          },
+          "text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in excess of the outward supplies declared by him in his valid return under section 39 for the said tax periods; or",
+          "payload": {
+            "order": 8,
+            "text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in excess of the outward supplies declared by him in his valid return under section 39 for the said tax periods; or"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 9",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=9",
+            "start": 9,
+            "end": 9
+          },
+          "text": "(g) violates the provision of rule 86B .]",
+          "payload": {
+            "order": 9,
+            "text": "(g) violates the provision of rule 86B .]"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 10",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=10",
+            "start": 10,
+            "end": 10
+          },
+          "text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]",
+          "payload": {
+            "order": 10,
+            "text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 11",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=11",
+            "start": 11,
+            "end": 11
+          },
+          "text": "5 [(h) being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a continuous period of six months;",
+          "payload": {
+            "order": 11,
+            "text": "5 [(h) being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a continuous period of six months;"
+          }
+        },
+        {
+          "kind": "source_block",
+          "label": "Source block 12",
+          "locator": {
+            "source_name": "hint.source_blocks",
+            "pointer": "order=12",
+            "start": 12,
+            "end": 12
+          },
+          "text": "(i) being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns for a continuous period of two tax periods.]",
+          "payload": {
+            "order": 12,
+            "text": "(i) being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns for a continuous period of two tax periods.]"
+          }
+        },
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment marker 1",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=1",
+            "start": null,
+            "end": null
+          },
+          "text": "1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\"",
+          "payload": {
+            "marker": "1",
+            "text": "1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\"",
+            "action": "SUBSTITUTED",
+            "effective_date": "2017-06-22",
+            "commencement_date": null,
+            "enacted_date": null,
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 07/2017-CT, dated 27.06.2017",
+            "notification_number": "07/2017-CT",
+            "notification_date": "2017-06-27",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017",
+                "action": "SUBSTITUTED",
+                "effective_date": "2017-06-22",
+                "commencement_date": null,
+                "enacted_date": null,
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 07/2017-CT, dated 27.06.2017",
+                "notification_number": "07/2017-CT",
+                "notification_date": "2017-06-27",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        },
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment marker 2",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=2",
+            "start": null,
+            "end": null
+          },
+          "text": "2. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+          "payload": {
+            "marker": "2",
+            "text": "2. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2020-12-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+            "notification_number": "94/2020-CT",
+            "notification_date": "2020-12-22",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No.94/2020 - CT dated 22.12.2020",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2020-12-22",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+                "notification_number": "94/2020-CT",
+                "notification_date": "2020-12-22",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        },
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment marker 3",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=3",
+            "start": null,
+            "end": null
+          },
+          "text": "3. Inserted vide Notification No.31/2019 - CT dated 28.06.2019.",
+          "payload": {
+            "marker": "3",
+            "text": "3. Inserted vide Notification No.31/2019 - CT dated 28.06.2019.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2019-06-28",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 31/2019-CT, dated 28.06.2019",
+            "notification_number": "31/2019-CT",
+            "notification_date": "2019-06-28",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No.31/2019 - CT dated 28.06.2019",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2019-06-28",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 31/2019-CT, dated 28.06.2019",
+                "notification_number": "31/2019-CT",
+                "notification_date": "2019-06-28",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        },
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment marker 4",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=4",
+            "start": null,
+            "end": null
+          },
+          "text": "4. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+          "payload": {
+            "marker": "4",
+            "text": "4. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2020-12-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+            "notification_number": "94/2020-CT",
+            "notification_date": "2020-12-22",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No.94/2020 - CT dated 22.12.2020",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2020-12-22",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+                "notification_number": "94/2020-CT",
+                "notification_date": "2020-12-22",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        },
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment marker 5",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=5",
+            "start": null,
+            "end": null
+          },
+          "text": "5. Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022.",
+          "payload": {
+            "marker": "5",
+            "text": "5. Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022.",
+            "action": "INSERTED",
+            "effective_date": "2022-10-01",
+            "commencement_date": null,
+            "enacted_date": null,
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 19/2022-CT, dated 28.09.2022",
+            "notification_number": "19/2022-CT",
+            "notification_date": "2022-09-28",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022",
+                "action": "INSERTED",
+                "effective_date": "2022-10-01",
+                "commencement_date": null,
+                "enacted_date": null,
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 19/2022-CT, dated 28.09.2022",
+                "notification_number": "19/2022-CT",
+                "notification_date": "2022-09-28",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        },
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment marker 6",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=6",
+            "start": null,
+            "end": null
+          },
+          "text": "6. Inserted vide Notification No. 12/2024 - CT dated 10.07.2024.",
+          "payload": {
+            "marker": "6",
+            "text": "6. Inserted vide Notification No. 12/2024 - CT dated 10.07.2024.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2024-07-10",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 12/2024-CT, dated 10.07.2024",
+            "notification_number": "12/2024-CT",
+            "notification_date": "2024-07-10",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No. 12/2024 - CT dated 10.07.2024",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2024-07-10",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 12/2024-CT, dated 10.07.2024",
+                "notification_number": "12/2024-CT",
+                "notification_date": "2024-07-10",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 2",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=2",
+            "start": 4,
+            "end": 4
+          },
+          "text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or",
+          "payload": {
+            "marker": "2",
+            "open_block": 4,
+            "close_block": 4,
+            "open_anchor_text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or",
+            "close_anchor_text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or"
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 1",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=1",
+            "start": 4,
+            "end": 5
+          },
+          "text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or",
+          "payload": {
+            "marker": "1",
+            "open_block": 4,
+            "close_block": 5,
+            "open_anchor_text": "1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or",
+            "close_anchor_text": "(c) violates the provisions of section 171 of the Act or the rules made thereunder]."
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 3",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=3",
+            "start": 6,
+            "end": 6
+          },
+          "text": "3 [(d) violates the provision of rule 10A ]",
+          "payload": {
+            "marker": "3",
+            "open_block": 6,
+            "close_block": 6,
+            "open_anchor_text": "3 [(d) violates the provision of rule 10A ]",
+            "close_anchor_text": "3 [(d) violates the provision of rule 10A ]"
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 4",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=4",
+            "start": 7,
+            "end": 9
+          },
+          "text": "4 [(e) avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or",
+          "payload": {
+            "marker": "4",
+            "open_block": 7,
+            "close_block": 9,
+            "open_anchor_text": "4 [(e) avails input tax credit in violation of the provisions of section 16 of the Act or the rules made thereunder; or",
+            "close_anchor_text": "(g) violates the provision of rule 86B .]"
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 6",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=6",
+            "start": 8,
+            "end": 8
+          },
+          "text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in exc",
+          "payload": {
+            "marker": "6",
+            "open_block": 8,
+            "close_block": 8,
+            "open_anchor_text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in exc",
+            "close_anchor_text": "(f) furnishes the details of outward supplies in FORM GSTR-1 6 [as amended in FORM GSTR-1A if any,] under section 37 for one or more tax periods which is in exc"
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 6",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=6",
+            "start": 10,
+            "end": 10
+          },
+          "text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]",
+          "payload": {
+            "marker": "6",
+            "open_block": 10,
+            "close_block": 10,
+            "open_anchor_text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]",
+            "close_anchor_text": "6 [(ga) violates the provisions of third or fourth proviso to sub-rule (1) of rule 23; or]"
+          }
+        },
+        {
+          "kind": "amendment_span",
+          "label": "Amendment span marker 5",
+          "locator": {
+            "source_name": "hint.amendment_spans",
+            "pointer": "marker=5",
+            "start": 11,
+            "end": 12
+          },
+          "text": "5 [(h) being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a cont",
+          "payload": {
+            "marker": "5",
+            "open_block": 11,
+            "close_block": 12,
+            "open_anchor_text": "5 [(h) being a registered person required to file return under subsection (1) of section 39 for each month or part thereof, has not furnished returns for a cont",
+            "close_anchor_text": "(i) being a registered person required to file return under proviso to subsection (1) of section 39 for each quarter or part thereof, has not furnished returns "
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "XREF-DUPE-CGST-R21-f",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-f",
+            "start": null,
+            "end": null
+          },
+          "text": "[cross_refs] Duplicate cross-reference emitted for one source mention: The same cross-reference target has been emitted multiple times from the same textual mention.",
+          "payload": {
+            "issue_id": "XREF-DUPE-CGST-R21-f",
+            "node_id": "CGST-R21-f",
+            "category": "cross_refs",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.96
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-EFFECTIVE-MISSING-CGST-R21-b-1",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-b",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Node is missing effective_from despite hint having effective_date: The hint amendment for marker 1 has effective_date '2017-06-22', but the node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-EFFECTIVE-MISSING-CGST-R21-b-1",
+            "node_id": "CGST-R21-b",
+            "category": "chronology",
+            "severity": "major",
+            "signal_class": "heuristic",
+            "confidence": 0.93
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-b-2",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-b",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 2 was enacted on '2020-12-22' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-b-2",
+            "node_id": "CGST-R21-b",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-d-3",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-d",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 3 was enacted on '2019-06-28' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-d-3",
+            "node_id": "CGST-R21-d",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-e-4",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-e",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 4 was enacted on '2020-12-22' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-e-4",
+            "node_id": "CGST-R21-e",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-f-4",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-f",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 4 was enacted on '2020-12-22' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-f-4",
+            "node_id": "CGST-R21-f",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-f-6",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-f",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 6 was enacted on '2024-07-10' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-f-6",
+            "node_id": "CGST-R21-f",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-g-4",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-g",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 4 was enacted on '2020-12-22' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-g-4",
+            "node_id": "CGST-R21-g",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        },
+        {
+          "kind": "deterministic_signal",
+          "label": "CHRON-DATE-AMBIGUOUS-CGST-R21-ga-6",
+          "locator": {
+            "source_name": "deterministic_check",
+            "pointer": "CGST-R21-ga",
+            "start": null,
+            "end": null
+          },
+          "text": "[chronology] Amendment has enacted_date but no clear effective date: The hint amendment for marker 6 was enacted on '2024-07-10' but the source footnote does not specify a w.e.f. date. The node has no effective_from.",
+          "payload": {
+            "issue_id": "CHRON-DATE-AMBIGUOUS-CGST-R21-ga-6",
+            "node_id": "CGST-R21-ga",
+            "category": "chronology",
+            "severity": "moderate",
+            "signal_class": "heuristic",
+            "confidence": 0.72
+          }
+        }
+      ],
+      "metadata": {
+        "cluster_root_id": "CGST-R21",
+        "cluster_root_type": "rule",
+        "cluster_root_path": "$.node",
+        "cluster_source_span": {
+          "start_block": 1,
+          "end_block": 12
+        },
+        "target_node_ids": [
+          "CGST-R21",
+          "CGST-R21-a",
+          "CGST-R21-b",
+          "CGST-R21-c",
+          "CGST-R21-d",
+          "CGST-R21-e",
+          "CGST-R21-f",
+          "CGST-R21-g",
+          "CGST-R21-ga",
+          "CGST-R21-h",
+          "CGST-R21-i"
+        ],
+        "target_node_paths": {
+          "CGST-R21": "$.node",
+          "CGST-R21-a": "$.node.children[0]",
+          "CGST-R21-b": "$.node.children[1]",
+          "CGST-R21-c": "$.node.children[2]",
+          "CGST-R21-d": "$.node.children[3]",
+          "CGST-R21-e": "$.node.children[4]",
+          "CGST-R21-f": "$.node.children[5]",
+          "CGST-R21-g": "$.node.children[6]",
+          "CGST-R21-ga": "$.node.children[7]",
+          "CGST-R21-h": "$.node.children[8]",
+          "CGST-R21-i": "$.node.children[9]"
+        },
+        "rule_path": "D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017\\chapter_03_registration\\rule_021.json",
+        "raw_html_path": "D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017\\raw\\html\\CGST-R21.html",
+        "hint_path": "D:\\Agents\\claude-code\\cbic-gst-scraper\\data\\gst_rules\\cgst_rules_2017\\raw\\hints\\CGST-R21.json",
+        "cluster_strategy": "parent_cluster"
+      }
+    },
+    {
+      "dossier_id": "gst-amendment-CGST-R21-1",
+      "kind": "amendment",
+      "domain": "gst",
+      "target_id": "1",
+      "title": "Amendment dossier for marker 1",
+      "category_focus": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "candidate_fragment": {
+        "marker": "1",
+        "text": "1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\"",
+        "action": "SUBSTITUTED",
+        "effective_date": "2017-06-22",
+        "commencement_date": null,
+        "enacted_date": null,
+        "instrument_type": "NOTIFICATION",
+        "notification": "Notification No. 07/2017-CT, dated 27.06.2017",
+        "notification_number": "07/2017-CT",
+        "notification_date": "2017-06-27",
+        "amending_act": null,
+        "target": null,
+        "events": [
+          {
+            "text": "Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017",
+            "action": "SUBSTITUTED",
+            "effective_date": "2017-06-22",
+            "commencement_date": null,
+            "enacted_date": null,
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 07/2017-CT, dated 27.06.2017",
+            "notification_number": "07/2017-CT",
+            "notification_date": "2017-06-27",
+            "amending_act": null,
+            "target": null
+          }
+        ]
+      },
+      "schema_excerpt": {
+        "definition": {
+          "type": "object",
+          "required": [
+            "marker",
+            "action",
+            "text"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "description": "Footnote identifier as rendered on the rule page. e.g. '1', '2', '*'."
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "INSERTED",
+                "SUBSTITUTED",
+                "OMITTED",
+                "ENFORCED",
+                "NOTIFIED",
+                "RENUMBERED"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "description": "Full footnote text exactly as on the source page."
+            },
+            "effective_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 effective date when extractable."
+            },
+            "commencement_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 commencement date when distinct from effective_date."
+            },
+            "enacted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 enacted date when the source gives only the amending Act date."
+            },
+            "instrument_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "ACT",
+                "ORDER",
+                "NOTIFICATION",
+                "UNKNOWN",
+                null
+              ],
+              "default": null,
+              "description": "Type of amending instrument."
+            },
+            "notification": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "notification_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Structured notification number extracted from footnote text."
+            },
+            "notification_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 date of the notification itself when extractable."
+            },
+            "amending_act": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'."
+            },
+            "historical_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Superseded text preserved in the footnote when a substitution note reproduces the prior wording."
+            },
+            "events": {
+              "type": "array",
+              "default": [],
+              "description": "Structured legal events parsed from this one footnote. Usually one event; compound source notes may contain multiple notifications/orders.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "action"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Source fragment that yielded this structured event."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "INSERTED",
+                      "SUBSTITUTED",
+                      "OMITTED",
+                      "ENFORCED",
+                      "NOTIFIED",
+                      "RENUMBERED"
+                    ]
+                  },
+                  "effective_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 effective date for this event when extractable."
+                  },
+                  "commencement_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 commencement date when distinct from effective_date."
+                  },
+                  "enacted_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 enacted/issuance date when only a bare dated reference is present."
+                  },
+                  "instrument_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "ACT",
+                      "ORDER",
+                      "NOTIFICATION",
+                      "UNKNOWN",
+                      null
+                    ],
+                    "default": null,
+                    "description": "Type of amending instrument for this event."
+                  },
+                  "notification": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "notification_number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Structured notification/order number for this event."
+                  },
+                  "notification_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 notification/order date for this event."
+                  },
+                  "amending_act": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Optional event-specific textual selector of what was affected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment 1",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=1",
+            "start": null,
+            "end": null
+          },
+          "text": "1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\"",
+          "payload": {
+            "marker": "1",
+            "text": "1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\"",
+            "action": "SUBSTITUTED",
+            "effective_date": "2017-06-22",
+            "commencement_date": null,
+            "enacted_date": null,
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 07/2017-CT, dated 27.06.2017",
+            "notification_number": "07/2017-CT",
+            "notification_date": "2017-06-27",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017",
+                "action": "SUBSTITUTED",
+                "effective_date": "2017-06-22",
+                "commencement_date": null,
+                "enacted_date": null,
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 07/2017-CT, dated 27.06.2017",
+                "notification_number": "07/2017-CT",
+                "notification_date": "2017-06-27",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        }
+      ],
+      "metadata": {
+        "rule_id": "CGST-R21"
+      }
+    },
+    {
+      "dossier_id": "gst-amendment-CGST-R21-2",
+      "kind": "amendment",
+      "domain": "gst",
+      "target_id": "2",
+      "title": "Amendment dossier for marker 2",
+      "category_focus": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "candidate_fragment": {
+        "marker": "2",
+        "text": "2. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+        "action": "INSERTED",
+        "effective_date": null,
+        "commencement_date": null,
+        "enacted_date": "2020-12-22",
+        "instrument_type": "NOTIFICATION",
+        "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+        "notification_number": "94/2020-CT",
+        "notification_date": "2020-12-22",
+        "amending_act": null,
+        "target": null,
+        "events": [
+          {
+            "text": "Inserted vide Notification No.94/2020 - CT dated 22.12.2020",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2020-12-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+            "notification_number": "94/2020-CT",
+            "notification_date": "2020-12-22",
+            "amending_act": null,
+            "target": null
+          }
+        ]
+      },
+      "schema_excerpt": {
+        "definition": {
+          "type": "object",
+          "required": [
+            "marker",
+            "action",
+            "text"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "description": "Footnote identifier as rendered on the rule page. e.g. '1', '2', '*'."
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "INSERTED",
+                "SUBSTITUTED",
+                "OMITTED",
+                "ENFORCED",
+                "NOTIFIED",
+                "RENUMBERED"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "description": "Full footnote text exactly as on the source page."
+            },
+            "effective_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 effective date when extractable."
+            },
+            "commencement_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 commencement date when distinct from effective_date."
+            },
+            "enacted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 enacted date when the source gives only the amending Act date."
+            },
+            "instrument_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "ACT",
+                "ORDER",
+                "NOTIFICATION",
+                "UNKNOWN",
+                null
+              ],
+              "default": null,
+              "description": "Type of amending instrument."
+            },
+            "notification": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "notification_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Structured notification number extracted from footnote text."
+            },
+            "notification_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 date of the notification itself when extractable."
+            },
+            "amending_act": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'."
+            },
+            "historical_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Superseded text preserved in the footnote when a substitution note reproduces the prior wording."
+            },
+            "events": {
+              "type": "array",
+              "default": [],
+              "description": "Structured legal events parsed from this one footnote. Usually one event; compound source notes may contain multiple notifications/orders.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "action"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Source fragment that yielded this structured event."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "INSERTED",
+                      "SUBSTITUTED",
+                      "OMITTED",
+                      "ENFORCED",
+                      "NOTIFIED",
+                      "RENUMBERED"
+                    ]
+                  },
+                  "effective_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 effective date for this event when extractable."
+                  },
+                  "commencement_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 commencement date when distinct from effective_date."
+                  },
+                  "enacted_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 enacted/issuance date when only a bare dated reference is present."
+                  },
+                  "instrument_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "ACT",
+                      "ORDER",
+                      "NOTIFICATION",
+                      "UNKNOWN",
+                      null
+                    ],
+                    "default": null,
+                    "description": "Type of amending instrument for this event."
+                  },
+                  "notification": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "notification_number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Structured notification/order number for this event."
+                  },
+                  "notification_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 notification/order date for this event."
+                  },
+                  "amending_act": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Optional event-specific textual selector of what was affected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment 2",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=2",
+            "start": null,
+            "end": null
+          },
+          "text": "2. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+          "payload": {
+            "marker": "2",
+            "text": "2. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2020-12-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+            "notification_number": "94/2020-CT",
+            "notification_date": "2020-12-22",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No.94/2020 - CT dated 22.12.2020",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2020-12-22",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+                "notification_number": "94/2020-CT",
+                "notification_date": "2020-12-22",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        }
+      ],
+      "metadata": {
+        "rule_id": "CGST-R21"
+      }
+    },
+    {
+      "dossier_id": "gst-amendment-CGST-R21-3",
+      "kind": "amendment",
+      "domain": "gst",
+      "target_id": "3",
+      "title": "Amendment dossier for marker 3",
+      "category_focus": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "candidate_fragment": {
+        "marker": "3",
+        "text": "3. Inserted vide Notification No.31/2019 - CT dated 28.06.2019.",
+        "action": "INSERTED",
+        "effective_date": null,
+        "commencement_date": null,
+        "enacted_date": "2019-06-28",
+        "instrument_type": "NOTIFICATION",
+        "notification": "Notification No. 31/2019-CT, dated 28.06.2019",
+        "notification_number": "31/2019-CT",
+        "notification_date": "2019-06-28",
+        "amending_act": null,
+        "target": null,
+        "events": [
+          {
+            "text": "Inserted vide Notification No.31/2019 - CT dated 28.06.2019",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2019-06-28",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 31/2019-CT, dated 28.06.2019",
+            "notification_number": "31/2019-CT",
+            "notification_date": "2019-06-28",
+            "amending_act": null,
+            "target": null
+          }
+        ]
+      },
+      "schema_excerpt": {
+        "definition": {
+          "type": "object",
+          "required": [
+            "marker",
+            "action",
+            "text"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "description": "Footnote identifier as rendered on the rule page. e.g. '1', '2', '*'."
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "INSERTED",
+                "SUBSTITUTED",
+                "OMITTED",
+                "ENFORCED",
+                "NOTIFIED",
+                "RENUMBERED"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "description": "Full footnote text exactly as on the source page."
+            },
+            "effective_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 effective date when extractable."
+            },
+            "commencement_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 commencement date when distinct from effective_date."
+            },
+            "enacted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 enacted date when the source gives only the amending Act date."
+            },
+            "instrument_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "ACT",
+                "ORDER",
+                "NOTIFICATION",
+                "UNKNOWN",
+                null
+              ],
+              "default": null,
+              "description": "Type of amending instrument."
+            },
+            "notification": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "notification_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Structured notification number extracted from footnote text."
+            },
+            "notification_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 date of the notification itself when extractable."
+            },
+            "amending_act": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'."
+            },
+            "historical_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Superseded text preserved in the footnote when a substitution note reproduces the prior wording."
+            },
+            "events": {
+              "type": "array",
+              "default": [],
+              "description": "Structured legal events parsed from this one footnote. Usually one event; compound source notes may contain multiple notifications/orders.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "action"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Source fragment that yielded this structured event."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "INSERTED",
+                      "SUBSTITUTED",
+                      "OMITTED",
+                      "ENFORCED",
+                      "NOTIFIED",
+                      "RENUMBERED"
+                    ]
+                  },
+                  "effective_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 effective date for this event when extractable."
+                  },
+                  "commencement_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 commencement date when distinct from effective_date."
+                  },
+                  "enacted_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 enacted/issuance date when only a bare dated reference is present."
+                  },
+                  "instrument_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "ACT",
+                      "ORDER",
+                      "NOTIFICATION",
+                      "UNKNOWN",
+                      null
+                    ],
+                    "default": null,
+                    "description": "Type of amending instrument for this event."
+                  },
+                  "notification": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "notification_number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Structured notification/order number for this event."
+                  },
+                  "notification_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 notification/order date for this event."
+                  },
+                  "amending_act": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Optional event-specific textual selector of what was affected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment 3",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=3",
+            "start": null,
+            "end": null
+          },
+          "text": "3. Inserted vide Notification No.31/2019 - CT dated 28.06.2019.",
+          "payload": {
+            "marker": "3",
+            "text": "3. Inserted vide Notification No.31/2019 - CT dated 28.06.2019.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2019-06-28",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 31/2019-CT, dated 28.06.2019",
+            "notification_number": "31/2019-CT",
+            "notification_date": "2019-06-28",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No.31/2019 - CT dated 28.06.2019",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2019-06-28",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 31/2019-CT, dated 28.06.2019",
+                "notification_number": "31/2019-CT",
+                "notification_date": "2019-06-28",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        }
+      ],
+      "metadata": {
+        "rule_id": "CGST-R21"
+      }
+    },
+    {
+      "dossier_id": "gst-amendment-CGST-R21-4",
+      "kind": "amendment",
+      "domain": "gst",
+      "target_id": "4",
+      "title": "Amendment dossier for marker 4",
+      "category_focus": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "candidate_fragment": {
+        "marker": "4",
+        "text": "4. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+        "action": "INSERTED",
+        "effective_date": null,
+        "commencement_date": null,
+        "enacted_date": "2020-12-22",
+        "instrument_type": "NOTIFICATION",
+        "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+        "notification_number": "94/2020-CT",
+        "notification_date": "2020-12-22",
+        "amending_act": null,
+        "target": null,
+        "events": [
+          {
+            "text": "Inserted vide Notification No.94/2020 - CT dated 22.12.2020",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2020-12-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+            "notification_number": "94/2020-CT",
+            "notification_date": "2020-12-22",
+            "amending_act": null,
+            "target": null
+          }
+        ]
+      },
+      "schema_excerpt": {
+        "definition": {
+          "type": "object",
+          "required": [
+            "marker",
+            "action",
+            "text"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "description": "Footnote identifier as rendered on the rule page. e.g. '1', '2', '*'."
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "INSERTED",
+                "SUBSTITUTED",
+                "OMITTED",
+                "ENFORCED",
+                "NOTIFIED",
+                "RENUMBERED"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "description": "Full footnote text exactly as on the source page."
+            },
+            "effective_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 effective date when extractable."
+            },
+            "commencement_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 commencement date when distinct from effective_date."
+            },
+            "enacted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 enacted date when the source gives only the amending Act date."
+            },
+            "instrument_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "ACT",
+                "ORDER",
+                "NOTIFICATION",
+                "UNKNOWN",
+                null
+              ],
+              "default": null,
+              "description": "Type of amending instrument."
+            },
+            "notification": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "notification_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Structured notification number extracted from footnote text."
+            },
+            "notification_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 date of the notification itself when extractable."
+            },
+            "amending_act": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'."
+            },
+            "historical_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Superseded text preserved in the footnote when a substitution note reproduces the prior wording."
+            },
+            "events": {
+              "type": "array",
+              "default": [],
+              "description": "Structured legal events parsed from this one footnote. Usually one event; compound source notes may contain multiple notifications/orders.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "action"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Source fragment that yielded this structured event."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "INSERTED",
+                      "SUBSTITUTED",
+                      "OMITTED",
+                      "ENFORCED",
+                      "NOTIFIED",
+                      "RENUMBERED"
+                    ]
+                  },
+                  "effective_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 effective date for this event when extractable."
+                  },
+                  "commencement_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 commencement date when distinct from effective_date."
+                  },
+                  "enacted_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 enacted/issuance date when only a bare dated reference is present."
+                  },
+                  "instrument_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "ACT",
+                      "ORDER",
+                      "NOTIFICATION",
+                      "UNKNOWN",
+                      null
+                    ],
+                    "default": null,
+                    "description": "Type of amending instrument for this event."
+                  },
+                  "notification": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "notification_number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Structured notification/order number for this event."
+                  },
+                  "notification_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 notification/order date for this event."
+                  },
+                  "amending_act": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Optional event-specific textual selector of what was affected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment 4",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=4",
+            "start": null,
+            "end": null
+          },
+          "text": "4. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+          "payload": {
+            "marker": "4",
+            "text": "4. Inserted vide Notification No.94/2020 - CT dated 22.12.2020.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2020-12-22",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+            "notification_number": "94/2020-CT",
+            "notification_date": "2020-12-22",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No.94/2020 - CT dated 22.12.2020",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2020-12-22",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 94/2020-CT, dated 22.12.2020",
+                "notification_number": "94/2020-CT",
+                "notification_date": "2020-12-22",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        }
+      ],
+      "metadata": {
+        "rule_id": "CGST-R21"
+      }
+    },
+    {
+      "dossier_id": "gst-amendment-CGST-R21-5",
+      "kind": "amendment",
+      "domain": "gst",
+      "target_id": "5",
+      "title": "Amendment dossier for marker 5",
+      "category_focus": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "candidate_fragment": {
+        "marker": "5",
+        "text": "5. Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022.",
+        "action": "INSERTED",
+        "effective_date": "2022-10-01",
+        "commencement_date": null,
+        "enacted_date": null,
+        "instrument_type": "NOTIFICATION",
+        "notification": "Notification No. 19/2022-CT, dated 28.09.2022",
+        "notification_number": "19/2022-CT",
+        "notification_date": "2022-09-28",
+        "amending_act": null,
+        "target": null,
+        "events": [
+          {
+            "text": "Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022",
+            "action": "INSERTED",
+            "effective_date": "2022-10-01",
+            "commencement_date": null,
+            "enacted_date": null,
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 19/2022-CT, dated 28.09.2022",
+            "notification_number": "19/2022-CT",
+            "notification_date": "2022-09-28",
+            "amending_act": null,
+            "target": null
+          }
+        ]
+      },
+      "schema_excerpt": {
+        "definition": {
+          "type": "object",
+          "required": [
+            "marker",
+            "action",
+            "text"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "description": "Footnote identifier as rendered on the rule page. e.g. '1', '2', '*'."
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "INSERTED",
+                "SUBSTITUTED",
+                "OMITTED",
+                "ENFORCED",
+                "NOTIFIED",
+                "RENUMBERED"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "description": "Full footnote text exactly as on the source page."
+            },
+            "effective_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 effective date when extractable."
+            },
+            "commencement_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 commencement date when distinct from effective_date."
+            },
+            "enacted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 enacted date when the source gives only the amending Act date."
+            },
+            "instrument_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "ACT",
+                "ORDER",
+                "NOTIFICATION",
+                "UNKNOWN",
+                null
+              ],
+              "default": null,
+              "description": "Type of amending instrument."
+            },
+            "notification": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "notification_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Structured notification number extracted from footnote text."
+            },
+            "notification_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 date of the notification itself when extractable."
+            },
+            "amending_act": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'."
+            },
+            "historical_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Superseded text preserved in the footnote when a substitution note reproduces the prior wording."
+            },
+            "events": {
+              "type": "array",
+              "default": [],
+              "description": "Structured legal events parsed from this one footnote. Usually one event; compound source notes may contain multiple notifications/orders.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "action"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Source fragment that yielded this structured event."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "INSERTED",
+                      "SUBSTITUTED",
+                      "OMITTED",
+                      "ENFORCED",
+                      "NOTIFIED",
+                      "RENUMBERED"
+                    ]
+                  },
+                  "effective_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 effective date for this event when extractable."
+                  },
+                  "commencement_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 commencement date when distinct from effective_date."
+                  },
+                  "enacted_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 enacted/issuance date when only a bare dated reference is present."
+                  },
+                  "instrument_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "ACT",
+                      "ORDER",
+                      "NOTIFICATION",
+                      "UNKNOWN",
+                      null
+                    ],
+                    "default": null,
+                    "description": "Type of amending instrument for this event."
+                  },
+                  "notification": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "notification_number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Structured notification/order number for this event."
+                  },
+                  "notification_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 notification/order date for this event."
+                  },
+                  "amending_act": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Optional event-specific textual selector of what was affected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment 5",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=5",
+            "start": null,
+            "end": null
+          },
+          "text": "5. Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022.",
+          "payload": {
+            "marker": "5",
+            "text": "5. Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022.",
+            "action": "INSERTED",
+            "effective_date": "2022-10-01",
+            "commencement_date": null,
+            "enacted_date": null,
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 19/2022-CT, dated 28.09.2022",
+            "notification_number": "19/2022-CT",
+            "notification_date": "2022-09-28",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted (w.e.f. 01.10.2022) vide Notification No. 19/2022 - CT dated 28.09.2022",
+                "action": "INSERTED",
+                "effective_date": "2022-10-01",
+                "commencement_date": null,
+                "enacted_date": null,
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 19/2022-CT, dated 28.09.2022",
+                "notification_number": "19/2022-CT",
+                "notification_date": "2022-09-28",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        }
+      ],
+      "metadata": {
+        "rule_id": "CGST-R21"
+      }
+    },
+    {
+      "dossier_id": "gst-amendment-CGST-R21-6",
+      "kind": "amendment",
+      "domain": "gst",
+      "target_id": "6",
+      "title": "Amendment dossier for marker 6",
+      "category_focus": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "candidate_fragment": {
+        "marker": "6",
+        "text": "6. Inserted vide Notification No. 12/2024 - CT dated 10.07.2024.",
+        "action": "INSERTED",
+        "effective_date": null,
+        "commencement_date": null,
+        "enacted_date": "2024-07-10",
+        "instrument_type": "NOTIFICATION",
+        "notification": "Notification No. 12/2024-CT, dated 10.07.2024",
+        "notification_number": "12/2024-CT",
+        "notification_date": "2024-07-10",
+        "amending_act": null,
+        "target": null,
+        "events": [
+          {
+            "text": "Inserted vide Notification No. 12/2024 - CT dated 10.07.2024",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2024-07-10",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 12/2024-CT, dated 10.07.2024",
+            "notification_number": "12/2024-CT",
+            "notification_date": "2024-07-10",
+            "amending_act": null,
+            "target": null
+          }
+        ]
+      },
+      "schema_excerpt": {
+        "definition": {
+          "type": "object",
+          "required": [
+            "marker",
+            "action",
+            "text"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "description": "Footnote identifier as rendered on the rule page. e.g. '1', '2', '*'."
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "INSERTED",
+                "SUBSTITUTED",
+                "OMITTED",
+                "ENFORCED",
+                "NOTIFIED",
+                "RENUMBERED"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "description": "Full footnote text exactly as on the source page."
+            },
+            "effective_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 effective date when extractable."
+            },
+            "commencement_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 commencement date when distinct from effective_date."
+            },
+            "enacted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 enacted date when the source gives only the amending Act date."
+            },
+            "instrument_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "ACT",
+                "ORDER",
+                "NOTIFICATION",
+                "UNKNOWN",
+                null
+              ],
+              "default": null,
+              "description": "Type of amending instrument."
+            },
+            "notification": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "notification_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Structured notification number extracted from footnote text."
+            },
+            "notification_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "ISO 8601 date of the notification itself when extractable."
+            },
+            "amending_act": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Textual selector of what was affected. e.g. 'sub-rule (4)', 'clause (b)'."
+            },
+            "historical_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Superseded text preserved in the footnote when a substitution note reproduces the prior wording."
+            },
+            "events": {
+              "type": "array",
+              "default": [],
+              "description": "Structured legal events parsed from this one footnote. Usually one event; compound source notes may contain multiple notifications/orders.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "action"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Source fragment that yielded this structured event."
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "INSERTED",
+                      "SUBSTITUTED",
+                      "OMITTED",
+                      "ENFORCED",
+                      "NOTIFIED",
+                      "RENUMBERED"
+                    ]
+                  },
+                  "effective_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 effective date for this event when extractable."
+                  },
+                  "commencement_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 commencement date when distinct from effective_date."
+                  },
+                  "enacted_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 enacted/issuance date when only a bare dated reference is present."
+                  },
+                  "instrument_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "ACT",
+                      "ORDER",
+                      "NOTIFICATION",
+                      "UNKNOWN",
+                      null
+                    ],
+                    "default": null,
+                    "description": "Type of amending instrument for this event."
+                  },
+                  "notification": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "notification_number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Structured notification/order number for this event."
+                  },
+                  "notification_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "ISO 8601 notification/order date for this event."
+                  },
+                  "amending_act": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Optional event-specific textual selector of what was affected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "evidence": [
+        {
+          "kind": "hint_amendment",
+          "label": "Hint amendment 6",
+          "locator": {
+            "source_name": "hint.amendments",
+            "pointer": "marker=6",
+            "start": null,
+            "end": null
+          },
+          "text": "6. Inserted vide Notification No. 12/2024 - CT dated 10.07.2024.",
+          "payload": {
+            "marker": "6",
+            "text": "6. Inserted vide Notification No. 12/2024 - CT dated 10.07.2024.",
+            "action": "INSERTED",
+            "effective_date": null,
+            "commencement_date": null,
+            "enacted_date": "2024-07-10",
+            "instrument_type": "NOTIFICATION",
+            "notification": "Notification No. 12/2024-CT, dated 10.07.2024",
+            "notification_number": "12/2024-CT",
+            "notification_date": "2024-07-10",
+            "amending_act": null,
+            "target": null,
+            "events": [
+              {
+                "text": "Inserted vide Notification No. 12/2024 - CT dated 10.07.2024",
+                "action": "INSERTED",
+                "effective_date": null,
+                "commencement_date": null,
+                "enacted_date": "2024-07-10",
+                "instrument_type": "NOTIFICATION",
+                "notification": "Notification No. 12/2024-CT, dated 10.07.2024",
+                "notification_number": "12/2024-CT",
+                "notification_date": "2024-07-10",
+                "amending_act": null,
+                "target": null
+              }
+            ]
+          }
+        }
+      ],
+      "metadata": {
+        "rule_id": "CGST-R21"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "docket-gst-cluster-CGST-R21",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "clauses",
+        "cross_refs",
+        "duplicates",
+        "source_refs",
+        "status_chronology",
+        "structure_scope",
+        "text_fidelity"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "docket-gst-amendment-CGST-R21-1",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-amendment-CGST-R21-1",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "1",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "docket-gst-amendment-CGST-R21-2",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-amendment-CGST-R21-2",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "2",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "docket-gst-amendment-CGST-R21-3",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-amendment-CGST-R21-3",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "3",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "docket-gst-amendment-CGST-R21-4",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-amendment-CGST-R21-4",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "4",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "docket-gst-amendment-CGST-R21-5",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-amendment-CGST-R21-5",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "5",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "docket-gst-amendment-CGST-R21-6",
+      "stage": "docket",
+      "counsel_name": "docket_clerk",
+      "dossier_id": "gst-amendment-CGST-R21-6",
+      "prompt_key": "core.docket",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "6",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "specialist-source_fidelity_counsel-gst-cluster-CGST-R21",
+      "stage": "specialist",
+      "counsel_name": "source_fidelity_counsel",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "gst.source_fidelity",
+      "categories": [
+        "text_fidelity"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "specialist-structure_scope_counsel-gst-cluster-CGST-R21",
+      "stage": "specialist",
+      "counsel_name": "structure_scope_counsel",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "gst.structure_scope",
+      "categories": [
+        "clauses",
+        "structure_scope"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-cluster-CGST-R21",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "specialist-reference_counsel-gst-cluster-CGST-R21",
+      "stage": "specialist",
+      "counsel_name": "reference_counsel",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "gst.references",
+      "categories": [
+        "cross_refs",
+        "duplicates",
+        "source_refs"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-amendment-CGST-R21-1",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-amendment-CGST-R21-1",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "1",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-amendment-CGST-R21-2",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-amendment-CGST-R21-2",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "2",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-amendment-CGST-R21-3",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-amendment-CGST-R21-3",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "3",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-amendment-CGST-R21-4",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-amendment-CGST-R21-4",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "4",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-amendment-CGST-R21-5",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-amendment-CGST-R21-5",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "5",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "specialist-amendment_counsel-gst-amendment-CGST-R21-6",
+      "stage": "specialist",
+      "counsel_name": "amendment_counsel",
+      "dossier_id": "gst-amendment-CGST-R21-6",
+      "prompt_key": "gst.amendment",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "6",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-cluster-CGST-R21",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "clauses",
+        "cross_refs",
+        "duplicates",
+        "source_refs",
+        "status_chronology",
+        "structure_scope",
+        "text_fidelity"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-amendment-CGST-R21-1",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-amendment-CGST-R21-1",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "1",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-amendment-CGST-R21-2",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-amendment-CGST-R21-2",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "2",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-amendment-CGST-R21-3",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-amendment-CGST-R21-3",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "3",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-amendment-CGST-R21-4",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-amendment-CGST-R21-4",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "4",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-amendment-CGST-R21-5",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-amendment-CGST-R21-5",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "5",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "skeptic-gst-amendment-CGST-R21-6",
+      "stage": "skeptic",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-amendment-CGST-R21-6",
+      "prompt_key": "gst.artifact_defender",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "6",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-cluster-CGST-R21",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "clauses",
+        "cross_refs",
+        "duplicates",
+        "source_refs",
+        "status_chronology",
+        "structure_scope",
+        "text_fidelity"
+      ],
+      "payload": {
+        "target_id": "CGST-R21",
+        "kind": "cluster"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-amendment-CGST-R21-1",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R21-1",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "1",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-amendment-CGST-R21-2",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R21-2",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "2",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-amendment-CGST-R21-3",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R21-3",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "3",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-amendment-CGST-R21-4",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R21-4",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "4",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-amendment-CGST-R21-5",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R21-5",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "5",
+        "kind": "amendment"
+      }
+    },
+    {
+      "task_id": "arbiter-gst-amendment-CGST-R21-6",
+      "stage": "arbiter",
+      "counsel_name": "chief_arbiter",
+      "dossier_id": "gst-amendment-CGST-R21-6",
+      "prompt_key": "gst.arbiter",
+      "categories": [
+        "amendment_markers",
+        "status_chronology"
+      ],
+      "payload": {
+        "target_id": "6",
+        "kind": "amendment"
+      }
+    }
+  ],
+  "metadata": {
+    "rule_number": "21",
+    "session_id": "sess_536d61412f0b"
+  }
+}

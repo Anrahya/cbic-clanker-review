@@ -1,0 +1,225 @@
+[
+  {
+    "task_id": "skeptic-ISSUE-0001",
+    "counsel_name": "artifact_defender",
+    "dossier_id": "gst-cluster-CGST-R21",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me analyze this candidate issue carefully.\n\nThe issue claims:\n- Node CGST-R21-b carries amendment marker [1] but has no effective_from\n- Amendment hint 1 states effective_date '2017-06-22' (w.e.f. 22.06.2017)\n- This is a genuine chronology defect: the clause's effective date is determinable from the hint but missing from the node\n\nLet me examine the evidence:\n\n1. Node CGST-R21-b:\n```json\n\"amendment_markers\": [1, 2],\n\"effective_from\": null,\n```\n\n2. Hint amendment marker 1:\n```json\n\"marker\": \"1\",\n\"text\": \"1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \\\"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\\\"\",\n\"action\": \"SUBSTITUTED\",\n\"effective_date\": \"2017-06-22\"\n```\n\nSo amendment marker 1 has a clear effective_date of '2017-06-22' (w.e.f. 22.06.2017).\n\nThe node CGST-R21-b has amendment_markers=[1,2] and effective_from=null.\n\nThe question is: should effective_from be propagated from the hint amendment?\n\nLooking at the schema:\n- `effective_from`: \"When this current node version became effective.\"\n\nThe hint amendment marker 1 says it was a SUBSTITUTION effective from 2017-06-22. This means clause (b) was substituted effective that date.\n\nLooking at other nodes for comparison:\n- CGST-R21-c: amendment_markers=[1], effective_from=\"2017-06-22\" ✓\n\n\n- CGST-R21-h: amendment_markers=[5], effective_from=\"2022-10-01\" ✓\n- CGST-R21-i: amendment_markers=[5], effective_from=\"2022-10-01\" ✓\n\nCGST-R21-c also carries amendment marker 1 and correctly has effective_from=\"2017-06-22\". This is strong evidence that the extractor should have propagated this date to CGST-R21-b as well.\n\nHowever, there's a complication: CGST-R21-b has amendment_markers=[1, 2], meaning it was both substituted (marker 1, w.e.f. 22.06.2017) and had text inserted (marker 2, enacted 22.12.2020). The most recent amendment marker (2) lacks a w.e.f. date, creating ambiguity about which effective_from date should apply to the current node state.\n\nGiven that marker 2 inserted \"or both\" into the text and marker 1 substituted the broader clause, the node's operative text likely reflects both amendments. Since both amendments are now in force, the earlier effective date of 2017-06-22 would be the appropriate effective_from value. But I need to examine the amendment span more carefully to confirm whether marker 2 is nested within marker 1's span or if it operates independently.\n\nThe amendment span for marker 1 spans blocks 4-5 (clauses b and c), while marker 2 is contained within block 4 (clause b alone). This nesting suggests the node's effective_from should be tied to the most recent amendment affecting it, which is marker 1 at 2017-06-22.\n\nHowever, there's a structural issue here: the amendment span covers both (b) and (c) together, but CGST-R21-b is a separate node from CGST-R21-c. The question becomes whether a node-level effective_from should reflect when that specific clause became operative, or whether it should reflect the entire amendment span's effective date. Since (b) is nested within the larger amendment, its effective_from should logically align with marker 1's date of 2017-06-22, even though the amendment span technically includes both clauses.\n\nLooking at how CGST-R21-c was handled—it also carries marker 1 and has effective_from=\"2017-06-22\"—suggests the extractor treated both clauses as part of the same amendment event. This creates an inconsistency: CGST-R21-b should logically have the same effective_from value as CGST-R21-c since they're governed by the same amendment marker, yet it doesn't.\n\nThe real issue is whether the effective_from should reflect the earliest amendment (2017-06-22) or wait for the most recent one that affected the node. Since marker 2 has no w.e.f. date and marker 1 does, the extractor should have used 2017-06-22. The candidate issue identifies this as a genuine chronology defect—the hint provides a determinable effective date that the node failed to capture. So the problem is straightforward: CGST-R21-b carries amendment marker 1 with an effective date of 2017-06-22, but the node has no effective_from value. The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identified this gap, and it's consistent with how CGST-R21-c was handled in the same amendment span. This is a legitimate extraction defect—the node should have propagated the effective date from the hint. I'll mark this as confirmed_issue with major severity, since the date is clearly available and the omission is unambiguous.",
+          "payload": {
+            "thinking": "Let me analyze this candidate issue carefully.\n\nThe issue claims:\n- Node CGST-R21-b carries amendment marker [1] but has no effective_from\n- Amendment hint 1 states effective_date '2017-06-22' (w.e.f. 22.06.2017)\n- This is a genuine chronology defect: the clause's effective date is determinable from the hint but missing from the node\n\nLet me examine the evidence:\n\n1. Node CGST-R21-b:\n```json\n\"amendment_markers\": [1, 2],\n\"effective_from\": null,\n```\n\n2. Hint amendment marker 1:\n```json\n\"marker\": \"1\",\n\"text\": \"1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \\\"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\\\"\",\n\"action\": \"SUBSTITUTED\",\n\"effective_date\": \"2017-06-22\"\n```\n\nSo amendment marker 1 has a clear effective_date of '2017-06-22' (w.e.f. 22.06.2017).\n\nThe node CGST-R21-b has amendment_markers=[1,2] and effective_from=null.\n\nThe question is: should effective_from be propagated from the hint amendment?\n\nLooking at the schema:\n- `effective_from`: \"When this current node version became effective.\"\n\nThe hint amendment marker 1 says it was a SUBSTITUTION effective from 2017-06-22. This means clause (b) was substituted effective that date.\n\nLooking at other nodes for comparison:\n- CGST-R21-c: amendment_markers=[1], effective_from=\"2017-06-22\" ✓\n\n\n- CGST-R21-h: amendment_markers=[5], effective_from=\"2022-10-01\" ✓\n- CGST-R21-i: amendment_markers=[5], effective_from=\"2022-10-01\" ✓\n\nCGST-R21-c also carries amendment marker 1 and correctly has effective_from=\"2017-06-22\". This is strong evidence that the extractor should have propagated this date to CGST-R21-b as well.\n\nHowever, there's a complication: CGST-R21-b has amendment_markers=[1, 2], meaning it was both substituted (marker 1, w.e.f. 22.06.2017) and had text inserted (marker 2, enacted 22.12.2020). The most recent amendment marker (2) lacks a w.e.f. date, creating ambiguity about which effective_from date should apply to the current node state.\n\nGiven that marker 2 inserted \"or both\" into the text and marker 1 substituted the broader clause, the node's operative text likely reflects both amendments. Since both amendments are now in force, the earlier effective date of 2017-06-22 would be the appropriate effective_from value. But I need to examine the amendment span more carefully to confirm whether marker 2 is nested within marker 1's span or if it operates independently.\n\nThe amendment span for marker 1 spans blocks 4-5 (clauses b and c), while marker 2 is contained within block 4 (clause b alone). This nesting suggests the node's effective_from should be tied to the most recent amendment affecting it, which is marker 1 at 2017-06-22.\n\nHowever, there's a structural issue here: the amendment span covers both (b) and (c) together, but CGST-R21-b is a separate node from CGST-R21-c. The question becomes whether a node-level effective_from should reflect when that specific clause became operative, or whether it should reflect the entire amendment span's effective date. Since (b) is nested within the larger amendment, its effective_from should logically align with marker 1's date of 2017-06-22, even though the amendment span technically includes both clauses.\n\nLooking at how CGST-R21-c was handled—it also carries marker 1 and has effective_from=\"2017-06-22\"—suggests the extractor treated both clauses as part of the same amendment event. This creates an inconsistency: CGST-R21-b should logically have the same effective_from value as CGST-R21-c since they're governed by the same amendment marker, yet it doesn't.\n\nThe real issue is whether the effective_from should reflect the earliest amendment (2017-06-22) or wait for the most recent one that affected the node. Since marker 2 has no w.e.f. date and marker 1 does, the extractor should have used 2017-06-22. The candidate issue identifies this as a genuine chronology defect—the hint provides a determinable effective date that the node failed to capture. So the problem is straightforward: CGST-R21-b carries amendment marker 1 with an effective date of 2017-06-22, but the node has no effective_from value. The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identified this gap, and it's consistent with how CGST-R21-c was handled in the same amendment span. This is a legitimate extraction defect—the node should have propagated the effective date from the hint. I'll mark this as confirmed_issue with major severity, since the date is clearly available and the omission is unambiguous.",
+            "signature": "c8b6535907470eb6388ad5e5c6ff08f904ef656c35d04fec4ae0601c03464cd4",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "```json\n{\n  \"label\": \"confirmed_issue\",\n  \"category\": \"chronology\",\n  \"node_id\": \"CGST-R21-b\",\n  \"severity\": \"major\",\n  \"title\": \"Missing effective_from for clause (b) amendment marker 1\",\n  \"problem\": \"Node CGST-R21-b carries amendment_markers=[1,2] but effective_from=null. Hint amendment marker 1 is a SUBSTITUTION with effective_date='2017-06-22' (w.e.f. 22.06.2017). The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identifies that the node is missing this determinable effective date. Consistent extraction pattern confirmed: CGST-R21-c also carries amendment marker 1 and correctly has effective_from='2017-06-22', showing the same amendment span's effective date was properly propagated there but not to CGST-R21-b.\",\n  \"evidence_refs\": [\n    \"Node CGST-R21-b: amendment_markers=[1,2], effective_from=null\",\n    \"Hint amendment marker 1: effective_date='2017-06-22', action=SUBSTITUTED, w.e.f. 22.06.2017\",\n    \"Node CGST-R21-c: amendment_markers=[1], effective_from='2017-06-22' (same marker 1, correct)\",\n    \"Signal: CHRON-EFFECTIVE-MISSING-CGST-R21-b-1\"\n  ],\n  \"recommended_fix\": \"Set effective_from='2017-06-22' on CGST-R21-b to propagate from hint amendment 1.\",\n  \"confidence\": 0.93\n}\n```",
+          "payload": {
+            "text": "```json\n{\n  \"label\": \"confirmed_issue\",\n  \"category\": \"chronology\",\n  \"node_id\": \"CGST-R21-b\",\n  \"severity\": \"major\",\n  \"title\": \"Missing effective_from for clause (b) amendment marker 1\",\n  \"problem\": \"Node CGST-R21-b carries amendment_markers=[1,2] but effective_from=null. Hint amendment marker 1 is a SUBSTITUTION with effective_date='2017-06-22' (w.e.f. 22.06.2017). The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identifies that the node is missing this determinable effective date. Consistent extraction pattern confirmed: CGST-R21-c also carries amendment marker 1 and correctly has effective_from='2017-06-22', showing the same amendment span's effective date was properly propagated there but not to CGST-R21-b.\",\n  \"evidence_refs\": [\n    \"Node CGST-R21-b: amendment_markers=[1,2], effective_from=null\",\n    \"Hint amendment marker 1: effective_date='2017-06-22', action=SUBSTITUTED, w.e.f. 22.06.2017\",\n    \"Node CGST-R21-c: amendment_markers=[1], effective_from='2017-06-22' (same marker 1, correct)\",\n    \"Signal: CHRON-EFFECTIVE-MISSING-CGST-R21-b-1\"\n  ],\n  \"recommended_fix\": \"Set effective_from='2017-06-22' on CGST-R21-b to propagate from hint amendment 1.\",\n  \"confidence\": 0.93\n}\n```",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0615b60e1f82218f68f5fb24c47824b6",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me analyze this candidate issue carefully.\n\nThe issue claims:\n- Node CGST-R21-b carries amendment marker [1] but has no effective_from\n- Amendment hint 1 states effective_date '2017-06-22' (w.e.f. 22.06.2017)\n- This is a genuine chronology defect: the clause's effective date is determinable from the hint but missing from the node\n\nLet me examine the evidence:\n\n1. Node CGST-R21-b:\n```json\n\"amendment_markers\": [1, 2],\n\"effective_from\": null,\n```\n\n2. Hint amendment marker 1:\n```json\n\"marker\": \"1\",\n\"text\": \"1. Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017 -CT dated 27.06.2017 for \\\"(b) issues invoice or bill without supply of goods or services in violation of the provisions of this Act, or the rules made thereunder.\\\"\",\n\"action\": \"SUBSTITUTED\",\n\"effective_date\": \"2017-06-22\"\n```\n\nSo amendment marker 1 has a clear effective_date of '2017-06-22' (w.e.f. 22.06.2017).\n\nThe node CGST-R21-b has amendment_markers=[1,2] and effective_from=null.\n\nThe question is: should effective_from be propagated from the hint amendment?\n\nLooking at the schema:\n- `effective_from`: \"When this current node version became effective.\"\n\nThe hint amendment marker 1 says it was a SUBSTITUTION effective from 2017-06-22. This means clause (b) was substituted effective that date.\n\nLooking at other nodes for comparison:\n- CGST-R21-c: amendment_markers=[1], effective_from=\"2017-06-22\" ✓\n\n\n- CGST-R21-h: amendment_markers=[5], effective_from=\"2022-10-01\" ✓\n- CGST-R21-i: amendment_markers=[5], effective_from=\"2022-10-01\" ✓\n\nCGST-R21-c also carries amendment marker 1 and correctly has effective_from=\"2017-06-22\". This is strong evidence that the extractor should have propagated this date to CGST-R21-b as well.\n\nHowever, there's a complication: CGST-R21-b has amendment_markers=[1, 2], meaning it was both substituted (marker 1, w.e.f. 22.06.2017) and had text inserted (marker 2, enacted 22.12.2020). The most recent amendment marker (2) lacks a w.e.f. date, creating ambiguity about which effective_from date should apply to the current node state.\n\nGiven that marker 2 inserted \"or both\" into the text and marker 1 substituted the broader clause, the node's operative text likely reflects both amendments. Since both amendments are now in force, the earlier effective date of 2017-06-22 would be the appropriate effective_from value. But I need to examine the amendment span more carefully to confirm whether marker 2 is nested within marker 1's span or if it operates independently.\n\nThe amendment span for marker 1 spans blocks 4-5 (clauses b and c), while marker 2 is contained within block 4 (clause b alone). This nesting suggests the node's effective_from should be tied to the most recent amendment affecting it, which is marker 1 at 2017-06-22.\n\nHowever, there's a structural issue here: the amendment span covers both (b) and (c) together, but CGST-R21-b is a separate node from CGST-R21-c. The question becomes whether a node-level effective_from should reflect when that specific clause became operative, or whether it should reflect the entire amendment span's effective date. Since (b) is nested within the larger amendment, its effective_from should logically align with marker 1's date of 2017-06-22, even though the amendment span technically includes both clauses.\n\nLooking at how CGST-R21-c was handled—it also carries marker 1 and has effective_from=\"2017-06-22\"—suggests the extractor treated both clauses as part of the same amendment event. This creates an inconsistency: CGST-R21-b should logically have the same effective_from value as CGST-R21-c since they're governed by the same amendment marker, yet it doesn't.\n\nThe real issue is whether the effective_from should reflect the earliest amendment (2017-06-22) or wait for the most recent one that affected the node. Since marker 2 has no w.e.f. date and marker 1 does, the extractor should have used 2017-06-22. The candidate issue identifies this as a genuine chronology defect—the hint provides a determinable effective date that the node failed to capture. So the problem is straightforward: CGST-R21-b carries amendment marker 1 with an effective date of 2017-06-22, but the node has no effective_from value. The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identified this gap, and it's consistent with how CGST-R21-c was handled in the same amendment span. This is a legitimate extraction defect—the node should have propagated the effective date from the hint. I'll mark this as confirmed_issue with major severity, since the date is clearly available and the omission is unambiguous.",
+            "signature": "c8b6535907470eb6388ad5e5c6ff08f904ef656c35d04fec4ae0601c03464cd4",
+            "type": "thinking"
+          },
+          {
+            "text": "```json\n{\n  \"label\": \"confirmed_issue\",\n  \"category\": \"chronology\",\n  \"node_id\": \"CGST-R21-b\",\n  \"severity\": \"major\",\n  \"title\": \"Missing effective_from for clause (b) amendment marker 1\",\n  \"problem\": \"Node CGST-R21-b carries amendment_markers=[1,2] but effective_from=null. Hint amendment marker 1 is a SUBSTITUTION with effective_date='2017-06-22' (w.e.f. 22.06.2017). The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identifies that the node is missing this determinable effective date. Consistent extraction pattern confirmed: CGST-R21-c also carries amendment marker 1 and correctly has effective_from='2017-06-22', showing the same amendment span's effective date was properly propagated there but not to CGST-R21-b.\",\n  \"evidence_refs\": [\n    \"Node CGST-R21-b: amendment_markers=[1,2], effective_from=null\",\n    \"Hint amendment marker 1: effective_date='2017-06-22', action=SUBSTITUTED, w.e.f. 22.06.2017\",\n    \"Node CGST-R21-c: amendment_markers=[1], effective_from='2017-06-22' (same marker 1, correct)\",\n    \"Signal: CHRON-EFFECTIVE-MISSING-CGST-R21-b-1\"\n  ],\n  \"recommended_fix\": \"Set effective_from='2017-06-22' on CGST-R21-b to propagate from hint amendment 1.\",\n  \"confidence\": 0.93\n}\n```",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 17153,
+          "output_tokens": 1502
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 17153,
+        "output_tokens": 1502,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "skeptic-ISSUE-0001",
+        "counsel_name": "artifact_defender",
+        "dossier_id": "gst-cluster-CGST-R21",
+        "stage": "skeptic",
+        "categories": [
+          "chronology"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0001",
+          "issue_signature": "gst-cluster-CGST-R21::CGST-R21-b::chronology::missing-effective-from-for-clause-b-amendment-marker-1::node-cgst-r21-b-carries-amendment-marker-1-but-has-no-effective-from-amendment-hint-1-states-effective-date-2017-06-22-w-e-f-22-06-2017-this-is-a-genuine-chronology-defect-the-clause-s-effective-date-is-determinable-from-the-hint-but-missing-from-the-node",
+          "source_dossier_id": "gst-cluster-CGST-R21",
+          "node_id": "CGST-R21-b",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "confirmed_issue",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "category": "chronology",
+      "node_id": "CGST-R21-b",
+      "severity": "major",
+      "title": "Missing effective_from for clause (b) amendment marker 1",
+      "problem": "Node CGST-R21-b carries amendment_markers=[1,2] but effective_from=null. Hint amendment marker 1 is a SUBSTITUTION with effective_date='2017-06-22' (w.e.f. 22.06.2017). The signal CHRON-EFFECTIVE-MISSING-CGST-R21-b-1 correctly identifies that the node is missing this determinable effective date. Consistent extraction pattern confirmed: CGST-R21-c also carries amendment marker 1 and correctly has effective_from='2017-06-22', showing the same amendment span's effective date was properly propagated there but not to CGST-R21-b.",
+      "evidence_refs": [
+        "Node CGST-R21-b: amendment_markers=[1,2], effective_from=null",
+        "Hint amendment marker 1: effective_date='2017-06-22', action=SUBSTITUTED, w.e.f. 22.06.2017",
+        "Node CGST-R21-c: amendment_markers=[1], effective_from='2017-06-22' (same marker 1, correct)",
+        "Signal: CHRON-EFFECTIVE-MISSING-CGST-R21-b-1"
+      ],
+      "recommended_fix": "Set effective_from='2017-06-22' on CGST-R21-b to propagate from hint amendment 1.",
+      "confidence": 0.93,
+      "metadata": {
+        "task_id": "skeptic-ISSUE-0001",
+        "stage": "skeptic",
+        "categories": [
+          "chronology"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0001",
+          "issue_signature": "gst-cluster-CGST-R21::CGST-R21-b::chronology::missing-effective-from-for-clause-b-amendment-marker-1::node-cgst-r21-b-carries-amendment-marker-1-but-has-no-effective-from-amendment-hint-1-states-effective-date-2017-06-22-w-e-f-22-06-2017-this-is-a-genuine-chronology-defect-the-clause-s-effective-date-is-determinable-from-the-hint-but-missing-from-the-node",
+          "source_dossier_id": "gst-cluster-CGST-R21",
+          "node_id": "CGST-R21-b",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0001"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  },
+  {
+    "task_id": "skeptic-ISSUE-0002",
+    "counsel_name": "artifact_defender",
+    "dossier_id": "gst-cluster-CGST-R21",
+    "provider_response": {
+      "model": "MiniMax-M2.7",
+      "blocks": [
+        {
+          "kind": "thinking",
+          "text": "Let me carefully review this candidate issue.\n\nThe issue claims that CGST-R21-b is missing effective_from despite the hint amendment marker 1 providing an effective_date of 2017-06-22.\n\nLet me analyze the evidence:\n\n1. **Node CGST-R21-b** has:\n   - amendment_markers: [1, 2]\n   - effective_from: null\n   - status: \"active\"\n\n2. **Hint amendment marker 1** says:\n   - \"Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017-CT dated 27.06.2017\"\n   - effective_date: \"2017-06-22\"\n   - action: \"SUBSTITUTED\"\n\n3. **Hint amendment marker 2** says:\n   - \"Inserted vide Notification No.94/2020 - CT dated 22.12.2020.\"\n   - enacted_date: \"2020-12-22\"\n   - effective_date: null\n\nThe critical question is: what does it mean when a node has TWO amendment markers [1, 2]?\n\n- Marker 1: SUBSTITUTED effective 2017-06-22\n- Marker 2: INSERTED enacted 2020-12-22 (no effective_date specified)\n\nThe node CGST-R21-b carries BOTH markers. Looking at the source block 4:\n\"1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or\"\n\nThis shows that:\n- Marker 1 is the outer bracket [ (introducing the substituted version)\n- Marker 2 is the inner insertion [or both]\n\nSo marker 1 is a SUBSTITUTION (the whole clause was substituted effective 2017-06-22), and marker 2 is an INSERTION (the words \"or both\" were inserted later effective 2020-12-22).\n\n\nThe proposed fix would incorrectly set the effective_from to 2017-06-22, but that date only applies to marker 1's substitution. Since marker 2 was inserted later in 2020, applying the earlier date to the entire node would misrepresent the chronological history. Marker 1's effective date should apply only to that amendment's scope, not to subsequent insertions like marker 2.\n\nThis points to a schema design issue rather than an extraction error—the current schema structure doesn't allow tracking multiple amendment dates within a single node. The proposed fix would impose an inaccurate effective_from value that conflates two distinct amendments.\n\nI should also check whether other clauses in this rule follow a similar pattern. CGST-R21-c, for instance, has amendment marker [1] with effective_from set to 2017-06-22, which is consistent with that marker's specification. CGST-R21-h similarly applies its effective date correctly for marker [5].\n\nThe pattern becomes clear: CGST-R21-c works because it has only a single amendment marker, whereas CGST-R21-b fails because it carries multiple markers where the second one (2020-12-22) takes precedence. The extractor assigned effective_from to nodes with one marker but left CGST-R21-b as null due to the ambiguity created by having two conflicting dates. This is fundamentally a schema limitation—CGST-R21-b genuinely has two amendments with different effective dates, and the single effective_from field cannot accommodate both. The recommendation would require flattening multiple effective dates into one value, which would lose information and be inaccurate.",
+          "payload": {
+            "thinking": "Let me carefully review this candidate issue.\n\nThe issue claims that CGST-R21-b is missing effective_from despite the hint amendment marker 1 providing an effective_date of 2017-06-22.\n\nLet me analyze the evidence:\n\n1. **Node CGST-R21-b** has:\n   - amendment_markers: [1, 2]\n   - effective_from: null\n   - status: \"active\"\n\n2. **Hint amendment marker 1** says:\n   - \"Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017-CT dated 27.06.2017\"\n   - effective_date: \"2017-06-22\"\n   - action: \"SUBSTITUTED\"\n\n3. **Hint amendment marker 2** says:\n   - \"Inserted vide Notification No.94/2020 - CT dated 22.12.2020.\"\n   - enacted_date: \"2020-12-22\"\n   - effective_date: null\n\nThe critical question is: what does it mean when a node has TWO amendment markers [1, 2]?\n\n- Marker 1: SUBSTITUTED effective 2017-06-22\n- Marker 2: INSERTED enacted 2020-12-22 (no effective_date specified)\n\nThe node CGST-R21-b carries BOTH markers. Looking at the source block 4:\n\"1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or\"\n\nThis shows that:\n- Marker 1 is the outer bracket [ (introducing the substituted version)\n- Marker 2 is the inner insertion [or both]\n\nSo marker 1 is a SUBSTITUTION (the whole clause was substituted effective 2017-06-22), and marker 2 is an INSERTION (the words \"or both\" were inserted later effective 2020-12-22).\n\n\nThe proposed fix would incorrectly set the effective_from to 2017-06-22, but that date only applies to marker 1's substitution. Since marker 2 was inserted later in 2020, applying the earlier date to the entire node would misrepresent the chronological history. Marker 1's effective date should apply only to that amendment's scope, not to subsequent insertions like marker 2.\n\nThis points to a schema design issue rather than an extraction error—the current schema structure doesn't allow tracking multiple amendment dates within a single node. The proposed fix would impose an inaccurate effective_from value that conflates two distinct amendments.\n\nI should also check whether other clauses in this rule follow a similar pattern. CGST-R21-c, for instance, has amendment marker [1] with effective_from set to 2017-06-22, which is consistent with that marker's specification. CGST-R21-h similarly applies its effective date correctly for marker [5].\n\nThe pattern becomes clear: CGST-R21-c works because it has only a single amendment marker, whereas CGST-R21-b fails because it carries multiple markers where the second one (2020-12-22) takes precedence. The extractor assigned effective_from to nodes with one marker but left CGST-R21-b as null due to the ambiguity created by having two conflicting dates. This is fundamentally a schema limitation—CGST-R21-b genuinely has two amendments with different effective dates, and the single effective_from field cannot accommodate both. The recommendation would require flattening multiple effective dates into one value, which would lose information and be inaccurate.",
+            "signature": "4ac554ddf9a182fdd43339d61eb03a73b811b9d5d4829218565b2c1373a68030",
+            "type": "thinking"
+          }
+        },
+        {
+          "kind": "text",
+          "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"chronology\",\n  \"node_id\": \"CGST-R21-b\",\n  \"severity\": \"moderate\",\n  \"title\": \"Multi-amendment node effective_from ambiguity is a schema design question\",\n  \"problem\": \"CGST-R21-b carries two amendment markers: marker 1 (SUBSTITUTED, effective 2017-06-22) and marker 2 (INSERTED, enacted 2020-12-22, no effective_date). Setting effective_from to '2017-06-22' would misrepresent marker 2's chronology—it was enacted later but has no independent effective date in the hint. The null effective_from reflects a genuine schema limitation: single-field effective_from cannot express multiple amendments with divergent effective dates. This is an extraction policy/schema design question, not a defect where the extractor produced wrong data.\",\n  \"evidence_refs\": [\n    \"Hint amendment marker 1: action=SUBSTITUTED, effective_date=2017-06-22\",\n    \"Hint amendment marker 2: action=INSERTED, enacted_date=2020-12-22, effective_date=null\",\n    \"Source block 4 shows marker 1 open-bracket and marker 2 nested insertion [or both]\",\n    \"CGST-R21-c has single marker [1] and correctly receives effective_from=2017-06-22\",\n    \"CFST-R21-h has single marker [5] and correctly receives effective_from=2022-10-01\"\n  ],\n  \"recommended_fix\": \"No node-level fix recommended. The extraction is correct for a single-field schema. Marker 2 (enacted 2020-12-22, no w.e.f. specified) is the more recent amendment affecting this node's current text. The schema needs multi-amendment date tracking before a precise chronology can be assigned.\",\n  \"confidence\": 0.72\n}\n```",
+          "payload": {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"chronology\",\n  \"node_id\": \"CGST-R21-b\",\n  \"severity\": \"moderate\",\n  \"title\": \"Multi-amendment node effective_from ambiguity is a schema design question\",\n  \"problem\": \"CGST-R21-b carries two amendment markers: marker 1 (SUBSTITUTED, effective 2017-06-22) and marker 2 (INSERTED, enacted 2020-12-22, no effective_date). Setting effective_from to '2017-06-22' would misrepresent marker 2's chronology—it was enacted later but has no independent effective date in the hint. The null effective_from reflects a genuine schema limitation: single-field effective_from cannot express multiple amendments with divergent effective dates. This is an extraction policy/schema design question, not a defect where the extractor produced wrong data.\",\n  \"evidence_refs\": [\n    \"Hint amendment marker 1: action=SUBSTITUTED, effective_date=2017-06-22\",\n    \"Hint amendment marker 2: action=INSERTED, enacted_date=2020-12-22, effective_date=null\",\n    \"Source block 4 shows marker 1 open-bracket and marker 2 nested insertion [or both]\",\n    \"CGST-R21-c has single marker [1] and correctly receives effective_from=2017-06-22\",\n    \"CFST-R21-h has single marker [5] and correctly receives effective_from=2022-10-01\"\n  ],\n  \"recommended_fix\": \"No node-level fix recommended. The extraction is correct for a single-field schema. Marker 2 (enacted 2020-12-22, no w.e.f. specified) is the more recent amendment affecting this node's current text. The schema needs multi-amendment date tracking before a precise chronology can be assigned.\",\n  \"confidence\": 0.72\n}\n```",
+            "type": "text"
+          }
+        }
+      ],
+      "raw_response": {
+        "id": "0615b60e091d7e69b256f04599c9f57f",
+        "type": "message",
+        "role": "assistant",
+        "model": "MiniMax-M2.7",
+        "content": [
+          {
+            "thinking": "Let me carefully review this candidate issue.\n\nThe issue claims that CGST-R21-b is missing effective_from despite the hint amendment marker 1 providing an effective_date of 2017-06-22.\n\nLet me analyze the evidence:\n\n1. **Node CGST-R21-b** has:\n   - amendment_markers: [1, 2]\n   - effective_from: null\n   - status: \"active\"\n\n2. **Hint amendment marker 1** says:\n   - \"Substituted (w.e.f. 22.06.2017) vide Notification No. 07/2017-CT dated 27.06.2017\"\n   - effective_date: \"2017-06-22\"\n   - action: \"SUBSTITUTED\"\n\n3. **Hint amendment marker 2** says:\n   - \"Inserted vide Notification No.94/2020 - CT dated 22.12.2020.\"\n   - enacted_date: \"2020-12-22\"\n   - effective_date: null\n\nThe critical question is: what does it mean when a node has TWO amendment markers [1, 2]?\n\n- Marker 1: SUBSTITUTED effective 2017-06-22\n- Marker 2: INSERTED enacted 2020-12-22 (no effective_date specified)\n\nThe node CGST-R21-b carries BOTH markers. Looking at the source block 4:\n\"1 [(b) issues invoice or bill without supply of goods or services 2 [or both] in violation of the provisions of this Act, or the rules made thereunder; or\"\n\nThis shows that:\n- Marker 1 is the outer bracket [ (introducing the substituted version)\n- Marker 2 is the inner insertion [or both]\n\nSo marker 1 is a SUBSTITUTION (the whole clause was substituted effective 2017-06-22), and marker 2 is an INSERTION (the words \"or both\" were inserted later effective 2020-12-22).\n\n\nThe proposed fix would incorrectly set the effective_from to 2017-06-22, but that date only applies to marker 1's substitution. Since marker 2 was inserted later in 2020, applying the earlier date to the entire node would misrepresent the chronological history. Marker 1's effective date should apply only to that amendment's scope, not to subsequent insertions like marker 2.\n\nThis points to a schema design issue rather than an extraction error—the current schema structure doesn't allow tracking multiple amendment dates within a single node. The proposed fix would impose an inaccurate effective_from value that conflates two distinct amendments.\n\nI should also check whether other clauses in this rule follow a similar pattern. CGST-R21-c, for instance, has amendment marker [1] with effective_from set to 2017-06-22, which is consistent with that marker's specification. CGST-R21-h similarly applies its effective date correctly for marker [5].\n\nThe pattern becomes clear: CGST-R21-c works because it has only a single amendment marker, whereas CGST-R21-b fails because it carries multiple markers where the second one (2020-12-22) takes precedence. The extractor assigned effective_from to nodes with one marker but left CGST-R21-b as null due to the ambiguity created by having two conflicting dates. This is fundamentally a schema limitation—CGST-R21-b genuinely has two amendments with different effective dates, and the single effective_from field cannot accommodate both. The recommendation would require flattening multiple effective dates into one value, which would lose information and be inaccurate.",
+            "signature": "4ac554ddf9a182fdd43339d61eb03a73b811b9d5d4829218565b2c1373a68030",
+            "type": "thinking"
+          },
+          {
+            "text": "```json\n{\n  \"label\": \"acceptable_artifact\",\n  \"category\": \"chronology\",\n  \"node_id\": \"CGST-R21-b\",\n  \"severity\": \"moderate\",\n  \"title\": \"Multi-amendment node effective_from ambiguity is a schema design question\",\n  \"problem\": \"CGST-R21-b carries two amendment markers: marker 1 (SUBSTITUTED, effective 2017-06-22) and marker 2 (INSERTED, enacted 2020-12-22, no effective_date). Setting effective_from to '2017-06-22' would misrepresent marker 2's chronology—it was enacted later but has no independent effective date in the hint. The null effective_from reflects a genuine schema limitation: single-field effective_from cannot express multiple amendments with divergent effective dates. This is an extraction policy/schema design question, not a defect where the extractor produced wrong data.\",\n  \"evidence_refs\": [\n    \"Hint amendment marker 1: action=SUBSTITUTED, effective_date=2017-06-22\",\n    \"Hint amendment marker 2: action=INSERTED, enacted_date=2020-12-22, effective_date=null\",\n    \"Source block 4 shows marker 1 open-bracket and marker 2 nested insertion [or both]\",\n    \"CGST-R21-c has single marker [1] and correctly receives effective_from=2017-06-22\",\n    \"CFST-R21-h has single marker [5] and correctly receives effective_from=2022-10-01\"\n  ],\n  \"recommended_fix\": \"No node-level fix recommended. The extraction is correct for a single-field schema. Marker 2 (enacted 2020-12-22, no w.e.f. specified) is the more recent amendment affecting this node's current text. The schema needs multi-amendment date tracking before a precise chronology can be assigned.\",\n  \"confidence\": 0.72\n}\n```",
+            "type": "text"
+          }
+        ],
+        "usage": {
+          "input_tokens": 17144,
+          "output_tokens": 1149
+        },
+        "stop_reason": "end_turn",
+        "base_resp": {
+          "status_code": 0,
+          "status_msg": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 17144,
+        "output_tokens": 1149,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "stop_reason": "end_turn",
+      "metadata": {
+        "task_id": "skeptic-ISSUE-0002",
+        "counsel_name": "artifact_defender",
+        "dossier_id": "gst-cluster-CGST-R21",
+        "stage": "skeptic",
+        "categories": [
+          "chronology"
+        ],
+        "payload": {
+          "issue_id": "ISSUE-0002",
+          "issue_signature": "gst-cluster-CGST-R21::CGST-R21-b::chronology::node-missing-effective-from-despite-hint-providing-effective-date::cgst-r21-b-carries-amendment-marker-1-which-has-effective-date-2017-06-22-from-the-substituted-action-in-hint-amendment-marker-1-however-the-node-s-effective-from-field-is-null-causing-the-operative-effective-date-to-be-lost-in-extraction",
+          "source_dossier_id": "gst-cluster-CGST-R21",
+          "node_id": "CGST-R21-b",
+          "kind": "candidate_issue"
+        }
+      }
+    },
+    "parsed_judgment": {
+      "label": "acceptable_artifact",
+      "counsel_name": "artifact_defender",
+      "dossier_id": "gst-cluster-CGST-R21",
+      "category": "chronology",
+      "node_id": "CGST-R21-b",
+      "severity": "moderate",
+      "title": "Multi-amendment node effective_from ambiguity is a schema design question",
+      "problem": "CGST-R21-b carries two amendment markers: marker 1 (SUBSTITUTED, effective 2017-06-22) and marker 2 (INSERTED, enacted 2020-12-22, no effective_date). Setting effective_from to '2017-06-22' would misrepresent marker 2's chronology—it was enacted later but has no independent effective date in the hint. The null effective_from reflects a genuine schema limitation: single-field effective_from cannot express multiple amendments with divergent effective dates. This is an extraction policy/schema design question, not a defect where the extractor produced wrong data.",
+      "evidence_refs": [
+        "Hint amendment marker 1: action=SUBSTITUTED, effective_date=2017-06-22",
+        "Hint amendment marker 2: action=INSERTED, enacted_date=2020-12-22, effective_date=null",
+        "Source block 4 shows marker 1 open-bracket and marker 2 nested insertion [or both]",
+        "CGST-R21-c has single marker [1] and correctly receives effective_from=2017-06-22",
+        "CFST-R21-h has single marker [5] and correctly receives effective_from=2022-10-01"
+      ],
+      "recommended_fix": "No node-level fix recommended. The extraction is correct for a single-field schema. Marker 2 (enacted 2020-12-22, no w.e.f. specified) is the more recent amendment affecting this node's current text. The schema needs multi-amendment date tracking before a precise chronology can be assigned.",
+      "confidence": 0.72,
+      "metadata": {
+        "task_id": "skeptic-ISSUE-0002",
+        "stage": "skeptic",
+        "categories": [
+          "chronology"
+        ],
+        "task_payload": {
+          "issue_id": "ISSUE-0002",
+          "issue_signature": "gst-cluster-CGST-R21::CGST-R21-b::chronology::node-missing-effective-from-despite-hint-providing-effective-date::cgst-r21-b-carries-amendment-marker-1-which-has-effective-date-2017-06-22-from-the-substituted-action-in-hint-amendment-marker-1-however-the-node-s-effective-from-field-is-null-causing-the-operative-effective-date-to-be-lost-in-extraction",
+          "source_dossier_id": "gst-cluster-CGST-R21",
+          "node_id": "CGST-R21-b",
+          "kind": "candidate_issue"
+        },
+        "issue_id": "ISSUE-0002"
+      }
+    },
+    "invoke_error": null,
+    "parse_error": null
+  }
+]

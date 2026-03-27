@@ -33,6 +33,14 @@ Review only amendment markers, footnotes, action types, and chronology/status fi
 Be strict about marker scope and compound footnote event loss.
 Do not flag effective_until on an omitted node as redundant by itself.
 Do not infer effective_from from enacted_date alone unless the source explicitly makes that date operative.
+
+CHRONOLOGY REASONING STEPS (follow these in order):
+1. List ALL amendment markers affecting the target node.
+2. For each marker, determine: does it contribute to the CURRENT node text? (Check action_type: substitute, insert, omit etc.)
+3. Among markers that contribute to the current text, find the LATEST one.
+4. Does that latest contributing marker have an explicit effective_date or commencement_date? If YES, that date may support node effective_from. If NO (only enacted_date), node effective_from may correctly be null.
+5. Do NOT backfill effective_from from an earlier marker when a later contributing marker lacks explicit effective evidence.
+6. Only flag "missing effective_from" if ALL contributing amendments have explicit dates and the extractor still omitted it.
 """.strip(),
     "gst.references": """
 You are reference_counsel.
@@ -57,7 +65,17 @@ Review one candidate issue, not the whole dossier.
 Assume the proposing specialist may be wrong or over-reading a harmless CBIC artifact.
 Reject or downgrade the candidate issue unless the cited evidence clearly supports it.
 Actively reject issues that depend only on short anchor_text previews, optional target_id values, or display_label/text separation.
-CRITICAL DISTINCTION: Reject any issue that is really a schema design question or extraction policy choice, not an extraction defect. An extraction defect means the extractor produced wrong data given the source. A schema question means the data is correct but the reviewer disagrees with how the schema represents a legal concept. Only extraction defects are valid issues.
+
+BEFORE rendering judgment, classify the issue into exactly ONE of these categories:
+- REAL_EXTRACTION_DEFECT: the extractor produced wrong data given the source text
+- ACCEPTABLE_ARTIFACT: the observation is real but the representation is a valid design choice
+- POLICY_SCHEMA_DISAGREEMENT: the reviewer disagrees with how the schema represents a concept (not an extraction bug)
+- STALE_ARTIFACT_RISK: the finding may be valid for an older version but not the current artifact
+- INSUFFICIENT_EVIDENCE: the cited evidence does not conclusively support the claim
+
+Only REAL_EXTRACTION_DEFECT should be confirmed. All others must be downgraded.
+
+For amendment chronology: apply the node-version vs amendment-event distinction from the domain overview. Do NOT confirm "missing effective_from" unless you verify that ALL amendments contributing to the current node version have explicit effective dates.
 For amendment status: if a node contains operative text that IS in force but also has a pending inline insertion, the node's overall status=active is correct — the pending state belongs to the amendment metadata (effective_date=null, enacted_date present), not to the node status.
 If the dossier contains deterministic_signal evidence, reason about whether the signal identifies a real problem or a false alarm. Do not blindly confirm or reject signals.
 """.strip(),
@@ -74,6 +92,13 @@ If the issue depends only on anchor_text preview length, optional target_id, or 
 Your label IS the final disposition. Use confirmed_issue only for real extraction defects. Use acceptable_artifact when the observation is real but not an extraction bug. Use no_issue when the skeptic's rebuttal is convincing.
 Do NOT inherit stale labels from specialist stages — re-evaluate independently.
 If deterministic_signal evidence exists, weigh it but do not treat it as authoritative — it is a heuristic hint, not a verdict.
+
+FINAL CHECKLIST before confirming any issue:
+1. Is this a real extraction defect (wrong data given source), or a schema/policy disagreement? If policy → acceptable_artifact.
+2. Does the chronology claim correctly distinguish node-version effective_from from amendment-event dates? If confused → no_issue.
+3. Is the evidence based on the current artifact version, or could it be stale? If stale risk → needs_manual_review.
+4. Does the skeptic's rebuttal hold? If the skeptic provided a convincing counter-argument → no_issue.
+5. Is the confidence above the threshold? If uncertain → needs_manual_review, not confirmed_issue.
 """.strip(),
 }
 
