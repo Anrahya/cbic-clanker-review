@@ -22,6 +22,7 @@ from .provider.minimax import MiniMaxProvider, MiniMaxProviderConfig
 from .report.persistence import write_deliberation_artifacts, write_run_artifacts
 from .session import compile_plan_requests, execute_compiled_requests
 from .workflow import run_issue_council
+from .stages.manual import apply_manual_review_summarizer
 
 app = typer.Typer(help="Clanker Zone multi-agent council runner.")
 
@@ -183,6 +184,11 @@ def gst_review(
     run.rule_report = apply_gst_false_positive_filter(
         report=run.rule_report,
         dossiers=plan.dossiers,
+    )
+    run.rule_report = apply_manual_review_summarizer(
+        report=run.rule_report,
+        dossiers=plan.dossiers,
+        provider=provider,
     )
     write_deliberation_artifacts(out_dir=out_dir, plan=plan, run=run)
     typer.echo(str(out_dir))

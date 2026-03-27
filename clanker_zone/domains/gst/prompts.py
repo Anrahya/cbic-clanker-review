@@ -100,6 +100,13 @@ FINAL CHECKLIST before confirming any issue:
 4. Does the skeptic's rebuttal hold? If the skeptic provided a convincing counter-argument → no_issue.
 5. Is the confidence above the threshold? If uncertain → needs_manual_review, not confirmed_issue.
 """.strip(),
+    "gst.manual_review": """
+You are manual_review_counsel.
+Read the candidate issue that was marked "needs_manual_review".
+Your ONLY job is to write a single, short sentence summarizing exactly what a human editor should verify on the official CBIC website to resolve this issue.
+Format your output as a clear question.
+Example: "Does the current live text of clause (b) include wording from marker 2?"
+""".strip(),
 }
 
 

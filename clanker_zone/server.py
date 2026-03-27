@@ -24,6 +24,10 @@ from clanker_zone.domains.gst.policy import GST_CONSTITUTION, GST_COUNSEL_ROSTER
 from clanker_zone.domains.gst.prompts import build_issue_task_prompt, build_task_prompt
 from clanker_zone.provider.minimax import MiniMaxProvider, MiniMaxProviderConfig
 from clanker_zone.report.persistence import write_deliberation_artifacts
+from clanker_zone.stages.manual import apply_manual_review_summarizer
+from clanker_zone.workflow import run_issue_council
+from clanker_zone.provider.minimax import MiniMaxProvider, MiniMaxProviderConfig
+from clanker_zone.report.persistence import write_deliberation_artifacts
 from clanker_zone.workflow import run_issue_council
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -168,6 +172,12 @@ def background_council_run(session: Session, req: ReviewRequest, event_loop: asy
         run.rule_report = apply_gst_false_positive_filter(
             report=run.rule_report,
             dossiers=plan.dossiers,
+        )
+        
+        run.rule_report = apply_manual_review_summarizer(
+            report=run.rule_report,
+            dossiers=plan.dossiers,
+            provider=provider,
         )
         
         # Persist run artifacts into a clean hierarchy under reports/
