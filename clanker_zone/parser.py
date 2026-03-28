@@ -26,6 +26,17 @@ LABEL_ALIASES = {
     "acceptable_artifact": "acceptable_artifact",
     "needs manual review": "needs_manual_review",
     "needs_manual_review": "needs_manual_review",
+    "rejected": "no_issue",
+    "not an issue": "no_issue",
+    "not_an_issue": "no_issue",
+    "dismiss": "no_issue",
+    "dismissed": "no_issue",
+    "accept": "acceptable_artifact",
+    "accepted": "acceptable_artifact",
+    "confirmed": "confirmed_issue",
+    "issue": "confirmed_issue",
+    "manual review": "needs_manual_review",
+    "manual_review": "needs_manual_review",
 }
 
 
