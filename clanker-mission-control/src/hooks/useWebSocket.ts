@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useSessionStore } from '../stores/session'
 import type { StreamEvent } from '../lib/types'
 
-const WS_URL = 'ws://localhost:8420/ws'
+const getWsUrl = () => {
+  const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+  return `${proto}//${window.location.host}/ws`
+}
 
 export function useWebSocket(sessionId: string | null) {
   const store = useSessionStore()
@@ -28,7 +31,7 @@ export function useWebSocket(sessionId: string | null) {
     function connect() {
       if (wsRef.current?.readyState === WebSocket.OPEN) return
       
-      const ws = new WebSocket(`${WS_URL}/${sessionId}`)
+      const ws = new WebSocket(`${getWsUrl()}/${sessionId}`)
       wsRef.current = ws
 
       ws.onopen = () => {

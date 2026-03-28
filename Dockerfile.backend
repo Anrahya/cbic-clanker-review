@@ -1,0 +1,22 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install build deps
+RUN apt-get update && apt-get install -y --no-install-recommends gcc && rm -rf /var/lib/apt/lists/*
+
+# Copy and install Python package
+COPY pyproject.toml README.md ./
+COPY gst_rule_review/ gst_rule_review/
+COPY clanker_zone/ clanker_zone/
+RUN pip install --no-cache-dir .
+
+# Create directories for runtime data
+RUN mkdir -p /app/reports
+
+# Default env
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 8420
+
+CMD ["uvicorn", "clanker_zone.server:app", "--host", "0.0.0.0", "--port", "8420"]

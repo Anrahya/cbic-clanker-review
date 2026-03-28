@@ -93,6 +93,30 @@ session_manager = SessionManager()
 executor = ThreadPoolExecutor(max_workers=4)
 
 
+class ScanRequest(BaseModel):
+    corpus_path: str
+
+
+class ScanRuleInfo(BaseModel):
+    rule_number: str
+    title: str
+    file: str
+    node_count: int = 0
+    amendment_count: int = 0
+
+
+class ScanChapterInfo(BaseModel):
+    number: str
+    title: str
+    dir_name: str
+    rules: list[ScanRuleInfo]
+
+
+class ScanResponse(BaseModel):
+    corpus_path: str
+    chapters: list[ScanChapterInfo]
+
+
 class ReviewRequest(BaseModel):
     rule_number: str
     corpus_path: str = "pc"
@@ -110,6 +134,67 @@ def _discover_bundles(corpus: Path):
     if any(corpus.glob("chapter_*")):
         return discover_rule_bundles_from_chapters(corpus)
     return discover_rule_bundles(corpus)
+
+
+@app.post("/api/corpus/scan", response_model=ScanResponse)
+async def scan_corpus(req: ScanRequest):
+    import json as _json
+    corpus = Path(req.corpus_path)
+    if not corpus.exists() or not corpus.is_dir():
+        raise HTTPException(status_code=400, detail=f"Path does not exist or is not a directory: {req.corpus_path}")
+
+    chapters: list[ScanChapterInfo] = []
+
+    for chapter_dir in sorted(corpus.glob("chapter_*")):
+        if not chapter_dir.is_dir():
+            continue
+        manifest_path = chapter_dir / "chapter_manifest.json"
+        if manifest_path.exists():
+            try:
+                manifest = _json.loads(manifest_path.read_text(encoding="utf-8"))
+                ch = manifest.get("chapter", {})
+                rules_list = []
+                for r in manifest.get("rules", []):
+                    rules_list.append(ScanRuleInfo(
+                        rule_number=str(r.get("rule_number", "")),
+                        title=r.get("title", ""),
+                        file=r.get("file", ""),
+                        node_count=r.get("node_count", 0),
+                        amendment_count=r.get("amendment_count", 0),
+                    ))
+                chapters.append(ScanChapterInfo(
+                    number=str(ch.get("number", chapter_dir.name)),
+                    title=ch.get("title", chapter_dir.name),
+                    dir_name=chapter_dir.name,
+                    rules=rules_list,
+                ))
+            except Exception as e:
+                logger.warning(f"Failed to read manifest {manifest_path}: {e}")
+        else:
+            # Fallback: no manifest, discover rule files directly
+            rules_list = []
+            for rule_path in sorted(chapter_dir.glob("rule_*.json")):
+                if rule_path.name in ("rule_document.json", "chapter_manifest.json"):
+                    continue
+                try:
+                    rd = _json.loads(rule_path.read_text(encoding="utf-8"))
+                    meta = rd.get("metadata", {})
+                    rules_list.append(ScanRuleInfo(
+                        rule_number=str(meta.get("rule_number", rule_path.stem)),
+                        title=meta.get("chapter_title", rule_path.stem),
+                        file=rule_path.name,
+                    ))
+                except Exception:
+                    pass
+            if rules_list:
+                chapters.append(ScanChapterInfo(
+                    number=chapter_dir.name.split("_")[1] if "_" in chapter_dir.name else "?",
+                    title=chapter_dir.name.replace("_", " ").title(),
+                    dir_name=chapter_dir.name,
+                    rules=rules_list,
+                ))
+
+    return ScanResponse(corpus_path=req.corpus_path, chapters=chapters)
 
 
 def background_council_run(session: Session, req: ReviewRequest, event_loop: asyncio.AbstractEventLoop):

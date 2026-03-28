@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { CounselStatus, RuleReport, StreamEvent, CounselStage } from '../lib/types'
+import type { CounselStatus, RuleReport, StreamEvent, CounselStage, CorpusChapter } from '../lib/types'
 
 interface StreamMessage {
   id: string
@@ -11,7 +11,7 @@ interface StreamMessage {
 }
 
 interface SessionState {
-  activeView: 'mission_control' | 'history'
+  activeView: 'mission_control' | 'history' | 'corpus_browser'
   sessionId: string | null
   ruleId: string | null
   status: 'idle' | 'connecting' | 'running' | 'complete' | 'error'
@@ -24,9 +24,13 @@ interface SessionState {
     completedAt: number | null
   }
   error: string | null
+  corpusPath: string
+  chapters: CorpusChapter[]
 
   // Actions
-  setActiveView: (view: 'mission_control' | 'history') => void
+  setActiveView: (view: 'mission_control' | 'history' | 'corpus_browser') => void
+  setCorpusPath: (path: string) => void
+  setChapters: (chapters: CorpusChapter[]) => void
   startSession: (sessionId: string, ruleId: string) => void
   handleEvent: (event: StreamEvent) => void
   loadReport: (report: RuleReport) => void
@@ -54,8 +58,12 @@ export const useSessionStore = create<SessionState>((set) => ({
   report: null,
   stats: { totalTokens: 0, startedAt: null, completedAt: null },
   error: null,
+  corpusPath: '',
+  chapters: [],
 
   setActiveView: (view) => set({ activeView: view }),
+  setCorpusPath: (path) => set({ corpusPath: path }),
+  setChapters: (chapters) => set({ chapters }),
 
   startSession: (sessionId, ruleId) => set({
     activeView: 'mission_control',

@@ -63,3 +63,18 @@ export interface SessionMeta {
   completed_at: number | null
   status: 'running' | 'complete' | 'error'
 }
+
+export interface CorpusRule {
+  rule_number: string
+  title: string
+  file: string
+  node_count: number
+  amendment_count: number
+}
+
+export interface CorpusChapter {
+  number: string
+  title: string
+  dir_name: string
+  rules: CorpusRule[]
+}

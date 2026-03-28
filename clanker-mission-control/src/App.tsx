@@ -3,6 +3,7 @@ import { CouncilRoster } from './components/CouncilRoster'
 import { DeliberationStream } from './components/DeliberationStream'
 import { IssueTracker } from './components/IssueTracker'
 import { HistoryView } from './components/HistoryView'
+import { CorpusBrowser } from './components/CorpusBrowser'
 import { StatsBar } from './components/StatsBar'
 import { useSessionStore } from './stores/session'
 import { useWebSocket } from './hooks/useWebSocket'
@@ -42,7 +43,7 @@ function App() {
     if (!ruleInput.trim() || !corpusInput.trim()) return
     try {
       const ruleNum = ruleInput.trim()
-      const res = await fetch('http://localhost:8420/api/review', {
+      const res = await fetch('/api/review', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rule_number: ruleNum, corpus_path: corpusInput.trim() })
@@ -153,6 +154,10 @@ function App() {
               <span className="material-symbols-outlined">history</span>
               <span>HISTORY_LOGS</span>
             </div>
+            <div className={`nav-item ${activeView === 'corpus_browser' ? 'active' : ''}`} onClick={() => setActiveView('corpus_browser')}>
+              <span className="material-symbols-outlined">folder_open</span>
+              <span>CORPUS_BROWSER</span>
+            </div>
           </nav>
         </aside>
 
@@ -201,8 +206,10 @@ function App() {
                 </section>
               </div>
             </>
-          ) : (
+          ) : activeView === 'history' ? (
             <HistoryView />
+          ) : (
+            <CorpusBrowser />
           )}
         </main>
       </div>

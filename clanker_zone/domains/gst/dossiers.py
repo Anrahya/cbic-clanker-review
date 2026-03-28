@@ -303,6 +303,15 @@ def _build_cluster_dossier(
         start_block=start_block,
         end_block=end_block,
     )
+    if bundle.raw_html:
+        evidence.append(
+            EvidenceSnippet(
+                kind="raw_rule_html",
+                label="Full Raw HTML for the Rule",
+                locator=EvidenceLocator(source_name="raw_html", pointer="entire_file"),
+                text=bundle.raw_html,
+            )
+        )
     metadata.update(
         {
             "rule_path": bundle.rule_path,
@@ -390,15 +399,7 @@ def build_gst_dossiers(
                 category_focus=["amendment_markers", "status_chronology"],
                 candidate_fragment=amendment,
                 schema_excerpt={"definition": bundle.rule_schema_json.get("definitions", {}).get("amendment", {})},
-                evidence=[
-                    EvidenceSnippet(
-                        kind="hint_amendment",
-                        label=f"Hint amendment {marker}",
-                        locator=EvidenceLocator(source_name="hint.amendments", pointer=f"marker={marker}"),
-                        text=amendment.get("text"),
-                        payload=amendment,
-                    )
-                ],
+                evidence=_build_amendment_evidence(amendment, marker, bundle),
                 metadata={
                     "rule_id": rule_id,
                     "rule_path": bundle.rule_path,
@@ -424,3 +425,25 @@ def _collect_node_ids(node: Dict[str, Any]) -> Set[str]:
         for child in node.get(bucket, []):
             ids.update(_collect_node_ids(child))
     return ids
+
+
+def _build_amendment_evidence(amendment: Dict[str, Any], marker: str, bundle: GSTRuleBundle) -> List[EvidenceSnippet]:
+    evidence = [
+        EvidenceSnippet(
+            kind="hint_amendment",
+            label=f"Hint amendment {marker}",
+            locator=EvidenceLocator(source_name="hint.amendments", pointer=f"marker={marker}"),
+            text=amendment.get("text"),
+            payload=amendment,
+        )
+    ]
+    if bundle.raw_html:
+        evidence.append(
+            EvidenceSnippet(
+                kind="raw_rule_html",
+                label="Full Raw HTML for the Rule",
+                locator=EvidenceLocator(source_name="raw_html", pointer="entire_file"),
+                text=bundle.raw_html,
+            )
+        )
+    return evidence

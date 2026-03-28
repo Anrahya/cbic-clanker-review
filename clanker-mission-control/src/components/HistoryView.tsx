@@ -15,7 +15,7 @@ export function HistoryView() {
   const loadReport = useSessionStore((s) => s.loadReport)
 
   useEffect(() => {
-    fetch('http://localhost:8420/api/history')
+    fetch('/api/history')
       .then(res => res.json())
       .then(data => {
         setHistory(data.history || [])
