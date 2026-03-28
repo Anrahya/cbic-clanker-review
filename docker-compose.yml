@@ -14,7 +14,7 @@ services:
       context: ./clanker-mission-control
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "6969:80"
     depends_on:
       - backend
     restart: unless-stopped
