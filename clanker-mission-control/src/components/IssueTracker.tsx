@@ -1,5 +1,5 @@
 import { useSessionStore } from '../stores/session'
-import type { CandidateIssue, FinalDisposition, Severity } from '../lib/types'
+import type { CandidateIssue, FinalDisposition } from '../lib/types'
 import { useState } from 'react'
 
 const dispStyles: Record<FinalDisposition, { label: string; icon: string; className: string }> = {
